@@ -156,7 +156,7 @@ void Game::Draw()
 {
 }
 
-bool Game::Clean()
+void Game::Clean()
 {
 	if (renderer != nullptr)
 	{

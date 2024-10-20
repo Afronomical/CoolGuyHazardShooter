@@ -18,7 +18,7 @@ public:
 	void HandleInput();
 	void Update(float deltaTime);
 	void Draw();
-	bool Clean();
+	void Clean();
 
 	inline SDL_Renderer* GetRenderer() { return renderer; }
 	inline void SetIsRunning(bool _isRunning) { isRunning = _isRunning; }
