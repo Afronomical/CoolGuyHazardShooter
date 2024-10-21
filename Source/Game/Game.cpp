@@ -4,6 +4,8 @@
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 
+#include "../GameObject/PlayerTest.h"
+
 //#include "../Debug/Debug.h"
 //#incldue "../Input/InputHandler.h"
 //#include "../Time/Time.h"
@@ -27,6 +29,8 @@ bool Game::Initialise()
 	// INFO: Check to see if everything has been initialised correctly
 	bool success = true;
 
+	PlayerTest playerTest;
+
 	// INFO: Initialise and Validate SDL subsystems
 	if (!InitialiseSDL()) 
 	{
@@ -41,6 +45,7 @@ bool Game::Initialise()
 		return !success;
 	}
 
+	
 	return success;
 }
 
@@ -50,7 +55,7 @@ bool Game::InitialiseSDL()
 	bool success = true;
 
 	// INFO: Initialise and Validate SDL
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
+	if (SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_SENSOR) < 0)
 	{
 		//Debug::LogError("SDL could not initialise! SDL_Error: %s", SDL_GetError());
 		return !success;
@@ -124,7 +129,7 @@ bool Game::InitialiseGame()
 	// NOTE: Initialise the game and various systems here
 
 	// INFO: Set the game to be running
-	isRunning = true;
+	isRunning = false;
 
 	return success;
 }
