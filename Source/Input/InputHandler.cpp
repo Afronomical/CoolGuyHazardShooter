@@ -1,7 +1,6 @@
 #include "InputHandler.h"
 #include <iostream>"
 
-InputHandler* InputHandler::_instance = nullptr;
 std::unordered_map<Sint32, BindData> InputHandler::keyBoardActions;
 std::unordered_map<Uint32, BindData> InputHandler::mouseButtonActions;
 std::function<void(int, int)> InputHandler::mouseMovementAction;

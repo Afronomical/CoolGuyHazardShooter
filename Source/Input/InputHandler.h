@@ -49,13 +49,11 @@ private:
 
 	static Mouse mouse;
 
-	static InputHandler* _instance;
 #pragma endregion
 
 public: 
 
 #pragma region Methods
-	static InputHandler* instance() { return _instance != nullptr ? _instance : _instance = new InputHandler(); }
 
 	static bool Initialise();
 
