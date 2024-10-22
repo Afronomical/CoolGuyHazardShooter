@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <queue>
 #include <vector>
 
@@ -52,78 +53,74 @@ public:
 	virtual void OnDestroy() {};
 
 	template<class T>
-	T* GetComponent();
+	std::weak_ptr<T> GetComponent();
 
 	template<class T, typename... Args>
-	T* AddComponent(Args&&... args);
+	std::weak_ptr<T> AddComponent(Args&&... args);
 
 	template<class T>
-	bool RemoveComponent(T*& component);
+	bool RemoveComponent(unsigned int componentID);
 
 public:
-	Transform* transform;
+	std::weak_ptr<Transform> transform;
 
 private:
-	std::vector<Component*> components;
+	std::vector<std::shared_ptr<Component>> components;
 };
 
 template<class T>
-inline T* GameObject::GetComponent()
+inline std::weak_ptr<T> GameObject::GetComponent()
 {
 	// INFO: Loop through all components, casting each to the desired type
 	//       if the cast is successful, return the component, otherwise return nullptr
 	for (auto& component : components)
 	{
-		T* castedComponent = dynamic_cast<T*>(component);
+		std::weak_ptr<T> castedComponent = std::dynamic_pointer_cast<T>(component);
 
-		if (castedComponent != nullptr)
+		if (!castedComponent.expired())
 			return castedComponent;
 	}
 
-	return nullptr;
+	return std::weak_ptr<T>();
 }
 
 template<class T, typename ...Args>
-inline T* GameObject::AddComponent(Args && ...args)
+inline std::weak_ptr<T> GameObject::AddComponent(Args && ...args)
 {
 	// INFO: Ensure the component being added derives from the Component class
 	static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
 
 	// INFO: Check to see if the component already exists
-	T* existingComponent = GetComponent<T>();
+	std::weak_ptr<T> existingComponent = GetComponent<T>();
 
 	// INFO: Return if the component already exists and we can only have one
-	if (existingComponent != nullptr && !existingComponent->canHaveMultiple)
+	if (!existingComponent.expired() && existingComponent.lock()->canHaveMultiple)
 		return existingComponent;
 
 	// INFO: Create the component and add it to the components vector
-	components.emplace_back(new T(std::forward<Args>(args)...));
+	components.emplace_back(std::make_shared<T>(std::forward<Args>(args)...));
 
 	// INFO: Return the newly created component
-	return dynamic_cast<T*>(components.back());
+	return std::dynamic_pointer_cast<T>(components.back());
 }
 
 template<class T>
-inline bool GameObject::RemoveComponent(T*& component)
+inline bool GameObject::RemoveComponent(unsigned int componentID)
 {
 	// INFO: Loop through all components, if the component ID matches the desired ID, delete the component
 	for (auto it = components.begin(); it != components.end(); ++it)
 	{
-		T* castedComponent = dynamic_cast<T*>(*it);
+		T* castedComponent = dynamic_cast<T*>(it->get());
 
 		// INFO: Check to see if the component is valid
 		if (castedComponent != nullptr)
 		{
 			// INFO: Continue searching if the component ID does not match the desired ID
-			if (castedComponent->GetComponentID() != component->GetComponentID())
+			if (castedComponent->GetComponentID() != componentID)
 				continue;
 
-			// INFO: Delete and Remove the component
-			delete* it;
+			// INFO: Remove the component (Using smart pointers so no need to delete)
 			components.erase(it);
-
-			// INFO: Set the raw pointer component to nullptr
-			component = nullptr;
 
 			return true;
 		}

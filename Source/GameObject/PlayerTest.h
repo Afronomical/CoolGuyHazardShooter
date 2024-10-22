@@ -3,7 +3,7 @@
 class PlayerTest : public GameObject
 {
 public:
-	Transform* otherTransform;
+	std::weak_ptr<Transform> otherTransform;
 	//using GameObject::GameObject;
 	PlayerTest();
 

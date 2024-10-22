@@ -63,7 +63,7 @@ bool Game::InitialiseSDL()
 	else
 	{
 		// INFO: Create the window
-		window = SDL_CreateWindow(windowName, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowDimensions.X, windowDimensions.Y, NULL);
+		window = SDL_CreateWindow(windowName, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, static_cast<int>(windowDimensions.X), static_cast<int>(windowDimensions.Y), NULL);
 
 		// INFO: Window Validity Check
 		if (window == nullptr)

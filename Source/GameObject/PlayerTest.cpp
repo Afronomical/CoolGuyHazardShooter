@@ -9,18 +9,15 @@
 PlayerTest::PlayerTest() : GameObject()
 {
 	otherTransform = GetComponent<Transform>();
-	bool removed = RemoveComponent<Transform>(transform);
+	bool removed = RemoveComponent<Transform>(transform.lock()->GetComponentID());
 
-	if (transform == nullptr)
+	if (transform.expired())
 	{
-		std::cout << "Hi\n";
+		std::cout << "transform has expired\n";
 	}
 
-	otherTransform->Translate(1.0f, 1.0f);
-	otherTransform->GetGameObject();
-
-	if (otherTransform = nullptr)
+	if (otherTransform.expired())
 	{
-		std::cout << "Hello\n";
+		std::cout << "other transform has expired\n";
 	}
 }
