@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Input\InputHandler.cpp" />
     <ClCompile Include="Source\GameObject\PlayerTest.cpp" />
     <ClCompile Include="Source\Components\Component.cpp" />
     <ClCompile Include="Source\GameObject\GameObject.cpp" />
@@ -141,6 +142,7 @@
     <ClCompile Include="Source\Components\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Input\InputHandler.h" />
     <ClInclude Include="Source\GameObject\PlayerTest.h" />
     <ClInclude Include="Source\Components\Component.h" />
     <ClInclude Include="Source\GameObject\GameObject.h" />
