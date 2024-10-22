@@ -13,7 +13,7 @@ const Uint8* InputHandler::currentKeyState = nullptr;
 Uint8* InputHandler::previousKeyState = nullptr;
 int InputHandler::keyLength = 0;
 
-const Uint32 InputHandler::currentMouseState = 0;
+Uint32 InputHandler::currentMouseState = 0;
 Uint32 InputHandler::previousMouseState = 0;
 Mouse InputHandler::mouse;
 
@@ -42,7 +42,7 @@ bool InputHandler::Initialise()
 	}
 
 	// INFO: Initialise and Validate Current Mouse State
-	//currentMouseState = SDL_GetMouseState(&mouse.position.X, &mouse.position.Y);
+	currentMouseState = SDL_GetMouseState(&mouse.mouseData.x, &mouse.mouseData.y);
 
 	if (!currentMouseState)
 	{
@@ -71,7 +71,7 @@ void InputHandler::HandleInputs()
 	previousMouseState = currentMouseState;
 
 	// INFO: Update Current Mouse State so the two can be compared
-	//currentMouseState = SDL_GetMouseState(&mouse.position.X, &mouse.position.Y);
+	currentMouseState = SDL_GetMouseState(&mouse.mouseData.x, &mouse.mouseData.y);
 
 	// INFO: Go through keyboardActions and check if any should be triggered
 	for (auto& keyboardAction : keyboardActions)

@@ -2,12 +2,12 @@
 
 #include <SDL.h>
 
-//#include "Vector2.h"
+#include "../Vector2/Vector2.h"
 
 class Game
 {
 public:
-	Game(const char* _windowName/*, Vector2 _windowDimensions*/);
+	Game(const char* _windowName, const Vector2& _windowDimensions);
 	
 	bool Initialise();
 	bool InitialiseSDL();
@@ -29,6 +29,6 @@ private:
 
 	bool isRunning;
 	const char* windowName;
-	//Vector2 windowDimensions;
+	Vector2 windowDimensions;
 };
 

@@ -68,7 +68,7 @@ private:
 	static Uint8* previousKeyState;
 	static int keyLength;
 
-	static const Uint32 currentMouseState;
+	static Uint32 currentMouseState;
 	static Uint32 previousMouseState;
 	static Mouse mouse;
 };

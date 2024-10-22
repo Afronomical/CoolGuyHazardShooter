@@ -2,7 +2,7 @@
 
 #include "Component.h"
 
-//#include "../Vector2/Vector2.h"
+#include "../Vector2/Vector2.h"
 
 class Transform : public Component
 {
@@ -11,9 +11,9 @@ public:
 	~Transform() override {};
 
 	void Translate(const float x, const float y);
-	//void Translate(const Vector2& translation);
+	void Translate(const Vector2& translation);
 
 public:
-	//Vector2 position;
+	Vector2 position;
 };
 

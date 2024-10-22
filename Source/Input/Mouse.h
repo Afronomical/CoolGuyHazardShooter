@@ -1,18 +1,13 @@
 #pragma once
 
-//#include "../Vector2/Vector2.h"
+#include <SDL.h>
 
 struct Mouse
 {
-	Mouse() : /*position(Vector2()),*/ width(0), height(0) {};
-	inline void SetMouseData(/*const Vector2& _position,*/ float _width, float _height) 
-	{ 
-		/*position = _position;*/ 
-		width = _width; 
-		height = height; 
-	}
+	Mouse() : mouseData() {};
+
+	inline void SetMouseData(SDL_Rect _mouseData) { mouseData = _mouseData; }
+	inline void SetMouseData(int x, int y, int width, int height) { mouseData = { x, y, width, height }; }
 	
-	//Vector2 position;
-	float width;
-	float height;
+	SDL_Rect mouseData;
 };
