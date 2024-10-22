@@ -1,11 +1,16 @@
 #pragma once
-#include "SDL.h"
+
+#include <SDL.h>
+
 #include <functional>
 #include <unordered_map>
+
+#include "Mouse.h"
 
 enum ButtonState
 {
 	None,
+
 	Pressed,
 	Held,
 	Released
@@ -15,88 +20,56 @@ struct BindData
 {
 	std::function<void()> action;
 	ButtonState buttonState;
+
 	BindData() : action(nullptr), buttonState(None) {};
 	BindData(std::function<void()> _action, ButtonState _buttonState) : action(_action), buttonState(_buttonState) {};
 };
 
-struct Mouse
-{
-	//Vector2 position;  INFO: kept out as V2 not implemented yet 
-	float width;
-	float height;
-
-	//Mouse(); // : position(Vector2(0, 0)), width(0), height(0) {};
-};
 class InputHandler
 {
-private:
-#pragma region Properties
-	static std::unordered_map<Sint32, BindData> keyBoardActions;   //did not like sdl keycode when binding so changed it to it's int value - Sint32 
-
-	static std::unordered_map<Uint32, BindData> mouseButtonActions;
-
-	static std::function<void(int, int)> mouseMovementAction;
-
-	static const Uint8* currentKeyState;
-
-	static Uint8* previousKeyState;
-
-	static int keyLength;
-
-	static const Uint32 currentMouseState;
-
-	static Uint32 previousMouseState;
-
-	static Mouse mouse;
-
-#pragma endregion
-
 public: 
-
-#pragma region Methods
-
 	static bool Initialise();
 
-	static void BindKeyToAction(SDL_Keycode key, BindData data);
+	static inline void BindKeyToAction(SDL_Keycode key, BindData data) { keyboardActions[key] = data; }
+	static inline void BindMouseButtonToAction(Uint32 button, BindData data) { mouseButtonActions[button] = data; }
+	static inline void BindMouseMovementToAction(std::function<void(int, int)> action) { mouseMovementAction = action; }
 
-	static void BindMouseButtonToAction(Uint32 button, BindData data);
+	static inline bool GetKey(SDL_Keycode key) { return currentKeyState[key]; }
+	static inline bool GetKeyDown(SDL_Keycode key) { return currentKeyState[key] && !previousKeyState[key]; }
+	static inline bool GetKeyUp(SDL_Keycode key) { return !currentKeyState[key] && previousKeyState[key]; }
 
-	static void BindMouseMovementToAction(std::function<void(int, int)> action);
+	static inline bool GetMouseButton(Uint32 button) { return currentMouseState & SDL_BUTTON(button); }
+	static inline bool GetMouseButtonDown(Uint32 button) { return (currentMouseState & SDL_BUTTON(button)) && !(previousMouseState & SDL_BUTTON(button)); }
+	static inline bool GetMouseButtonUp(Uint32 button) { return !(currentMouseState & SDL_BUTTON(button)) && (previousMouseState & SDL_BUTTON(button)); }
 
-	static bool GetKey(SDL_Keycode key);
-
-	static bool GetKeyDown(SDL_Keycode key);
-
-	static bool GetKeyUp(SDL_Keycode key);
-
-	static bool GetMouseButton(Uint32 button);
-
-	static bool GetMouseButtonDown(Uint32 button);
-
-	static bool GetMouseButtonUp(Uint32 button);
-
-	static const Mouse& GetMouse();
+	static inline const Mouse& GetMouse() { return mouse; }
 
 	static void HandleInputs();
 
 	static void ClearAllBindings();
 
-	static void ClearKeyBindings();
+	static inline void ClearKeyBindings() { keyboardActions.clear(); }
+	static inline void ClearKeyBinding(SDL_Keycode key) { keyboardActions.erase(key); }
 
-	static void ClearKeyBinding(Sint32 key);
+	static inline void ClearMouseBindings() { mouseButtonActions.clear(); }
+	static inline void ClearMouseBinding(Uint32 button) { mouseButtonActions.erase(button); }
 
-	static void ClearMouseBindings();
-
-	static void ClearMouseBinding(Uint32 button);
-
-	static void ClearMouseMovementBinding();
+	static inline void ClearMouseMovementBinding() { mouseMovementAction = nullptr; }
 
 	static void Clean();
 
-	
+private:
+	static std::unordered_map<SDL_Keycode, BindData> keyboardActions;
+	static std::unordered_map<Uint32, BindData> mouseButtonActions;
 
+	static std::function<void(int, int)> mouseMovementAction;
 
-	
-	
+	static const Uint8* currentKeyState;
+	static Uint8* previousKeyState;
+	static int keyLength;
+
+	static const Uint32 currentMouseState;
+	static Uint32 previousMouseState;
+	static Mouse mouse;
 };
 

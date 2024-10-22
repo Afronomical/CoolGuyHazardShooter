@@ -148,6 +148,7 @@
     <ClInclude Include="Source\GameObject\GameObject.h" />
     <ClInclude Include="Source\Game\Game.h" />
     <ClInclude Include="Source\Components\Transform.h" />
+    <ClInclude Include="Source\Input\Mouse.h" />
     <ClInclude Include="Source\MemoryLeakDetector\MemoryLeakDetector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
