@@ -1,23 +1,26 @@
 #include "Maths.h"
-#include <random>
 
-const float pi = 3.14159265358979323846f;
+#include <cmath>
+#include <ctime>
+#include <iomanip>
+#include <sstream>
+
+const float Maths::PI = 3.1415f;
 
 float Maths::DegToRad(float deg)
 {
-	deg = deg * pi / 180.0f;
-	return deg;
+	return deg * (PI / 180.0f);
 }
 
 float Maths::RadToDeg(float rad)
 {
-	rad = rad * 180.0f / pi;
-	return rad;
+	return rad * (180.0f / PI);
 }
 
 float Maths::Lerp(float a, float b, float t)
 {
-	 return a + (b - a) * t;
+	t = Clamp(t, 0.0f, 1.0f);
+	return a + (b - a) * t;
 }
 
 float Maths::Clamp(float value, float min, float max)
@@ -34,8 +37,7 @@ int Maths::Clamp(int value, int min, int max)
 
 float Maths::Abs(float value)
 {
-	if(value < 0) return -value;
-	else return value;
+	return std::abs(value);
 }
 
 float Maths::Max(float value1, float value2)
@@ -51,24 +53,22 @@ float Maths::Min(float value1, float value2)
 int Maths::RandomRange(int min, int max)
 {
     //INFO: Generate a random range between min and max(inclusive)
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<int> dis(min, max);
-    return dis(gen);
+    int range = max - min;
+    return min + rand() % range;
 }
 
 float Maths::RandomRange(float min, float max)
 {
 	//INFO: Generate a random range between min and max(inclusive)
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<int> dis(min, max);
-	return dis(gen);
+    float range = max - min;
+    return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / range));
 }
 
-string Maths::FloatToString(float value, int precision)
+std::string Maths::FloatToString(float value, int precision)
 {
-	return std::to_string(value);
+    std::ostringstream stream;
+    stream << std::fixed << std::setprecision(precision) << value;
+    return stream.str();
 }
 
 int Maths::RoundToInt(float f)
@@ -78,10 +78,10 @@ int Maths::RoundToInt(float f)
 
 float Maths::PingPong(float time, float length)
 {
-	float t = fmod(time, length * 2);
-	if (t > length) {
+	float t = std::fmod(time, length * 2);
+	if (t > length)
 		t = length * 2 - t;
-	}
+
 	return t;
 }
 
@@ -90,18 +90,16 @@ float Maths::MoveTowards(float current, float target, float maxDelta)
     if (current < target)
     {
         current += maxDelta;
+
         if (current > target)
-        {
             current = target;
-        }
     }
     else if (current > target)
     {
         current -= maxDelta;
+
         if (current < target)
-        {
             current = target;
-        }
     }
     return current;
 }

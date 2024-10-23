@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-//#include "Maths.h"
+#include "../Maths/Maths.h"
 
 const Vector2 Vector2::Up(0, 1);
 const Vector2 Vector2::Down(0, -1);
@@ -73,7 +73,7 @@ float Vector2::Dot(const Vector2& a, const Vector2& b)
 
 Vector2 Vector2::Lerp(const Vector2& a, const Vector2& b, float t)
 {
-	//t = Maths::Clamp(t, 0.0f, 1.0f);
+	t = Maths::Clamp(t, 0.0f, 1.0f);
 	return a + (b - a) * t;
 }
 

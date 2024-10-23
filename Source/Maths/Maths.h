@@ -1,9 +1,8 @@
 #pragma once
+
 #include <string>
-using namespace std;
 
-
-static class Maths
+class Maths
 {
 public:
 	static float DegToRad(float deg);
@@ -20,7 +19,7 @@ public:
 	static int RandomRange(int min, int max);
 	static float RandomRange(float min, float max);
 
-	static string FloatToString(float value, int precision);
+	static std::string FloatToString(float value, int precision);
 	static int RoundToInt(float f);
 
 	static float PingPong(float time, float length);
@@ -29,6 +28,6 @@ public:
 	static float Atan2(float y, float x);
 
 public:
-	static const float pi;
+	static const float PI;
 };
 
