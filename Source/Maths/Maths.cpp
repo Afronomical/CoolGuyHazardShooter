@@ -1,7 +1,7 @@
 #include "Maths.h"
 #include <random>
 
-const float pi = 3.14159265358979323846f;
+const float Maths:: pi = 3.14159265358979323846f;
 
 float Maths::DegToRad(float deg)
 {
