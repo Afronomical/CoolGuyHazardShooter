@@ -10,6 +10,7 @@
     <ClCompile Include="Source\Components\Transform.cpp" />
     <ClCompile Include="Source\Vector2\Vector2.cpp" />
     <ClCompile Include="Source\Maths\Maths.cpp" />
+    <ClCompile Include="Source\Time\TimeClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Input\InputHandler.h" />
@@ -22,5 +23,6 @@
     <ClInclude Include="Source\MemoryLeakDetector\MemoryLeakDetector.h" />
     <ClInclude Include="Source\Vector2\Vector2.h" />
     <ClInclude Include="Source\Maths\Maths.h" />
+    <ClInclude Include="Source\Time\TimeClass.h" />
   </ItemGroup>
 </Project>
