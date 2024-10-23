@@ -2,8 +2,8 @@
 
 #include <SDL_image.h>
 #include <SDL_mixer.h>
+#include "../Time/TimeClass.h"
 #include <SDL_ttf.h>
-#include "TimeClass.h"
 
 #include "../GameObject/PlayerTest.h"
 
@@ -141,7 +141,7 @@ void Game::Run()
 	while (isRunning)
 	{
 		HandleInput();
-		//Update(Time::DeltaTime());
+		Update(TimeClass::DeltaTime());
 		Draw();
 		//Time::Tick();
 	}
