@@ -2,14 +2,13 @@
 
 #include <SDL_image.h>
 #include <SDL_mixer.h>
-#include "../Time/TimeClass.h"
 #include <SDL_ttf.h>
 
 #include "../GameObject/PlayerTest.h"
 
 //#include "../Debug/Debug.h"
 //#incldue "../Input/InputHandler.h"
-//#include "../Time/Time.h"
+#include "../Time/Time.h"
 
 Game::Game(const char* _windowName, const Vector2& _windowDimensions) : window(nullptr), renderer(nullptr), isRunning(false),
 																		windowName(_windowName), windowDimensions(_windowDimensions)
@@ -141,9 +140,10 @@ void Game::Run()
 	while (isRunning)
 	{
 		HandleInput();
-		Update(TimeClass::DeltaTime());
+		Update(Time::DeltaTime());
 		Draw();
-		//Time::Tick();
+
+		Time::Tick();
 	}
 
 	// NOTE: Clean up the game

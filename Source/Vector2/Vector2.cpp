@@ -49,7 +49,7 @@ void Vector2::MoveTowards(const Vector2& target, float maxDistanceDelta)
 		Normalize(direction);
 
 		// INFO: Move the current vector towards the target vector by maxDistanceDelta
-		*this = *this + direction * maxDistanceDelta;
+		*this += direction * maxDistanceDelta;
 	}
 }
 

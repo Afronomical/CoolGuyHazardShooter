@@ -142,7 +142,7 @@
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Components\Transform.cpp" />
     <ClCompile Include="Source\Vector2\Vector2.cpp" />
-    <ClCompile Include="Source\Time\TimeClass.cpp" />
+    <ClCompile Include="Source\Time\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Maths\Maths.h" />
@@ -155,7 +155,7 @@
     <ClInclude Include="Source\Input\Mouse.h" />
     <ClInclude Include="Source\MemoryLeakDetector\MemoryLeakDetector.h" />
     <ClInclude Include="Source\Vector2\Vector2.h" />
-    <ClInclude Include="Source\Time\TimeClass.h" />
+    <ClInclude Include="Source\Time\Time.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
