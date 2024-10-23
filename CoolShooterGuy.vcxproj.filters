@@ -9,6 +9,7 @@
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Components\Transform.cpp" />
     <ClCompile Include="Source\Vector2\Vector2.cpp" />
+    <ClCompile Include="Source\Maths\Maths.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Input\InputHandler.h" />
@@ -20,5 +21,6 @@
     <ClInclude Include="Source\Input\Mouse.h" />
     <ClInclude Include="Source\MemoryLeakDetector\MemoryLeakDetector.h" />
     <ClInclude Include="Source\Vector2\Vector2.h" />
+    <ClInclude Include="Source\Maths\Maths.h" />
   </ItemGroup>
 </Project>
