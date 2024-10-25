@@ -2,7 +2,7 @@
 
 #include <string>
 
-class Maths
+static class Maths
 {
 public:
 	static float DegToRad(float deg);

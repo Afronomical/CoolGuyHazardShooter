@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-class Time
+static class Time
 {
 public:
 	static void Tick();
