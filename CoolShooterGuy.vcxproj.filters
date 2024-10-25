@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Source\Input\InputHandler.cpp" />
-    <ClCompile Include="Source\GameObject\PlayerTest.cpp" />
     <ClCompile Include="Source\Components\Component.cpp" />
     <ClCompile Include="Source\GameObject\GameObject.cpp" />
     <ClCompile Include="Source\Game\Game.cpp" />
@@ -10,11 +9,11 @@
     <ClCompile Include="Source\Components\Transform.cpp" />
     <ClCompile Include="Source\Vector2\Vector2.cpp" />
     <ClCompile Include="Source\Maths\Maths.cpp" />
-    <ClCompile Include="Source\Time\TimeClass.cpp" />
+    <ClCompile Include="Source\Time\Time.cpp" />
+    <ClCompile Include="Source\Collision\Collider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Input\InputHandler.h" />
-    <ClInclude Include="Source\GameObject\PlayerTest.h" />
     <ClInclude Include="Source\Components\Component.h" />
     <ClInclude Include="Source\GameObject\GameObject.h" />
     <ClInclude Include="Source\Game\Game.h" />
@@ -23,6 +22,7 @@
     <ClInclude Include="Source\MemoryLeakDetector\MemoryLeakDetector.h" />
     <ClInclude Include="Source\Vector2\Vector2.h" />
     <ClInclude Include="Source\Maths\Maths.h" />
-    <ClInclude Include="Source\Time\TimeClass.h" />
+    <ClInclude Include="Source\Time\Time.h" />
+    <ClInclude Include="Source\Collision\Collider.h" />
   </ItemGroup>
 </Project>

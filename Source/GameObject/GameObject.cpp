@@ -96,6 +96,9 @@ void GameObject::Handler::ProcessDeletionQueue()
 #pragma region GameObjectMethods
 GameObject::GameObject() : components()
 {
+	// INFO: Register the game object with the handler
+	GameObject::Handler::RegisterGameObject(this);
+
 	// INFO: Add a transform component to the game object
 	transform = AddComponent<Transform>(this);
 }
