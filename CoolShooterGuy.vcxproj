@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\DebugSystem\Debug.cpp" />
     <ClCompile Include="Source\Collision\Collider.cpp" />
     <ClCompile Include="Source\Maths\Maths.cpp" />
     <ClCompile Include="Source\Input\InputHandler.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="Source\Time\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\DebugSystem\Debug.h" />
     <ClInclude Include="Source\Collision\Collider.h" />
     <ClInclude Include="Source\Maths\Maths.h" />
     <ClInclude Include="Source\Input\InputHandler.h" />

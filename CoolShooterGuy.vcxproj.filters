@@ -11,6 +11,7 @@
     <ClCompile Include="Source\Maths\Maths.cpp" />
     <ClCompile Include="Source\Time\Time.cpp" />
     <ClCompile Include="Source\Collision\Collider.cpp" />
+    <ClCompile Include="Source\DebugSystem\Debug.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Input\InputHandler.h" />
@@ -24,5 +25,6 @@
     <ClInclude Include="Source\Maths\Maths.h" />
     <ClInclude Include="Source\Time\Time.h" />
     <ClInclude Include="Source\Collision\Collider.h" />
+    <ClInclude Include="Source\DebugSystem\Debug.h" />
   </ItemGroup>
 </Project>
