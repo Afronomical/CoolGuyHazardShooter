@@ -133,7 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Debug\Debug.cpp" />
+    <ClCompile Include="Source\Debugging\Debug.cpp" />
     <ClCompile Include="Source\Collision\Collider.cpp" />
     <ClCompile Include="Source\Maths\Maths.cpp" />
     <ClCompile Include="Source\Input\InputHandler.cpp" />
@@ -147,7 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Color\Color.h" />
-    <ClInclude Include="Source\Debug\Debug.h" />
+    <ClInclude Include="Source\Debugging\Debug.h" />
     <ClInclude Include="Source\Collision\Collider.h" />
     <ClInclude Include="Source\Maths\Maths.h" />
     <ClInclude Include="Source\Input\InputHandler.h" />
@@ -156,7 +156,7 @@
     <ClInclude Include="Source\Game\Game.h" />
     <ClInclude Include="Source\Components\Transform.h" />
     <ClInclude Include="Source\Input\Mouse.h" />
-    <ClInclude Include="Source\Debug\MemoryLeakDetector.h" />
+    <ClInclude Include="Source\Debugging\MemoryLeakDetector.h" />
     <ClInclude Include="Source\Vector2\Vector2.h" />
     <ClInclude Include="Source\Time\Time.h" />
   </ItemGroup>
