@@ -34,7 +34,7 @@ public:
 protected:
 	enum class Type
 	{
-		None,
+		None = 0,
 
 		Box,
 		Circle

@@ -9,7 +9,7 @@
 
 enum ButtonState
 {
-	None,
+	None = 0,
 
 	Pressed,
 	Held,
