@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssetLoader.cpp" />
     <ClCompile Include="Source\Debugging\Debug.cpp" />
     <ClCompile Include="Source\Collision\Collider.cpp" />
     <ClCompile Include="Source\Maths\Maths.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="Source\Time\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AssetLoader.h" />
     <ClInclude Include="Source\Color\Color.h" />
     <ClInclude Include="Source\Debugging\Debug.h" />
     <ClInclude Include="Source\Collision\Collider.h" />
