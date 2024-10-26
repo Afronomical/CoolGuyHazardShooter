@@ -25,7 +25,7 @@ struct BindData
 	BindData(std::function<void()> _action, ButtonState _buttonState) : action(_action), buttonState(_buttonState) {};
 };
 
-static class InputHandler
+class InputHandler
 {
 public: 
 	static bool Initialise();

@@ -4,8 +4,6 @@
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 
-#include "../GameObject/PlayerTest.h"
-
 //#include "../Debug/Debug.h"
 //#incldue "../Input/InputHandler.h"
 #include "../Time/Time.h"
@@ -29,8 +27,6 @@ bool Game::Initialise()
 	// INFO: Check to see if everything has been initialised correctly
 	bool success = true;
 
-	PlayerTest playerTest;
-
 	// INFO: Initialise and Validate SDL subsystems
 	if (!InitialiseSDL()) 
 	{
@@ -44,7 +40,6 @@ bool Game::Initialise()
 		//Debug::LogError("Game could not initialise!");
 		return !success;
 	}
-
 	
 	return success;
 }

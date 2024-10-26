@@ -2,7 +2,7 @@
 
 //#include "../Debug/Debug.h"
 
-#include "../MemoryLeakDetector/MemoryLeakDetector.h"
+#include "../Debugging/MemoryLeakDetector.h"
 
 std::unordered_map<SDL_Keycode, BindData> InputHandler::keyboardActions;
 std::unordered_map<Uint32, BindData> InputHandler::mouseButtonActions;

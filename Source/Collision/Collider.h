@@ -7,8 +7,30 @@
 
 #include "../Vector2/Vector2.h"
 
-class Collider : public Component
+class BoxCollider;
+class CircleCollider;
+
+class Collider : public Component, public std::enable_shared_from_this<Collider>
 {
+public:
+	class Handler
+	{
+	public:
+		static void CheckCollisions();
+
+		static void CircleCircleCollision(std::shared_ptr<CircleCollider> c1, std::shared_ptr<CircleCollider> c2);
+		static void BoxBoxCollision(std::shared_ptr<BoxCollider> b1, std::shared_ptr<BoxCollider> b2);
+		static void CircleBoxCollision(std::shared_ptr<CircleCollider> c, std::shared_ptr<BoxCollider> b);
+
+		static void HandleCollisionResponse(std::shared_ptr<Collider> c1, std::shared_ptr<Collider> c2, bool hasCollided);
+
+		inline static void RegisterCollider(std::shared_ptr<Collider> collider) { colliders.push_back(collider); }
+		static void UnregisterCollider(std::shared_ptr<Collider> collider);
+
+	private:
+		static std::vector<std::weak_ptr<Collider>> colliders;
+	};
+
 protected:
 	enum class Type
 	{
@@ -19,11 +41,11 @@ protected:
 	};
 
 public:
-	using Component::Component;
+	Collider(GameObject* _gameObject);
 
-	inline void SetPosition(const Vector2& _position) { position = _position; }
+	inline void UpdateCollider(const Vector2& _position) { position = _position + offset; }
 	inline const Vector2& GetPosition() const { return position; }
-	virtual const Vector2& GetCentrePosition() const = 0;
+	virtual Vector2 GetCentrePosition() const = 0;
 
 	inline void SetOffset(const Vector2& _offset) { offset = _offset; }
 	inline const Vector2& GetOffset() const { return offset; }
@@ -34,9 +56,9 @@ public:
 private:
 	inline Collider::Type GetColliderType() const { return colliderType; }
 
-	inline void AddCollidingCollider(Collider* collider) { collidingColliders.push_back(collider); }
-	void RemoveCollidingCollider(Collider* collider);
-	bool ContainsCollidingCollider(Collider* collider) const;
+	inline void AddCollidingCollider(std::shared_ptr<Collider> collider) { collidingColliders.push_back(collider); }
+	void RemoveCollidingCollider(std::shared_ptr<Collider> collider);
+	bool ContainsCollidingCollider(std::shared_ptr<Collider> collider) const;
 
 protected:
 	Collider::Type colliderType;
@@ -45,14 +67,14 @@ protected:
 
 private:
 	bool isTrigger;
-	std::vector<Collider*> collidingColliders;
+	std::vector<std::weak_ptr<Collider>> collidingColliders;
 
-	std::function<void(Collider*)> OnCollisionEnter;
-	std::function<void(Collider*)> OnCollisionStay;
-	std::function<void(Collider*)> OnCollisionExit;
+	std::function<void(std::shared_ptr<Collider>)> OnCollisionEnter;
+	std::function<void(std::shared_ptr<Collider>)> OnCollisionStay;
+	std::function<void(std::shared_ptr<Collider>)> OnCollisionExit;
 
-	std::function<void(Collider*)> OnTriggerEnter;
-	std::function<void(Collider*)> OnTriggerStay;
-	std::function<void(Collider*)> OnTriggerExit;
+	std::function<void(std::shared_ptr<Collider>)> OnTriggerEnter;
+	std::function<void(std::shared_ptr<Collider>)> OnTriggerStay;
+	std::function<void(std::shared_ptr<Collider>)> OnTriggerExit;
 };
 

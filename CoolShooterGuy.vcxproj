@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Collision\CircleCollider.cpp" />
+    <ClCompile Include="Source\Collision\BoxCollider.cpp" />
     <ClCompile Include="Source\Debugging\Debug.cpp" />
     <ClCompile Include="Source\Collision\Collider.cpp" />
     <ClCompile Include="Source\Maths\Maths.cpp" />
@@ -146,6 +148,8 @@
     <ClCompile Include="Source\Time\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Collision\CircleCollider.h" />
+    <ClInclude Include="Source\Collision\BoxCollider.h" />
     <ClInclude Include="Source\Color\Color.h" />
     <ClInclude Include="Source\Debugging\Debug.h" />
     <ClInclude Include="Source\Collision\Collider.h" />

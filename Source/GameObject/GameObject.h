@@ -42,13 +42,13 @@ public:
 	virtual void LateUpdate(float deltaTime) {};
 	virtual void Draw() {};
 
-	virtual void OnCollisionEnter(Collider* other) {};
-	virtual void OnCollisionStay(Collider* other) {};
-	virtual void OnCollisionExit(Collider* other) {};
+	virtual void OnCollisionEnter(std::shared_ptr<Collider> other) {};
+	virtual void OnCollisionStay(std::shared_ptr<Collider> other) {};
+	virtual void OnCollisionExit(std::shared_ptr<Collider> other) {};
 
-	virtual void OnTriggerEnter(Collider* other) {};
-	virtual void OnTriggerStay(Collider* other) {};
-	virtual void OnTriggerExit(Collider* other) {};
+	virtual void OnTriggerEnter(std::shared_ptr<Collider> other) {};
+	virtual void OnTriggerStay(std::shared_ptr<Collider> other) {};
+	virtual void OnTriggerExit(std::shared_ptr<Collider> other) {};
 
 	virtual void OnDestroy() {};
 

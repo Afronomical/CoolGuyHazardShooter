@@ -12,6 +12,8 @@
     <ClCompile Include="Source\Time\Time.cpp" />
     <ClCompile Include="Source\Collision\Collider.cpp" />
     <ClCompile Include="Source\Debugging\Debug.cpp" />
+    <ClCompile Include="Source\Collision\BoxCollider.cpp" />
+    <ClCompile Include="Source\Collision\CircleCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Input\InputHandler.h" />
@@ -27,5 +29,7 @@
     <ClInclude Include="Source\Collision\Collider.h" />
     <ClInclude Include="Source\Debugging\Debug.h" />
     <ClInclude Include="Source\Color\Color.h" />
+    <ClInclude Include="Source\Collision\BoxCollider.h" />
+    <ClInclude Include="Source\Collision\CircleCollider.h" />
   </ItemGroup>
 </Project>

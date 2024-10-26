@@ -2,7 +2,7 @@
 
 #include "../Components/Transform.h"
 
-#include "../MemoryLeakDetector/MemoryLeakDetector.h"
+#include "../Debugging/MemoryLeakDetector.h"
 
 #pragma region StaticHandlerMembers
 std::vector<GameObject*> GameObject::Handler::gameObjects;

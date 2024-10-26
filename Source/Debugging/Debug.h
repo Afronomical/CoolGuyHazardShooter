@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <string>
 
 //#include "../Collision/BoxCollider.h"
@@ -7,9 +8,9 @@
 #include "../Color/Color.h"
 #include "../Vector2/Vector2.h"
 
-class SDL_Renderer;
+struct SDL_Renderer;
 
-static class Debug
+class Debug
 {
 public:
 	//static void DrawColliderOutline(const BoxCollider& collider, const Color& color);

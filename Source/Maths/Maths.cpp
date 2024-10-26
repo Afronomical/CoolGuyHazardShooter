@@ -31,7 +31,7 @@ float Maths::Clamp(float value, float min, float max)
 
 int Maths::Clamp(int value, int min, int max)
 {
-	const float t = value < min ? min : value;
+	const int t = value < min ? min : value;
 	return t > max ? max : t;
 }
 

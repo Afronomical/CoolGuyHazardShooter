@@ -3,7 +3,8 @@
 #include <SDL.h>
 
 #include <cmath>
-#include <iostream>
+
+SDL_Renderer* Debug::renderer = nullptr;
 
 //void Debug::DrawColliderOutline(const BoxCollider& collider, const Color& color)
 //{
@@ -64,7 +65,7 @@ void Debug::DrawLine(const Vector2& start, const Vector2& end, const Color& colo
 
 	// INFO: Set the color that will represent the line
 	SDL_SetRenderDrawColor(renderer, color.R, color.G, color.B, color.A);
-	SDL_RenderDrawLine(renderer, start.X, start.Y, end.X, end.Y);
+	SDL_RenderDrawLine(renderer, static_cast<int>(start.X), static_cast<int>(start.Y), static_cast<int>(end.X), static_cast<int>(end.Y));
 
 	// INFO: Restore the previous color
 	SDL_SetRenderDrawColor(renderer, previousColor.R, previousColor.G, previousColor.B, previousColor.A);

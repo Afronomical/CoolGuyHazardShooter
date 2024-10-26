@@ -2,7 +2,7 @@
 
 #include <ctime>
 
-#include "MemoryLeakDetector/MemoryLeakDetector.h"
+#include "Debugging/MemoryLeakDetector.h"
 
 int main(int argc, char* argv[])
 {
