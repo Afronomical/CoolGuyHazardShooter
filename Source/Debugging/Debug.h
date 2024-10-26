@@ -3,8 +3,8 @@
 #include <iostream>
 #include <string>
 
-//#include "../Collision/BoxCollider.h"
-//#include "../Collision/CircleCollider.h"
+#include "../Collision/BoxCollider.h"
+#include "../Collision/CircleCollider.h"
 #include "../Color/Color.h"
 #include "../Vector2/Vector2.h"
 
@@ -13,8 +13,8 @@ struct SDL_Renderer;
 class Debug
 {
 public:
-	//static void DrawColliderOutline(const BoxCollider& collider, const Color& color);
-	//static void DrawColliderOutline(const CircleCollider& collider, const Color& color);
+	static void DrawColliderOutline(std::shared_ptr<BoxCollider> boxCollider, const Color& color);
+	static void DrawColliderOutline(std::shared_ptr<CircleCollider> circleCollider, const Color& color);
 	static void DrawLine(const Vector2& start, const Vector2& end, const Color& color);
 
 	static inline void Log(std::string message) { std::cout << message << std::endl; }
