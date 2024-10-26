@@ -269,8 +269,8 @@ void Collider::Handler::UnregisterCollider(std::shared_ptr<Collider> collider)
 #pragma endregion HandlerMethods
 
 #pragma region ColliderMethods
-Collider::Collider(GameObject* _gameObject) : Component(_gameObject), colliderType(Type::None), position(Vector2()), 
-											  offset(Vector2()), isTrigger(false)
+Collider::Collider(GameObject* _gameObject, bool useCustomFunctions) : Component(_gameObject), colliderType(Type::None), position(Vector2()),
+																	   offset(Vector2()), isTrigger(false)
 {
 	// INFO: Register the collider with the handler
 	Collider::Handler::RegisterCollider(shared_from_this());
@@ -279,13 +279,16 @@ Collider::Collider(GameObject* _gameObject) : Component(_gameObject), colliderTy
 	canHaveMultiple = true;
 	
 	// INFO: Set the collision functions to hold the owning game objects collision functions
-	OnCollisionEnter = std::bind(&GameObject::OnCollisionEnter, GetGameObject(), std::placeholders::_1);
-	OnCollisionStay = std::bind(&GameObject::OnCollisionStay, GetGameObject(), std::placeholders::_1);
-	OnCollisionExit = std::bind(&GameObject::OnCollisionExit, GetGameObject(), std::placeholders::_1);
+	if (!useCustomFunctions)
+	{
+		OnCollisionEnter = std::bind(&GameObject::OnCollisionEnter, GetGameObject(), std::placeholders::_1);
+		OnCollisionStay = std::bind(&GameObject::OnCollisionStay, GetGameObject(), std::placeholders::_1);
+		OnCollisionExit = std::bind(&GameObject::OnCollisionExit, GetGameObject(), std::placeholders::_1);
 
-	OnTriggerEnter = std::bind(&GameObject::OnTriggerEnter, GetGameObject(), std::placeholders::_1);
-	OnTriggerStay = std::bind(&GameObject::OnTriggerStay, GetGameObject(), std::placeholders::_1);
-	OnTriggerExit = std::bind(&GameObject::OnTriggerExit, GetGameObject(), std::placeholders::_1);
+		OnTriggerEnter = std::bind(&GameObject::OnTriggerEnter, GetGameObject(), std::placeholders::_1);
+		OnTriggerStay = std::bind(&GameObject::OnTriggerStay, GetGameObject(), std::placeholders::_1);
+		OnTriggerExit = std::bind(&GameObject::OnTriggerExit, GetGameObject(), std::placeholders::_1);
+	}
 }
 
 void Collider::RemoveCollidingCollider(std::shared_ptr<Collider> collider)

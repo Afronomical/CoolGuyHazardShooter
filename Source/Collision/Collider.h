@@ -41,7 +41,9 @@ protected:
 	};
 
 public:
-	Collider(GameObject* _gameObject);
+	/// @param useCustomFunctions : If false, the default collision functions held in GameObject will be used
+	/// otherwise if true, you'll need to set the desired collision functions yourself 
+	Collider(GameObject* _gameObject, bool useCustomFunctions = false);
 
 	inline void UpdateCollider(const Vector2& _position) { position = _position + offset; }
 	inline const Vector2& GetPosition() const { return position; }
@@ -52,6 +54,14 @@ public:
 
 	inline void SetIsTrigger(bool _isTrigger) { isTrigger = _isTrigger; }
 	inline bool IsTrigger() const { return isTrigger; }
+
+	inline void SetOnCollisionEnter(std::function<void(std::shared_ptr<Collider>)> function) { OnCollisionEnter = function; }
+	inline void SetOnCollisionStay(std::function<void(std::shared_ptr<Collider>)> function) { OnCollisionStay = function; }
+	inline void SetOnCollisionExit(std::function<void(std::shared_ptr<Collider>)> function) { OnCollisionExit = function; }
+
+	inline void SetOnTriggerEnter(std::function<void(std::shared_ptr<Collider>)> function) { OnTriggerEnter = function; }
+	inline void SetOnTriggerStay(std::function<void(std::shared_ptr<Collider>)> function) { OnTriggerStay = function; }
+	inline void SetOnTriggerExit(std::function<void(std::shared_ptr<Collider>)> function) { OnTriggerExit = function; }
 
 private:
 	inline Collider::Type GetColliderType() const { return colliderType; }
