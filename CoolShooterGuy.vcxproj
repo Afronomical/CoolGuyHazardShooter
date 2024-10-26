@@ -136,6 +136,7 @@
     <ClCompile Include="Source\Physics\Rigidbody.cpp" />
     <ClCompile Include="Source\Collision\CircleCollider.cpp" />
     <ClCompile Include="Source\Collision\BoxCollider.cpp" />
+    <ClCompile Include="AssetLoader.cpp" />
     <ClCompile Include="Source\Debugging\Debug.cpp" />
     <ClCompile Include="Source\Collision\Collider.cpp" />
     <ClCompile Include="Source\Maths\Maths.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Source\Physics\Rigidbody.h" />
     <ClInclude Include="Source\Collision\CircleCollider.h" />
     <ClInclude Include="Source\Collision\BoxCollider.h" />
+    <ClInclude Include="AssetLoader.h" />
     <ClInclude Include="Source\Color\Color.h" />
     <ClInclude Include="Source\Debugging\Debug.h" />
     <ClInclude Include="Source\Collision\Collider.h" />
