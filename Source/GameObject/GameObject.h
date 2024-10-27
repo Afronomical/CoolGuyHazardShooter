@@ -29,6 +29,12 @@ public:
 	private:
 		static std::vector<GameObject*> gameObjects;
 		static std::queue<GameObject*> deletionQueue;
+
+	private:
+		Handler() = delete;
+		~Handler() = delete;
+		Handler(const Handler&) = delete;
+		Handler& operator=(const Handler&) = delete;
 	};
 
 public:

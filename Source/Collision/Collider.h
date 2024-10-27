@@ -29,6 +29,12 @@ public:
 
 	private:
 		static std::vector<std::weak_ptr<Collider>> colliders;
+
+	private:
+		Handler() = delete;
+		~Handler() = delete;
+		Handler(const Handler&) = delete;
+		Handler& operator=(const Handler&) = delete;
 	};
 
 protected:

@@ -71,5 +71,11 @@ private:
 	static Uint32 currentMouseState;
 	static Uint32 previousMouseState;
 	static Mouse mouse;
+
+private:
+	InputHandler() = delete;
+	~InputHandler() = delete;
+	InputHandler(const InputHandler&) = delete;
+	InputHandler& operator=(const InputHandler&) = delete;
 };
 

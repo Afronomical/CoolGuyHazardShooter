@@ -33,6 +33,12 @@ public:
 	private:
 		static std::vector<std::weak_ptr<Rigidbody>> rigidbodies;
 		static float globalGravity;
+
+	private:
+		Handler() = delete;
+		~Handler() = delete;
+		Handler(const Handler&) = delete;
+		Handler& operator=(const Handler&) = delete;
 	};
 
 public:

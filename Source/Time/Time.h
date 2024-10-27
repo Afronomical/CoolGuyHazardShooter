@@ -20,5 +20,11 @@ private:
 
 	static std::chrono::time_point<std::chrono::steady_clock> currentTime;
 	static std::chrono::time_point<std::chrono::steady_clock> previousTime;
+
+private:
+	Time() = delete;
+	~Time() = delete;
+	Time(const Time&) = delete;
+	Time& operator=(const Time&) = delete;
 };
 

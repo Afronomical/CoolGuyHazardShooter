@@ -29,5 +29,11 @@ public:
 
 public:
 	static const float PI;
+
+private:
+	Maths() = delete;
+	~Maths() = delete;
+	Maths(const Maths&) = delete;
+	Maths& operator=(const Maths&) = delete;
 };
 
