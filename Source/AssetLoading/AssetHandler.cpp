@@ -1,6 +1,7 @@
 #include "AssetHandler.h"
 
 #include "../Debugging/Debug.h"
+#include "../Debugging/MemoryLeakDetector.h"
 
 std::unordered_map<Asset, SDL_Texture*> AssetHandler::textureLib;
 std::unordered_map<Asset, Mix_Music*> AssetHandler::musicLib;

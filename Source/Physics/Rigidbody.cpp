@@ -1,9 +1,9 @@
 #include "Rigidbody.h"
 
+#include "../Debugging/MemoryLeakDetector.h"
 #include "../Time/Time.h"
 
 #pragma region StaticHandlerMembers
-std::vector<std::weak_ptr<Rigidbody>> Rigidbody::Handler::rigidbodies;
 float Rigidbody::Handler::globalGravity = 9.81f;
 #pragma endregion StaticHandlerMembers
 
@@ -11,37 +11,10 @@ float Rigidbody::Handler::globalGravity = 9.81f;
 float Rigidbody::dragCoefficient = 0.5f;
 #pragma endregion StaticRigidbodyMembers
 
-#pragma region HandlerMethods
-void Rigidbody::Handler::Update(float deltaTime)
-{
-	// INFO: Loop through all rigidbodies and call their Update function
-	for (auto& rigidbody : rigidbodies)
-		rigidbody.lock()->Update(deltaTime);
-}
-
-void Rigidbody::Handler::UnregisterRigidbody(std::shared_ptr<Rigidbody> rigidbody)
-{
-	// INFO: Iterates over the rigidbodies ensuring the rigidbody is not nullptr before removing the rigidbody
-	rigidbodies.erase(
-		std::remove_if(
-			rigidbodies.begin(),
-			rigidbodies.end(),
-			[&rigidbody](std::weak_ptr<Rigidbody> registeredRigidbody) {
-				return !registeredRigidbody.expired() && registeredRigidbody.lock() == rigidbody;
-			}
-		),
-		rigidbodies.end()
-	);
-}
-#pragma endregion HandlerMethods
-
 #pragma region RigidbodyMethods
 Rigidbody::Rigidbody(GameObject* _gameObject) : Component(_gameObject), mass(1.0f), gravityDirection(Vector2::Down), acceleration(Vector2::Zero), 
 												velocity(Vector2::Zero), displacement(Vector2::Zero)
 {
-	// INFO: Register the rigidbody with the handler
-	Rigidbody::Handler::RegisterRigidbody(shared_from_this());
-
 	// INFO: Set gravity to global gravity value
 	gravity = Rigidbody::Handler::GetGlobalGravity();
 }

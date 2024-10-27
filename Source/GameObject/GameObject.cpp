@@ -1,7 +1,6 @@
 #include "GameObject.h"
 
 #include "../Components/Transform.h"
-
 #include "../Debugging/MemoryLeakDetector.h"
 
 #pragma region StaticHandlerMembers

@@ -44,6 +44,8 @@ public:
 
 	static inline const Mouse& GetMouse() { return mouse; }
 
+	static inline void SetOnQuit(std::function<void()> action) { OnQuit = action; }
+
 	static void HandleInputs();
 
 	static void ClearAllBindings();
@@ -71,6 +73,8 @@ private:
 	static Uint32 currentMouseState;
 	static Uint32 previousMouseState;
 	static Mouse mouse;
+
+	static std::function<void()> OnQuit;
 
 private:
 	InputHandler() = delete;

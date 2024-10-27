@@ -1,7 +1,6 @@
 #include "InputHandler.h"
 
-//#include "../Debug/Debug.h"
-
+#include "../Debugging/Debug.h"
 #include "../Debugging/MemoryLeakDetector.h"
 
 std::unordered_map<SDL_Keycode, BindData> InputHandler::keyboardActions;
@@ -16,6 +15,8 @@ int InputHandler::keyLength = 0;
 Uint32 InputHandler::currentMouseState = 0;
 Uint32 InputHandler::previousMouseState = 0;
 Mouse InputHandler::mouse;
+
+std::function<void()> InputHandler::OnQuit = nullptr;
 
 bool InputHandler::Initialise()
 {
@@ -139,8 +140,11 @@ void InputHandler::HandleInputs()
 		switch (event.type)
 		{
 		case SDL_QUIT:
-			//Debug::Log("Quit Event Detected!");
+		{
+			Debug::Log("Quit Event Detected!");
+			OnQuit();
 			break;
+		}
 		default:
 			break;
 		}

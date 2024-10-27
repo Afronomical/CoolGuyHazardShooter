@@ -22,16 +22,10 @@ public:
 	class Handler
 	{
 	public:
-		static void Update(float deltaTime);
-
 		inline static void SetGlobalGravity(float _gravity) { globalGravity = _gravity; }
 		inline static float GetGlobalGravity() { return globalGravity; }
 
-		inline static void RegisterRigidbody(std::shared_ptr<Rigidbody> rigidbody) { rigidbodies.push_back(rigidbody); }
-		static void UnregisterRigidbody(std::shared_ptr<Rigidbody> rigidbody);
-
 	private:
-		static std::vector<std::weak_ptr<Rigidbody>> rigidbodies;
 		static float globalGravity;
 
 	private:

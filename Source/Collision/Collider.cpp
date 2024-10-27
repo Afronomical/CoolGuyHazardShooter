@@ -2,6 +2,7 @@
 
 #include "BoxCollider.h"
 #include "CircleCollider.h"
+#include "../Debugging/MemoryLeakDetector.h"
 #include "../GameObject/GameObject.h"
 
 #pragma region StaticHandlerMembers
