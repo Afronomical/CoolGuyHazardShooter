@@ -15,7 +15,7 @@
     <ClCompile Include="Source\Collision\BoxCollider.cpp" />
     <ClCompile Include="Source\Collision\CircleCollider.cpp" />
     <ClCompile Include="Source\Physics\Rigidbody.cpp" />
-    <ClCompile Include="AssetLoader.cpp" />
+    <ClCompile Include="Source\AssetLoading\Asset.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Input\InputHandler.h" />
@@ -34,6 +34,6 @@
     <ClInclude Include="Source\Collision\BoxCollider.h" />
     <ClInclude Include="Source\Collision\CircleCollider.h" />
     <ClInclude Include="Source\Physics\Rigidbody.h" />
-    <ClInclude Include="AssetLoader.h" />
+    <ClInclude Include="Source\AssetLoading\Asset.h" />
   </ItemGroup>
 </Project>
