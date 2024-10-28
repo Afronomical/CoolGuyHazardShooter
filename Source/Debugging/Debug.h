@@ -17,10 +17,14 @@ public:
 	static void DrawColliderOutline(std::shared_ptr<CircleCollider> circleCollider, const Color& color);
 	static void DrawLine(const Vector2& start, const Vector2& end, const Color& color);
 
+	/// @brief Allows for logging of messages to the console
 	static inline void Log(std::string message) { std::cout << message << std::endl; }
-	static void LogWarning(std::string message);
-	static void LogError(std::string message);
 
+	/// @brief Allows for logging of warning messages (yellow) to the console
+	static void LogWarning(std::string message);
+
+	/// @brief Allows for logging of error messages (red) to the console
+	static void LogError(std::string message);
 
 	static inline void SetRenderer(SDL_Renderer* _renderer) { renderer = _renderer; }
 

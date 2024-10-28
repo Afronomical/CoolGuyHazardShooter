@@ -2,8 +2,8 @@
 
 #include "../Components/Component.h"
 
-#include <vector>
 #include <functional>
+#include <vector>
 
 #include "../Vector2/Vector2.h"
 
@@ -16,16 +16,22 @@ public:
 	class Handler
 	{
 	public:
+		/// @brief Utility function used to check for collisions between all colliders
 		static void CheckCollisions();
 
+		/// @brief Used to register a collider with the handler
+		/// @param collider : The collider to register
+		inline static void RegisterCollider(std::shared_ptr<Collider> collider) { colliders.push_back(collider); }
+
+		/// @brief Used to clear all expired colliders from the handler at the end of the frame
+		static void ClearExpiredColliders();
+
+	private:
 		static void CircleCircleCollision(std::shared_ptr<CircleCollider> c1, std::shared_ptr<CircleCollider> c2);
 		static void BoxBoxCollision(std::shared_ptr<BoxCollider> b1, std::shared_ptr<BoxCollider> b2);
 		static void CircleBoxCollision(std::shared_ptr<CircleCollider> c, std::shared_ptr<BoxCollider> b);
 
 		static void HandleCollisionResponse(std::shared_ptr<Collider> c1, std::shared_ptr<Collider> c2, bool hasCollided);
-
-		inline static void RegisterCollider(std::shared_ptr<Collider> collider) { colliders.push_back(collider); }
-		static void UnregisterCollider(std::shared_ptr<Collider> collider);
 
 	private:
 		static std::vector<std::weak_ptr<Collider>> colliders;
@@ -51,6 +57,9 @@ public:
 	/// otherwise if true, you'll need to set the desired collision functions yourself 
 	Collider(GameObject* _gameObject, bool useCustomFunctions = false);
 
+	/// @brief Used by the user to update the collider's position using the GameObject's position
+	/// also takes into account the offset that was set by the user
+	/// @param _position : The position of the GameObject
 	inline void UpdateCollider(const Vector2& _position) { position = _position + offset; }
 	inline const Vector2& GetPosition() const { return position; }
 	virtual Vector2 GetCentrePosition() const = 0;
@@ -58,8 +67,12 @@ public:
 	inline void SetOffset(const Vector2& _offset) { offset = _offset; }
 	inline const Vector2& GetOffset() const { return offset; }
 
+	/// @brief Whether the collider will perform trigger events or collision events
 	inline void SetIsTrigger(bool _isTrigger) { isTrigger = _isTrigger; }
 	inline bool IsTrigger() const { return isTrigger; }
+
+
+	// INFO: Setters for custom collision functions, in case the user adds more than one collider to a GameObject
 
 	inline void SetOnCollisionEnter(std::function<void(std::shared_ptr<Collider>)> function) { OnCollisionEnter = function; }
 	inline void SetOnCollisionStay(std::function<void(std::shared_ptr<Collider>)> function) { OnCollisionStay = function; }

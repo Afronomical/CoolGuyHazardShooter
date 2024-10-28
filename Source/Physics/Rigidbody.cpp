@@ -19,30 +19,6 @@ Rigidbody::Rigidbody(GameObject* _gameObject) : Component(_gameObject), mass(1.0
 	gravity = Rigidbody::Handler::GetGlobalGravity();
 }
 
-void Rigidbody::AddForce(const Vector2& _force, ForceMode mode)
-{
-	float deltaTime = Time::DeltaTime();
-
-	switch (mode)
-	{
-	case ForceMode::Force:
-		force += _force * deltaTime / mass;
-		break;
-	case ForceMode::Acceleration:
-		force += _force * deltaTime;
-		break;
-	case ForceMode::Impulse:
-		force += _force / mass;
-		break;
-	case ForceMode::VelocityChange:
-		force += _force;
-		break;
-	case ForceMode::None:
-	default:
-		break;
-	}
-}
-
 void Rigidbody::Update(float deltaTime)
 {
 	// INFO: Calculate gravitational force based on mass as well as the
@@ -70,12 +46,36 @@ void Rigidbody::Update(float deltaTime)
 	{
 		// INFO: Normalize the velocity
 		Vector2::Normalize(velocity);
-		
+
 		// INFO: Scale the velocity to the terminal velocity
 		velocity *= terminalVelocity.Magnitude();
 	}
 
 	// INFO: Calculate displacement based on the velocity of the rigidbody
 	displacement = velocity * deltaTime;
+}
+
+void Rigidbody::AddForce(const Vector2& _force, ForceMode mode)
+{
+	float deltaTime = Time::DeltaTime();
+
+	switch (mode)
+	{
+	case ForceMode::Force:
+		force += _force * deltaTime / mass;
+		break;
+	case ForceMode::Acceleration:
+		force += _force * deltaTime;
+		break;
+	case ForceMode::Impulse:
+		force += _force / mass;
+		break;
+	case ForceMode::VelocityChange:
+		force += _force;
+		break;
+	case ForceMode::None:
+	default:
+		break;
+	}
 }
 #pragma endregion RigidbodyMethods

@@ -34,18 +34,29 @@ public:
 	static inline void BindMouseButtonToAction(Uint32 button, BindData data) { mouseButtonActions[button] = data; }
 	static inline void BindMouseMovementToAction(std::function<void(int, int)> action) { mouseMovementAction = action; }
 
+	/// @brief Used internally by the InputHandler, but can be used by user for quick testing
 	static inline bool GetKey(SDL_Keycode key) { return currentKeyState[key]; }
+
+	/// @brief Used internally by the InputHandler, but can be used by user for quick testing
 	static inline bool GetKeyDown(SDL_Keycode key) { return currentKeyState[key] && !previousKeyState[key]; }
+
+	/// @brief Used internally by the InputHandler, but can be used by user for quick testing
 	static inline bool GetKeyUp(SDL_Keycode key) { return !currentKeyState[key] && previousKeyState[key]; }
 
+	/// @brief Used internally by the InputHandler, but can be used by user for quick testing
 	static inline bool GetMouseButton(Uint32 button) { return currentMouseState & SDL_BUTTON(button); }
+
+	/// @brief Used internally by the InputHandler, but can be used by user for quick testing
 	static inline bool GetMouseButtonDown(Uint32 button) { return (currentMouseState & SDL_BUTTON(button)) && !(previousMouseState & SDL_BUTTON(button)); }
+
+	/// @brief Used internally by the InputHandler, but can be used by user for quick testing
 	static inline bool GetMouseButtonUp(Uint32 button) { return !(currentMouseState & SDL_BUTTON(button)) && (previousMouseState & SDL_BUTTON(button)); }
 
 	static inline const Mouse& GetMouse() { return mouse; }
 
 	static inline void SetOnQuit(std::function<void()> action) { OnQuit = action; }
 
+	/// @brief Called in the handle input function found in the Game class
 	static void HandleInputs();
 
 	static void ClearAllBindings();

@@ -5,7 +5,7 @@ class Vector2
 public:
 	Vector2(float _X = 0.0f, float _Y = 0.0f);
 
-	/// @brief Returns a new normalized vector of the vector that called the function
+	/// @return A new normalized vector of the vector that called the function
 	const Vector2 Normalized();
 
 	const float Magnitude() const;

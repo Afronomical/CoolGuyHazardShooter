@@ -228,18 +228,6 @@ void AssetHandler::DrawAnimation(const Asset& texture, const Vector2& position, 
 	//SDL_RenderCopyEx(renderer, textureLib[texture], &srcRect, &destRect, 0.0, nullptr, flip);
 }
 
-bool AssetHandler::IsAudioValid(const Asset& audio, bool isMusic)
-{
-	if (isMusic)
-	{
-		return musicLib.find(audio) != musicLib.end();
-	}
-	else
-	{
-		return sfxLib.find(audio) != sfxLib.end();
-	}
-}
-
 void AssetHandler::PlayMusic(const Asset& music, int loops)
 {
 	// INFO: Check if the music is valid
@@ -308,4 +296,16 @@ TTF_Font* AssetHandler::GetFont(const Asset& font)
 	}
 
 	return fontLib[font];
+}
+
+bool AssetHandler::IsAudioValid(const Asset& audio, bool isMusic)
+{
+	if (isMusic)
+	{
+		return musicLib.find(audio) != musicLib.end();
+	}
+	else
+	{
+		return sfxLib.find(audio) != sfxLib.end();
+	}
 }

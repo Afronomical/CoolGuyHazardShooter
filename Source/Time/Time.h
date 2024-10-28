@@ -5,9 +5,13 @@
 class Time
 {
 public:
+	/// @brief Used to update the time values
 	static void Tick();
 
+	/// @return The time between frames
 	static inline const float DeltaTime() { return deltaTime * timeScale; }
+
+	/// @return The total time since the game started
 	static inline const float ElapsedTime() { return elapsedTime; }
 
 	static inline void SetTimeScale(float scale) { timeScale = scale; }

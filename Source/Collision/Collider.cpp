@@ -45,6 +45,18 @@ void Collider::Handler::CheckCollisions()
 	}
 }
 
+void Collider::Handler::ClearExpiredColliders()
+{
+	for (size_t i = 0; i < colliders.size(); i++)
+	{
+		if (colliders[i].expired())
+		{
+			colliders.erase(colliders.begin() + i);
+			i--;
+		}
+	}
+}
+
 void Collider::Handler::CircleCircleCollision(std::shared_ptr<CircleCollider> c1, std::shared_ptr<CircleCollider> c2)
 {
 	// INFO: Circle centre positions
@@ -251,21 +263,6 @@ void Collider::Handler::HandleCollisionResponse(std::shared_ptr<Collider> c1, st
 				c2->OnCollisionExit(c1);
 		}
 	}
-}
-
-void Collider::Handler::UnregisterCollider(std::shared_ptr<Collider> collider)
-{
-	// INFO: Iterates over the colliders ensuring the collider is not nullptr before removing the collider
-	colliders.erase(
-		std::remove_if(
-			colliders.begin(),
-			colliders.end(),
-			[&collider](std::weak_ptr<Collider> registeredCollider) {
-				return !registeredCollider.expired() && registeredCollider.lock() == collider;
-			}
-		),
-		colliders.end()
-	);
 }
 #pragma endregion HandlerMethods
 

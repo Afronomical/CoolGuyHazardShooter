@@ -19,6 +19,10 @@ public:
 	static int RandomRange(int min, int max);
 	static float RandomRange(float min, float max);
 
+	/// @brief Converts a float to a string with a certain precision
+	/// @param value : The float value to convert
+	/// @param precision : The number of decimal places to include
+	/// @return The float as a string
 	static std::string FloatToString(float value, int precision);
 	static int RoundToInt(float f);
 

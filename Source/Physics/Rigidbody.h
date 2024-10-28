@@ -22,6 +22,8 @@ public:
 	class Handler
 	{
 	public:
+		/// @brief Sets the gravity value that will be used by all newly created Rigidbody components
+		/// after this function is called
 		inline static void SetGlobalGravity(float _gravity) { globalGravity = _gravity; }
 		inline static float GetGlobalGravity() { return globalGravity; }
 
@@ -38,6 +40,11 @@ public:
 public:
 	Rigidbody(GameObject* _gameObject);
 	~Rigidbody() override {};
+	
+	/// @brief Called by the user to update the Rigidbody component based on the changes
+	/// made previously through functions like AddForce
+	/// @param deltaTime : The time between frames
+	void Update(float deltaTime);
 
 	void AddForce(const Vector2& _force, ForceMode mode = ForceMode::Force);
 	inline void AddForce(float forceX, float forceY, ForceMode mode = ForceMode::Force) { AddForce(Vector2(forceX, forceY), mode); }
@@ -45,6 +52,7 @@ public:
 	inline void SetMass(float _mass) { mass = _mass; }
 	inline float GetMass() const { return mass; }
 
+	/// @brief Sets the gravity value that will be used by this Rigidbody component
 	inline void SetGravity(float _gravity) { gravity = _gravity; }
 	inline float GetGravity() const { return gravity; }
 
@@ -55,9 +63,6 @@ public:
 	inline const Vector2& GetVelocity() const { return velocity; }
 
 	inline const Vector2& GetDisplacement() const { return displacement; }
-
-private:
-	void Update(float deltaTime);
 
 private:
 	static float dragCoefficient;

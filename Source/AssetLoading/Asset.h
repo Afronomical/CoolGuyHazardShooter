@@ -16,7 +16,10 @@ class Asset
 public:
 	Asset();
 
+	/// @brief The unique ID of the asset that is used to identify the asset
 	inline const int GetID() const { return id; }
+
+	/// @brief The filepath of the asset used to check if the asset is already loaded
 	inline const char* GetFilepath() const { return filepath; }
 
 	inline bool operator==(const Asset& other) const { return id == other.id && filepath == other.filepath; }

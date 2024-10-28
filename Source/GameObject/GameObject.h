@@ -14,16 +14,34 @@ public:
 	class Handler
 	{
 	public:
+		/// @brief Utility function used to call the Start function for all game objects
 		static void Start();
+
+		/// @brief Utility function used to call the Update function for all game objects
+		/// @param deltaTime : The time between frames
 		static void Update(float deltaTime);
+
+		/// @brief Utility function used to call the LateUpdate function for all game objects
+		/// @param deltaTime : The time between frames
 		static void LateUpdate(float deltaTime);
+
+		/// @brief Utility function used to call the Draw function for all game objects
 		static void Draw();
 
+		/// @brief Utility function used to clean up all game objects
 		static void Clean();
 
+		/// @brief Used to register a game object with the handler
+		/// @param gameObject : The game object to register
 		static void RegisterGameObject(GameObject* gameObject);
+
+		/// @brief Used to unregister a game object with the handler, this will queue the
+		/// game object for deletion at the end of the frame
+		/// @param gameObject : The game object to unregister
 		static void UnregisterGameObject(GameObject* gameObject);
 
+		/// @brief Used to process the deletion queue, this will delete all game objects
+		/// that have been queued for deletion
 		static void ProcessDeletionQueue();
 
 	private:
@@ -41,6 +59,7 @@ public:
 	GameObject();
 	virtual ~GameObject() = 0 {};
 
+	/// @brief Used to destroy the game object
 	void Destroy();
 
 	virtual void Start() {};
@@ -56,6 +75,7 @@ public:
 	virtual void OnTriggerStay(std::shared_ptr<Collider> other) {};
 	virtual void OnTriggerExit(std::shared_ptr<Collider> other) {};
 
+	/// @brief Event that is called when the game object is destroyed
 	virtual void OnDestroy() {};
 
 	template<class T>
