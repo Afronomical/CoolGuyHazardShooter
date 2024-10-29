@@ -56,7 +56,6 @@ public:
 	inline void SetGravity(float _gravity) { gravity = _gravity; }
 	inline float GetGravity() const { return gravity; }
 
-	inline void SetAcceleration(const Vector2& _acceleration) { acceleration = _acceleration; }
 	inline const Vector2& GetAcceleration() const { return acceleration; }
 
 	inline void SetVelocity(const Vector2& _velocity) { velocity = _velocity; }
