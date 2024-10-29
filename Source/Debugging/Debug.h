@@ -13,9 +13,9 @@ struct SDL_Renderer;
 class Debug
 {
 public:
-	static void DrawColliderOutline(std::shared_ptr<BoxCollider> boxCollider, const Color& color);
-	static void DrawColliderOutline(std::shared_ptr<CircleCollider> circleCollider, const Color& color);
-	static void DrawLine(const Vector2& start, const Vector2& end, const Color& color);
+	static void DrawColliderOutline(std::shared_ptr<BoxCollider> boxCollider, const Color& color = Color::Green);
+	static void DrawColliderOutline(std::shared_ptr<CircleCollider> circleCollider, const Color& color = Color::Green);
+	static void DrawLine(const Vector2& start, const Vector2& end, const Color& color = Color::Red);
 
 	/// @brief Allows for logging of messages to the console
 	static inline void Log(std::string message) { std::cout << message << std::endl; }

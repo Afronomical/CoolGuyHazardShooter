@@ -6,20 +6,20 @@ class AssetHandler
 {
 public:
 	static Asset LoadTexture(const char* filepath);
-	static Asset LoadFont(const char* filepath, int ptSize);
+	static Asset LoadFont(const char* filepath, int ptSize = 16);
 	static Asset LoadMusic(const char* filepath);
 	static Asset LoadSFX(const char* filepath);
 
 	static void Clean();
 
 	/// @brief Used to draw static textures that do not change based on camera e.g. (UI)
-	static void DrawStatic(const Asset& texture, const Vector2& position, float width, float height, float scale, SDL_RendererFlip flip);
+	static void DrawStatic(const Asset& texture, const Vector2& position, float width, float height, float scale = 1.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	/// @brief Used to draw dynamic textures that change based on camera e.g. (Background, tilemap blocks)
-	static void DrawDynamic(const Asset& texture, const Vector2& position, float width, float height, float scrollSpeed, float scale, SDL_RendererFlip flip);
+	static void DrawDynamic(const Asset& texture, const Vector2& position, float width, float height, float scrollSpeed = 1.0f, float scale = 1.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	
 	/// @brief Used to draw animated textures that change based on camera e.g. (Player, enemies)
-	static void DrawAnimation(const Asset& texture, const Vector2& position, float width, float height, int row, int frame, float scrollSpeed, float scale, SDL_RendererFlip flip);
+	static void DrawAnimation(const Asset& texture, const Vector2& position, float width, float height, int row, int frame, float scrollSpeed = 1.0f, float scale = 1.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	/// @param loops : 0 = play once, -1 = loop indefinitely
 	static void PlayMusic(const Asset& music, int loops = 0);

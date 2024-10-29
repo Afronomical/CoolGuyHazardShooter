@@ -23,7 +23,7 @@ public:
 	/// @param value : The float value to convert
 	/// @param precision : The number of decimal places to include
 	/// @return The float as a string
-	static std::string FloatToString(float value, int precision);
+	static std::string FloatToString(float value, int precision = 2);
 	static int RoundToInt(float f);
 
 	static float PingPong(float time, float length);
