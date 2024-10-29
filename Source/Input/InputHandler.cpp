@@ -74,6 +74,24 @@ void InputHandler::HandleInputs()
 	// INFO: Update Current Mouse State so the two can be compared
 	currentMouseState = SDL_GetMouseState(&mouse.mouseData.x, &mouse.mouseData.y);
 
+	// INFO: Handle any SDL events for generic functionality (e.g. closing the window)
+	SDL_Event event;
+
+	while (SDL_PollEvent(&event))
+	{
+		switch (event.type)
+		{
+		case SDL_QUIT:
+		{
+			Debug::Log("Quit Event Detected!");
+			OnQuit();
+			break;
+		}
+		default:
+			break;
+		}
+	}
+
 	// INFO: Go through keyboardActions and check if any should be triggered
 	for (auto& keyboardAction : keyboardActions)
 	{
@@ -131,25 +149,6 @@ void InputHandler::HandleInputs()
 			break;
 		}
 	}
-
-	// INFO: Handle any SDL events for generic functionality (e.g. closing the window)
-	SDL_Event event;
-
-	while (SDL_PollEvent(&event))
-	{
-		switch (event.type)
-		{
-		case SDL_QUIT:
-		{
-			Debug::Log("Quit Event Detected!");
-			OnQuit();
-			break;
-		}
-		default:
-			break;
-		}
-	}
-
 }
 
 void InputHandler::ClearAllBindings()
