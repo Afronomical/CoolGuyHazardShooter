@@ -35,6 +35,7 @@ public:
 	static const float PI;
 
 private:
+	//private constructor to prevent instantiation
 	Maths() = delete;
 	~Maths() = delete;
 	Maths(const Maths&) = delete;
