@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetLoading\AssetHandler.cpp" />
+    <ClCompile Include="Source\Camera\Camera.cpp" />
     <ClCompile Include="Source\Color\Color.cpp" />
     <ClCompile Include="Source\Physics\Rigidbody.cpp" />
     <ClCompile Include="Source\Collision\CircleCollider.cpp" />
@@ -153,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\AssetLoading\AssetHandler.h" />
+    <ClInclude Include="Source\Camera\Camera.h" />
     <ClInclude Include="Source\Physics\Rigidbody.h" />
     <ClInclude Include="Source\Collision\CircleCollider.h" />
     <ClInclude Include="Source\Collision\BoxCollider.h" />
