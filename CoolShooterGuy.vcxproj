@@ -133,7 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Particles\Particles.cpp" />
+    <ClCompile Include="Source\Particles\Particle.cpp" />
     <ClCompile Include="Source\AssetLoading\AssetHandler.cpp" />
     <ClCompile Include="Source\Color\Color.cpp" />
     <ClCompile Include="Source\Physics\Rigidbody.cpp" />
@@ -153,7 +153,7 @@
     <ClCompile Include="Source\Time\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Particles\Particles.h" />
+    <ClInclude Include="Source\Particles\Particle.h" />
     <ClInclude Include="Source\AssetLoading\AssetHandler.h" />
     <ClInclude Include="Source\Physics\Rigidbody.h" />
     <ClInclude Include="Source\Collision\CircleCollider.h" />
