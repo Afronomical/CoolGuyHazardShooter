@@ -5,10 +5,10 @@
 class AssetHandler
 {
 public:
-	static Asset LoadTexture(const char* filepath);
-	static Asset LoadFont(const char* filepath, int ptSize = 16);
-	static Asset LoadMusic(const char* filepath);
-	static Asset LoadSFX(const char* filepath);
+	static Asset LoadTexture(const std::string& filepath);
+	static Asset LoadFont(const std::string& filepath, int ptSize = 16);
+	static Asset LoadMusic(const std::string& filepath);
+	static Asset LoadSFX(const std::string& filepath);
 
 	static void Clean();
 

@@ -10,19 +10,19 @@ std::unordered_map<Asset, TTF_Font*> AssetHandler::fontLib;
 
 SDL_Renderer* AssetHandler::renderer = nullptr;
 
-Asset AssetHandler::LoadTexture(const char* filepath)
+Asset AssetHandler::LoadTexture(const std::string& filepath)
 {
 	// INFO: Check if the texture is already loaded, if so return it
 	for (auto& texture : textureLib)
 	{
-		if (strcmp(texture.first.GetFilepath(), filepath) == 0)
+		if (strcmp(texture.first.GetFilepath().c_str(), filepath.c_str()) == 0)
 		{
 			return texture.first;
 		}
 	}
 
 	// INFO: Load the texture
-	SDL_Surface* sdlSurface = IMG_Load(filepath);
+	SDL_Surface* sdlSurface = IMG_Load(filepath.c_str());
 
 	//if (sdlSurface == nullptr)
 	//{
@@ -49,19 +49,19 @@ Asset AssetHandler::LoadTexture(const char* filepath)
 	return asset;
 }
 
-Asset AssetHandler::LoadFont(const char* filepath, int ptSize)
+Asset AssetHandler::LoadFont(const std::string& filepath, int ptSize)
 {
 	// INFO: Check if the font is already loaded, if so return it
 	for (auto& font : fontLib)
 	{
-		if (strcmp(font.first.GetFilepath(), filepath) == 0)
+		if (strcmp(font.first.GetFilepath().c_str(), filepath.c_str()) == 0)
 		{
 			return font.first;
 		}
 	}
 
 	// INFO: Load the font
-	TTF_Font* sdlFont = TTF_OpenFont(filepath, ptSize);
+	TTF_Font* sdlFont = TTF_OpenFont(filepath.c_str(), ptSize);
 
 	if (sdlFont == nullptr)
 	{
@@ -78,19 +78,19 @@ Asset AssetHandler::LoadFont(const char* filepath, int ptSize)
 	return asset;
 }
 
-Asset AssetHandler::LoadMusic(const char* filepath)
+Asset AssetHandler::LoadMusic(const std::string& filepath)
 {
 	// INFO: Check if the music is already loaded, if so return it
 	for (auto& music : musicLib)
 	{
-		if (strcmp(music.first.GetFilepath(), filepath) == 0)
+		if (strcmp(music.first.GetFilepath().c_str(), filepath.c_str()) == 0)
 		{
 			return music.first;
 		}
 	}
 
 	// INFO: Load the music
-	Mix_Music* sdlMusic = Mix_LoadMUS(filepath);
+	Mix_Music* sdlMusic = Mix_LoadMUS(filepath.c_str());
 
 	if (sdlMusic == nullptr)
 	{
@@ -107,19 +107,19 @@ Asset AssetHandler::LoadMusic(const char* filepath)
 	return asset;
 }
 
-Asset AssetHandler::LoadSFX(const char* filepath)
+Asset AssetHandler::LoadSFX(const std::string& filepath)
 {
 	// INFO: Check if the SFX is already loaded, if so return it
 	for (auto& sfx : sfxLib)
 	{
-		if (strcmp(sfx.first.GetFilepath(), filepath) == 0)
+		if (strcmp(sfx.first.GetFilepath().c_str(), filepath.c_str()) == 0)
 		{
 			return sfx.first;
 		}
 	}
 
 	// INFO: Load the SFX
-	Mix_Chunk* sdlSFX = Mix_LoadWAV(filepath);
+	Mix_Chunk* sdlSFX = Mix_LoadWAV(filepath.c_str());
 
 	if (sdlSFX == nullptr)
 	{

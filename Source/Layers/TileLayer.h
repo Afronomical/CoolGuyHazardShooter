@@ -22,11 +22,8 @@ struct Tileset
 	// INFO: The size of each individual tile in the tileset
 	int tileSize;
 
-	// INFO: The texture of the tileset used to draw the tiles
+	// INFO: The texture of the tileset used to draw the tiles (Also contains the filepath to the texture)
 	Asset texture;
-
-	// INFO: The filepath of the tileset
-	const char* filepath;
 };
 
 class TileLayer : public Layer

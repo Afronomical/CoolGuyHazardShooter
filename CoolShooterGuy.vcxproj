@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Map\Map.cpp" />
     <ClCompile Include="Source\Particles\Particle.cpp" />
     <ClCompile Include="Source\AssetLoading\AssetHandler.cpp" />
     <ClCompile Include="Source\Color\Color.cpp" />
@@ -151,8 +152,11 @@
     <ClCompile Include="Source\Components\Transform.cpp" />
     <ClCompile Include="Source\Vector2\Vector2.cpp" />
     <ClCompile Include="Source\Time\Time.cpp" />
+    <ClCompile Include="Source\Layers\TileLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Map\Map.h" />
+    <ClInclude Include="Source\Layers\Layer.h" />
     <ClInclude Include="Source\Particles\Particle.h" />
     <ClInclude Include="Source\AssetLoading\AssetHandler.h" />
     <ClInclude Include="Source\Physics\Rigidbody.h" />
@@ -172,6 +176,7 @@
     <ClInclude Include="Source\Debugging\MemoryLeakDetector.h" />
     <ClInclude Include="Source\Vector2\Vector2.h" />
     <ClInclude Include="Source\Time\Time.h" />
+    <ClInclude Include="Source\Layers\TileLayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

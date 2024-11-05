@@ -5,6 +5,7 @@
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 
+#include <string>
 #include <unordered_map>
 
 #include "../Vector2/Vector2.h"
@@ -20,18 +21,18 @@ public:
 	inline const int GetID() const { return id; }
 
 	/// @brief The filepath of the asset used to check if the asset is already loaded
-	inline const char* GetFilepath() const { return filepath; }
+	inline const std::string& GetFilepath() const { return filepath; }
 
 	inline bool operator==(const Asset& other) const { return id == other.id && filepath == other.filepath; }
 
 private:
-	Asset(int _id, const char* _filepath);
+	Asset(int _id, const std::string& _filepath);
 
-	void SetFilepath(const char* _filepath) { filepath = _filepath; }
+	void SetFilepath(const std::string& _filepath) { filepath = _filepath; }
 
 private:
 	int id;
-	const char* filepath;
+	std::string filepath;
 
 	static unsigned int assetCount;
 	static Asset invalidAsset;
@@ -45,7 +46,7 @@ namespace std
 		std::size_t operator()(const Asset& asset) const
 		{
 			return ((std::hash<int>()(asset.GetID()) 
-				   ^ (std::hash<const char*>()(asset.GetFilepath()) << 1)) >> 1);
+				   ^ (std::hash<std::string>()(asset.GetFilepath()) << 1)) >> 1);
 		}
 	};
 }

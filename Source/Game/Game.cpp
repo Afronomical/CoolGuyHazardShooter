@@ -12,7 +12,7 @@
 #include "../Input/InputHandler.h"
 #include "../Time/Time.h"
 
-Game::Game(const char* _windowName, const Vector2& _windowDimensions) : window(nullptr), renderer(nullptr), isRunning(false),
+Game::Game(const std::string& _windowName, const Vector2& _windowDimensions) : window(nullptr), renderer(nullptr), isRunning(false),
 																		windowName(_windowName), windowDimensions(_windowDimensions)
 {
 	// INFO: Initialise and Validate everything
@@ -58,7 +58,8 @@ bool Game::InitialiseSDL()
 	else
 	{
 		// INFO: Create the window
-		window = SDL_CreateWindow(windowName, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, static_cast<int>(windowDimensions.X), static_cast<int>(windowDimensions.Y), NULL);
+		window = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
+								  static_cast<int>(windowDimensions.X), static_cast<int>(windowDimensions.Y), NULL);
 
 		// INFO: Window Validity Check
 		if (window == nullptr)

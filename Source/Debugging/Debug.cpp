@@ -71,7 +71,7 @@ void Debug::DrawLine(const Vector2& start, const Vector2& end, const Color& colo
 	SDL_SetRenderDrawColor(renderer, previousColor.R, previousColor.G, previousColor.B, previousColor.A);
 }
 
-void Debug::LogWarning(std::string message)
+void Debug::LogWarning(const std::string& message)
 {
 	// INFO: Set color to bold yellow
 	std::cout << "\033[1;33;1m";
@@ -82,7 +82,7 @@ void Debug::LogWarning(std::string message)
 	std::cout << "\033[0m";
 }
 
-void Debug::LogError(std::string message)
+void Debug::LogError(const std::string& message)
 {
 	// INFO: Set color to bold red
 	std::cout << "\033[1;31;1m";

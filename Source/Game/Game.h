@@ -2,12 +2,14 @@
 
 #include <SDL.h>
 
+#include <string>
+
 #include "../Vector2/Vector2.h"
 
 class Game
 {
 public:
-	Game(const char* _windowName, const Vector2& _windowDimensions);
+	Game(const std::string& _windowName, const Vector2& _windowDimensions);
 	
 	/// @brief Utility function that encapsulates SDL and game initialisation
 	/// @retval TRUE : If everything was initialised correctly
@@ -47,7 +49,7 @@ private:
 	SDL_Renderer* renderer;
 
 	bool isRunning;
-	const char* windowName;
+	std::string windowName;
 	Vector2 windowDimensions;
 };
 
