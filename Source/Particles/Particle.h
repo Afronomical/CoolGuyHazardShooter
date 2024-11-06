@@ -11,14 +11,16 @@ class Particle : public GameObject
 {
 private:
 
-	float pLifeTime;
-	int pSpeed;
+	float pLifeTime = 0;
+	int pSpeed = 0;
 	//Vector2 pos;
 
 public:
 
 	using GameObject::GameObject;
 	~Particle() override {};
+
+	Particle(float lifeTime, float size, const Asset& texture, const Vector2& position);
 
 	//Getters
 	float GetLifetime() { return pLifeTime; };

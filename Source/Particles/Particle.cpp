@@ -28,3 +28,10 @@
 //		lifeTime -= Time::DeltaTime();
 //	}
 //}
+
+Particle::Particle(float lifeTime, float size, const Asset& texture, const Vector2& position)
+{
+	AssetHandler::DrawDynamic(texture, position, size, size);
+	SetLifetime(lifeTime);
+
+}

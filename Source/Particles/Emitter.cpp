@@ -1,29 +1,48 @@
 #include "Emitter.h"
 
-void Emitter::EmitParticles(int range, float duration, int particleCount, const Asset& texture, const Vector2& position)
+void Emitter::EmitParticles(int range, float duration, const Asset& texture, const Vector2& position)
 {
-	/*lifeTime = duration;
+	//Set range of particles
 	radius = range;
-	maxParticles = particleCount;
 
-	if (lifeTime > 0)
+	for (int i = 0; i < MAX_PARTICLES; ++i)
 	{
-		for (int i = 0; i < maxParticles; ++i)
+		if (!particles[i]) //If empty
 		{
-			AssetHandler::DrawDynamic(texture, position, 2.f, 2.f);
+			particles[i]->SetLifetime(duration);
 
+			//Create particle
+			particles[i] = new Particle(particles[i]->GetLifetime(), 2.0f, texture, position);
+
+			//Create random direction
 			float dirX = Maths::RandomRange(0.f, 1.f);
 			float dirY = Maths::RandomRange(0.f, 1.f);
 
 			Vector2 randomDir = { dirX, dirY };
 
-			pos += randomDir * Time::DeltaTime();
+			//Move particle in said direction
+			particles[i]->SetPosition(randomDir * Time::DeltaTime());
 
-			if (pos.X > position.X + radius || pos.Y > position.Y + radius)
+
+			if (particles[i]->GetPosition().X > position.X + radius || particles[i]->GetPosition().Y > position.Y + radius)
 			{
-				Disable single particle
+				//Remove the particle when out of range
+				//particles[i]->Destroy();
+				delete particles[i];
 			}
 		}
 
-		lifeTime -= Time::DeltaTime();*/
+		else if (particles[i])//If not empty
+		{
+			if (particles[i]->GetLifetime() > 0)//If out of time
+			{
+				//particles[i]->Destroy();
+				delete particles[i];
+				particles[i] = nullptr;//Double tap
+			}
+		}
+
+		//Decrement the particle's lifetime
+		particles[i]->SetLifetime(particles[i]->GetLifetime() - Time::DeltaTime());
+	}
 }

@@ -2,6 +2,8 @@
 #include "../Components/Component.h"
 #include "Particle.h"
 
+#define MAX_PARTICLES 100
+
 class Particle;
 
 class Emitter : public Component
@@ -9,7 +11,8 @@ class Emitter : public Component
 private:
 
 	int radius;
-	int maxParticles;
+	int particleCount;
+	Particle* particles[MAX_PARTICLES];
 
 public:
 
@@ -22,6 +25,6 @@ public:
 	/// <param name="particleCount"> Max amount of particles </param>
 	/// <param name="texture"> What each particle looks like </param>
 	/// <param name="position"> Origin point of particles </param>
-	void EmitParticles(int range, float duration, int particleCount, const Asset& texture, const Vector2& position);
+	void EmitParticles(int range, float duration, const Asset& texture, const Vector2& position);
 };
 
