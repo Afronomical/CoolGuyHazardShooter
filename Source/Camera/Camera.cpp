@@ -3,14 +3,12 @@
 Camera::Camera(int width, int height)
 {
    
-    this->width = width;
-    this->height = height;
-
+   
     //initalise the viewport
     viewport.x = 0; 
     viewport.y = 0;
-    viewport.w = this->width; 
-    viewport.h = this->height;
+    viewport.w = width; 
+    viewport.h = height;
 }
 
 SDL_Rect Camera::getViewport()

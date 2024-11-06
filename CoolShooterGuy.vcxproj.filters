@@ -22,6 +22,7 @@
     <ClCompile Include="Source\Map\Map.cpp" />
     <ClCompile Include="Source\Layers\TileLayer.cpp" />
     <ClCompile Include="Source\Particles\Emitter.cpp" />
+    <ClCompile Include="Source\Camera\Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Input\InputHandler.h" />
@@ -47,5 +48,6 @@
     <ClInclude Include="Source\Map\Map.h" />
     <ClInclude Include="Source\Layers\TileLayer.h" />
     <ClInclude Include="Source\Particles\Emitter.h" />
+    <ClInclude Include="Source\Camera\Camera.h" />
   </ItemGroup>
 </Project>

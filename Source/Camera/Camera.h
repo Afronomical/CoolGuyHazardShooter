@@ -10,7 +10,5 @@ public:
 	//future functions for camera to be added
 
 private:
-	int width;
-	int height;
 	SDL_Rect viewport;
 };
