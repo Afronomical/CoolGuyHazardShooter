@@ -21,6 +21,7 @@
     <ClCompile Include="Source\Particles\Particle.cpp" />
     <ClCompile Include="Source\Map\Map.cpp" />
     <ClCompile Include="Source\Layers\TileLayer.cpp" />
+    <ClCompile Include="Source\Particles\Emitter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Input\InputHandler.h" />
@@ -45,5 +46,6 @@
     <ClInclude Include="Source\Layers\Layer.h" />
     <ClInclude Include="Source\Map\Map.h" />
     <ClInclude Include="Source\Layers\TileLayer.h" />
+    <ClInclude Include="Source\Particles\Emitter.h" />
   </ItemGroup>
 </Project>

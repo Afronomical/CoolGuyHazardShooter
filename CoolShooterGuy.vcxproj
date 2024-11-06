@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Particles\Emitter.cpp" />
     <ClCompile Include="Source\Map\Map.cpp" />
     <ClCompile Include="Source\Particles\Particle.cpp" />
     <ClCompile Include="Source\AssetLoading\AssetHandler.cpp" />
@@ -155,6 +156,7 @@
     <ClCompile Include="Source\Layers\TileLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Particles\Emitter.h" />
     <ClInclude Include="Source\Map\Map.h" />
     <ClInclude Include="Source\Layers\Layer.h" />
     <ClInclude Include="Source\Particles\Particle.h" />
