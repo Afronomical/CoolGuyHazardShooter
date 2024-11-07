@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Enemies\BaseEnemy.cpp" />
     <ClCompile Include="Source\Camera\Camera.cpp" />
     <ClCompile Include="Source\Particles\Emitter.cpp" />
     <ClCompile Include="Source\Map\Map.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="Source\Layers\TileLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Enemies\BaseEnemy.h" />
     <ClInclude Include="Source\Camera\Camera.h" />
     <ClInclude Include="Source\Particles\Emitter.h" />
     <ClInclude Include="Source\Map\Map.h" />
