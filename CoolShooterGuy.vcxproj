@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Animation\AnimatorController.cpp" />
+    <ClCompile Include="Source\Animation\Animator.cpp" />
     <ClCompile Include="Source\Enemies\BaseEnemy.cpp" />
     <ClCompile Include="Source\Camera\Camera.cpp" />
     <ClCompile Include="Source\Particles\Emitter.cpp" />
@@ -158,6 +160,8 @@
     <ClCompile Include="Source\Layers\TileLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Animation\AnimatorController.h" />
+    <ClInclude Include="Source\Animation\Animator.h" />
     <ClInclude Include="Source\Enemies\BaseEnemy.h" />
     <ClInclude Include="Source\Camera\Camera.h" />
     <ClInclude Include="Source\Particles\Emitter.h" />
