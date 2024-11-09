@@ -26,6 +26,11 @@
     <ClCompile Include="Source\Enemies\BaseEnemy.cpp" />
     <ClCompile Include="Source\Animation\Animator.cpp" />
     <ClCompile Include="Source\Animation\AnimatorController.cpp" />
+    <ClCompile Include="Source\FileHandling\FileHandler.cpp" />
+    <ClCompile Include="Source\Externals\TinyXML\tinystr.cpp" />
+    <ClCompile Include="Source\Externals\TinyXML\tinyxml.cpp" />
+    <ClCompile Include="Source\Externals\TinyXML\tinyxmlerror.cpp" />
+    <ClCompile Include="Source\Externals\TinyXML\tinyxmlparser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Input\InputHandler.h" />
@@ -55,5 +60,8 @@
     <ClInclude Include="Source\Enemies\BaseEnemy.h" />
     <ClInclude Include="Source\Animation\Animator.h" />
     <ClInclude Include="Source\Animation\AnimatorController.h" />
+    <ClInclude Include="Source\FileHandling\FileHandler.h" />
+    <ClInclude Include="Source\Externals\TinyXML\tinystr.h" />
+    <ClInclude Include="Source\Externals\TinyXML\tinyxml.h" />
   </ItemGroup>
 </Project>

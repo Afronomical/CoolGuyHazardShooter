@@ -13,6 +13,7 @@
 class Asset
 {
 	friend class AssetHandler;
+	friend class FileHandler;
 
 public:
 	Asset();

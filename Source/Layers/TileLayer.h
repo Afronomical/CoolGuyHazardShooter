@@ -24,6 +24,8 @@ struct Tileset
 
 	// INFO: The texture of the tileset used to draw the tiles (Also contains the filepath to the texture)
 	Asset texture;
+
+	Tileset() : firstID(0), lastID(0), numRows(0), numColumns(0), numTiles(0), tileSize(0) {}
 };
 
 class TileLayer : public Layer
