@@ -11,17 +11,19 @@
 class FileHandler
 {
 public:
-	bool LoadMap(const std::string& name, const std::string& filepath);
+	static bool LoadMap(const std::string& name, const std::string& filepath);
+
+	static inline Map* GetMap(const std::string& name) { return IsMapLoaded(name) ? mapLib[name].get() : nullptr; }
 
 private:
-	bool ParseMap(const std::string& name, const std::string& filepath);
-	Tileset ParseTileset(TiXmlElement* tilesetElement);
-	TileLayer* ParseTileLayer(TiXmlElement* layerElement, const std::vector<Tileset>& tilesets, int tileSize, int numRows, int numColumns);
+	static bool ParseMap(const std::string& name, const std::string& filepath);
+	static Tileset ParseTileset(TiXmlElement* tilesetElement);
+	static std::unique_ptr<TileLayer> ParseTileLayer(TiXmlElement* layerElement, const std::vector<Tileset>& tilesets, int tileSize, int numRows, int numColumns);
 
-	inline bool IsMapLoaded(const std::string& name) const { return mapLib.find(name) != mapLib.end(); }
+	static inline bool IsMapLoaded(const std::string& name) { return mapLib.find(name) != mapLib.end(); }
 
 private:
-	std::unordered_map<std::string, std::unique_ptr<Map>> mapLib;
+	static std::unordered_map<std::string, std::unique_ptr<Map>> mapLib;
 
 private:
 	FileHandler() = delete;

@@ -2,6 +2,8 @@
 
 #include "../Debugging/Debug.h"
 
+std::unordered_map<std::string, std::unique_ptr<Map>> FileHandler::mapLib{};
+
 bool FileHandler::LoadMap(const std::string& name, const std::string& filepath)
 {
 	// INFO: Check if the map is already loaded
@@ -23,7 +25,59 @@ bool FileHandler::LoadMap(const std::string& name, const std::string& filepath)
 
 bool FileHandler::ParseMap(const std::string& name, const std::string& filepath)
 {
-	return false;
+	// INFO: Load the XML document
+	TiXmlDocument doc{};
+
+	if (!doc.LoadFile(filepath))
+	{
+		Debug::LogError("Failed to load XML file: " + filepath);
+		return false;
+	}
+
+	// INFO: Get the root element of the XML document
+	TiXmlElement* rootElement = doc.RootElement();
+
+	if (rootElement == nullptr)
+	{
+		Debug::LogError("Failed to get root element from XML file: " + filepath);
+		return false;
+	}
+
+	int numRows = 0;
+	int numColumns = 0;
+	int tileSize = 0;
+
+	// INFO: Get the map attributes from the root element
+	rootElement->Attribute("height", &numRows);
+	rootElement->Attribute("width", &numColumns);
+	rootElement->Attribute("tilewidth", &tileSize);
+
+	// INFO: Parse the tilesets from the root element
+	std::vector<Tileset> tilesets;
+
+	for (TiXmlElement* i = rootElement->FirstChildElement(); i != nullptr; i = i->NextSiblingElement())
+	{
+		if (i->Value() == std::string("tileset"))
+		{
+			tilesets.push_back(ParseTileset(i));
+		}
+	}
+
+	// INFO: Parse the tile layers from the root element
+	std::unique_ptr<Map> map = std::make_unique<Map>();
+
+	for (TiXmlElement* i = rootElement->FirstChildElement(); i != nullptr; i = i->NextSiblingElement())
+	{
+		if (i->Value() == std::string("layer"))
+		{
+			map->AddLayer(ParseTileLayer(i, tilesets, tileSize, numRows, numColumns));
+		}
+	}
+
+	// INFO: Add the map to the map library
+	mapLib[name] = std::move(map);
+
+	return true;
 }
 
 Tileset FileHandler::ParseTileset(TiXmlElement* tilesetElement)
@@ -46,7 +100,56 @@ Tileset FileHandler::ParseTileset(TiXmlElement* tilesetElement)
 	return tileset;
 }
 
-TileLayer* FileHandler::ParseTileLayer(TiXmlElement* layerElement, const std::vector<Tileset>& tilesets, int tileSize, int numRows, int numColumns)
+std::unique_ptr<TileLayer> FileHandler::ParseTileLayer(TiXmlElement* layerElement, const std::vector<Tileset>& tilesets, int tileSize, int numRows, int numColumns)
 {
-	return nullptr;
+	// INFO: Get the data element from the layer element
+	TiXmlElement* dataElement{};
+
+	for (TiXmlElement* i = layerElement->FirstChildElement(); i != nullptr; i = i->NextSiblingElement())
+	{
+		if (i->Value() == std::string("data"))
+		{
+			dataElement = i;
+			break;
+		}
+	}
+
+	if (dataElement == nullptr)
+	{
+		Debug::LogError("Failed to find data element in layer element!");
+		return nullptr;
+	}
+
+	// INFO: Get the data from the data element
+	std::string data = dataElement->GetText();
+
+	if (data.empty())
+	{
+		Debug::LogError("Failed to get data from data element!");
+		return nullptr;
+	}
+
+	std::istringstream dataStream(data);
+	std::string tileID;
+
+	// INFO: Create the tilemap
+	std::vector<std::vector<int>> tilemap(numRows, std::vector<int>(numColumns, 0));
+
+	// INFO: Parse the data and fill the tilemap
+	for (int row = 0; row < numRows; ++row)
+	{
+		for (int column = 0; column < numColumns; ++column)
+		{
+			std::getline(dataStream, tileID, ',');
+
+			// INFO: Convert the tile ID to an integer and store it in the tilemap
+			tilemap[row][column] = std::stoi(tileID);
+
+			// INFO: Break if the data stream is no longer good (No more data to read)
+			if (!dataStream.good())
+				break;
+		}
+	}
+
+	return std::make_unique<TileLayer>(tileSize, numRows, numColumns, tilemap, tilesets);
 }
