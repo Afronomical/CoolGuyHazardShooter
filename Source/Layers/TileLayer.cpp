@@ -9,7 +9,7 @@ TileLayer::TileLayer(int _tileSize, int _numRows, int _numColumns, const std::ve
 	for (size_t i = 0; i < tilesets.size(); i++)
 	{
 		// INFO: Create the filepath for the texture using the textures path and the remaining path
-		std::string textureFilepath = "Assets/Textures/" + tilesets[i].texture.GetFilepath();
+		std::string textureFilepath = "Assets/Maps/" + tilesets[i].texture.GetFilepath();
 
 		AssetHandler::LoadTexture(textureFilepath);
 	}
