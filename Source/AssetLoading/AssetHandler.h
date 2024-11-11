@@ -15,9 +15,12 @@ public:
 	/// @brief Used to draw static textures that do not change based on camera e.g. (UI)
 	static void DrawStatic(const Asset& texture, const Vector2& position, float width, float height, float scale = 1.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-	/// @brief Used to draw dynamic textures that change based on camera e.g. (Background, tilemap blocks)
+	/// @brief Used to draw dynamic textures that change based on camera e.g. (Whole backgrounds)
 	static void DrawDynamic(const Asset& texture, const Vector2& position, float width, float height, float scrollSpeed = 1.0f, float scale = 1.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	
+	/// @brief Used to draw tiles that change based on camera e.g. (Tilemaps)
+	static void DrawTile(const Asset& texture, const Vector2& position, int tileSize, int row, int frame);
+
 	/// @brief Used to draw animated textures that change based on camera e.g. (Player, enemies)
 	static void DrawAnimation(const Asset& texture, const Vector2& position, float width, float height, int row, int frame, float scrollSpeed = 1.0f, float scale = 1.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
 

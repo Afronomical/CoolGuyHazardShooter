@@ -13,7 +13,7 @@ class FileHandler
 public:
 	static bool LoadMap(const std::string& name, const std::string& filepath);
 
-	static inline Map* GetMap(const std::string& name) { return IsMapLoaded(name) ? mapLib[name].get() : nullptr; }
+	static inline std::shared_ptr<Map> GetMap(const std::string& name) { return IsMapLoaded(name) ? mapLib[name] : nullptr; }
 
 private:
 	static bool ParseMap(const std::string& name, const std::string& filepath);
@@ -23,7 +23,7 @@ private:
 	static inline bool IsMapLoaded(const std::string& name) { return mapLib.find(name) != mapLib.end(); }
 
 private:
-	static std::unordered_map<std::string, std::unique_ptr<Map>> mapLib;
+	static std::unordered_map<std::string, std::shared_ptr<Map>> mapLib;
 
 private:
 	FileHandler() = delete;

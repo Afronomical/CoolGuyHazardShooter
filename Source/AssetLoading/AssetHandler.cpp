@@ -206,6 +206,28 @@ void AssetHandler::DrawDynamic(const Asset& texture, const Vector2& position, fl
 	//SDL_RenderCopyEx(renderer, textureLib[texture], nullptr, &destRect, 0.0, nullptr, flip);
 }
 
+void AssetHandler::DrawTile(const Asset& texture, const Vector2& position, int tileSize, int row, int frame)
+{
+	// INFO: Check if the texture is valid
+	if (!IsTextureValid(texture))
+	{
+		Debug::LogWarning("Asset::Handler::DrawTile: Invalid texture.");
+		return;
+	}
+
+	// INFO: Get camera position
+	// Vector2 cameraPosition = ...;
+
+	// INFO: Create the source rectangle
+	SDL_Rect srcRect = { frame * tileSize, row * tileSize, tileSize, tileSize };
+
+	// INFO: Create the destination rectangle with the camera offset
+	//SDL_Rect destRect = { static_cast<int>(position.X - cameraPosition.X), static_cast<int>(position.Y - cameraPosition.Y), tileSize, tileSize };
+
+	// INFO: Draw the texture
+	//SDL_RenderCopyEx(renderer, textureLib[texture], &srcRect, &destRect, 0.0, nullptr, SDL_FLIP_NONE);
+}
+
 void AssetHandler::DrawAnimation(const Asset& texture, const Vector2& position, float width, float height, int row, int frame, float scrollSpeed, float scale, SDL_RendererFlip flip)
 {
 	// INFO: Check if the texture is valid

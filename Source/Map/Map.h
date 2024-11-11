@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 
-class Layer;
+#include "../Layers/Layer.h"
 
 class Map
 {

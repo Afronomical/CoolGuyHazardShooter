@@ -8,12 +8,13 @@
 #include "../Collision/Collider.h"
 #include "../Debugging/Debug.h"
 #include "../Debugging/MemoryLeakDetector.h"
+#include "../FileHandling/FileHandler.h"
 #include "../GameObject/GameObject.h"
 #include "../Input/InputHandler.h"
 #include "../Time/Time.h"
 
-Game::Game(const std::string& _windowName, const Vector2& _windowDimensions) : window(nullptr), renderer(nullptr), isRunning(false),
-																		windowName(_windowName), windowDimensions(_windowDimensions)
+Game::Game(const std::string& _windowName, const Vector2& _windowDimensions) : window(nullptr), renderer(nullptr), isRunning(false), windowName(_windowName), 
+																			   windowDimensions(_windowDimensions), currentMap(nullptr)
 {
 	// INFO: Initialise and Validate everything
 	if (Initialise())
@@ -58,8 +59,10 @@ bool Game::InitialiseSDL()
 	else
 	{
 		// INFO: Create the window
+		SDL_WindowFlags windowFlags = SDL_WINDOW_RESIZABLE;
+
 		window = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
-								  static_cast<int>(windowDimensions.X), static_cast<int>(windowDimensions.Y), NULL);
+								  static_cast<int>(windowDimensions.X), static_cast<int>(windowDimensions.Y), windowFlags);
 
 		// INFO: Window Validity Check
 		if (window == nullptr)
@@ -136,6 +139,16 @@ bool Game::InitialiseGame()
 	// INFO: Set up the on quit function for the Input System
 	InputHandler::SetOnQuit([&]() { isRunning = false; });
 
+	// INFO: Load the map that will be used as the current map
+	//if (!FileHandler::LoadMap("StarterMap", "Assets/Maps/StarterMap.tmx"))
+	//{
+	//	Debug::LogError("Game::InitialiseGame: Failed to load map!");
+	//	return !success;
+	//}
+
+	// INFO: Set the current map
+	//currentMap = FileHandler::GetMap("StarterMap");
+
 	// INFO: Set the game to be running
 	isRunning = true;
 
@@ -186,6 +199,9 @@ void Game::Draw()
 {
 	// INFO: Clear the renderer
 	SDL_RenderClear(renderer);
+
+	// INFO: Draw the current map
+	//currentMap->Draw();
 
 	// INFO: Call the Draw function for all game objects
 	GameObject::Handler::Draw();

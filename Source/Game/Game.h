@@ -4,6 +4,7 @@
 
 #include <string>
 
+#include "../Map/Map.h"
 #include "../Vector2/Vector2.h"
 
 class Game
@@ -51,5 +52,7 @@ private:
 	bool isRunning;
 	std::string windowName;
 	Vector2 windowDimensions;
+
+	std::shared_ptr<Map> currentMap;
 };
 

@@ -2,7 +2,7 @@
 
 #include "../Debugging/Debug.h"
 
-std::unordered_map<std::string, std::unique_ptr<Map>> FileHandler::mapLib{};
+std::unordered_map<std::string, std::shared_ptr<Map>> FileHandler::mapLib{};
 
 bool FileHandler::LoadMap(const std::string& name, const std::string& filepath)
 {
@@ -64,7 +64,7 @@ bool FileHandler::ParseMap(const std::string& name, const std::string& filepath)
 	}
 
 	// INFO: Parse the tile layers from the root element
-	std::unique_ptr<Map> map = std::make_unique<Map>();
+	std::shared_ptr<Map> map = std::make_shared<Map>();
 
 	for (TiXmlElement* i = rootElement->FirstChildElement(); i != nullptr; i = i->NextSiblingElement())
 	{
