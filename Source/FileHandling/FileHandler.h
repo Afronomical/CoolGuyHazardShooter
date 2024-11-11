@@ -11,8 +11,13 @@
 class FileHandler
 {
 public:
+	/// @brief Loads a map from a file and stores it in the map library
+	/// @param name : The name of the map to be stored in the map library
+	/// @param filepath : The path to the file containing the map data (.tmx format)
 	static bool LoadMap(const std::string& name, const std::string& filepath);
 
+	/// @brief Returns the specified map from the map library
+	/// @param name : The name of the map to be retrieved from the map library
 	static inline std::shared_ptr<Map> GetMap(const std::string& name) { return IsMapLoaded(name) ? mapLib[name] : nullptr; }
 
 private:
