@@ -14,7 +14,7 @@
 #include "../Time/Time.h"
 
 Game::Game(const std::string& _windowName, const Vector2& _windowDimensions) : window(nullptr), renderer(nullptr), isRunning(false), windowName(_windowName), 
-																			   windowDimensions(_windowDimensions), currentMap(nullptr)
+																			   windowDimensions(_windowDimensions)
 {
 	// INFO: Initialise and Validate everything
 	if (Initialise())
@@ -140,14 +140,14 @@ bool Game::InitialiseGame()
 	InputHandler::SetOnQuit([&]() { isRunning = false; });
 
 	// INFO: Load the map that will be used as the current map
-	//if (!FileHandler::LoadMap("StarterMap", "Assets/Maps/StarterMap.tmx"))
-	//{
-	//	Debug::LogError("Game::InitialiseGame: Failed to load map!");
-	//	return !success;
-	//}
+	if (!FileHandler::LoadMap("TestMap", "Assets/Maps/TestMap.tmx"))
+	{
+		Debug::LogError("Game::InitialiseGame: Failed to load map!");
+		return !success;
+	}
 
 	// INFO: Set the current map
-	//currentMap = FileHandler::GetMap("StarterMap");
+	currentMap = FileHandler::GetMap("TestMap");
 
 	// INFO: Set the game to be running
 	isRunning = true;
@@ -200,8 +200,9 @@ void Game::Draw()
 	// INFO: Clear the renderer
 	SDL_RenderClear(renderer);
 
-	// INFO: Draw the current map
-	//currentMap->Draw();
+	// INFO: Draw the current map if it exists
+	if (!currentMap.expired())
+		currentMap.lock()->Draw();
 
 	// INFO: Call the Draw function for all game objects
 	GameObject::Handler::Draw();

@@ -1,6 +1,7 @@
 #include "TileLayer.h"
 
 #include "../AssetLoading/AssetHandler.h"
+#include "../Debugging/MemoryLeakDetector.h"
 
 TileLayer::TileLayer(int _tileSize, int _numRows, int _numColumns, const std::vector<std::vector<int>>& _tilemap, const std::vector<Tileset>& _tilesets) 
 					 : tileSize(_tileSize), numRows(_numRows), numColumns(_numColumns), tilemap(_tilemap), tilesets(_tilesets)
@@ -11,7 +12,7 @@ TileLayer::TileLayer(int _tileSize, int _numRows, int _numColumns, const std::ve
 		// INFO: Create the filepath for the texture using the textures path and the remaining path
 		std::string textureFilepath = "Assets/Maps/" + tilesets[i].texture.GetFilepath();
 
-		AssetHandler::LoadTexture(textureFilepath);
+		tilesets[i].texture = AssetHandler::LoadTexture(textureFilepath);
 	}
 }
 
@@ -48,7 +49,14 @@ void TileLayer::Draw()
 			// INFO: Calculate the row and column of the tile in the tileset
 			Tileset selectedTileset = tilesets[tilesetIndex];
 			int tileRow = tileID / selectedTileset.numColumns;
-			int tileColumn = tileID % selectedTileset.numColumns;
+			int tileColumn = tileID - tileRow * selectedTileset.numColumns - 1;
+
+			// INFO: Edge case for tiles in the last column
+			if (tileID % selectedTileset.numColumns == 0)
+			{
+				tileRow--;
+				tileColumn = selectedTileset.numColumns - 1;
+			}
 
 			// INFO: Draw the tile
 			Vector2 tilePos = Vector2((float)(mapColumn * selectedTileset.tileSize), (float)(mapRow * selectedTileset.tileSize));

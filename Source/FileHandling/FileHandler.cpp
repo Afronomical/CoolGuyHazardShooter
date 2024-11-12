@@ -1,6 +1,7 @@
 #include "FileHandler.h"
 
 #include "../Debugging/Debug.h"
+#include "../Debugging/MemoryLeakDetector.h"
 
 std::unordered_map<std::string, std::shared_ptr<Map>> FileHandler::mapLib{};
 

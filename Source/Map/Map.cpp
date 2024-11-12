@@ -1,5 +1,7 @@
 #include "Map.h"
 
+#include "../Debugging/MemoryLeakDetector.h"
+
 void Map::Draw()
 {
 	// INFO: Go through all map layers and draw them

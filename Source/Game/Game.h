@@ -53,6 +53,6 @@ private:
 	std::string windowName;
 	Vector2 windowDimensions;
 
-	std::shared_ptr<Map> currentMap;
+	std::weak_ptr<Map> currentMap;
 };
 

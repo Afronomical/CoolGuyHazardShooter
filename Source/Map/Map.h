@@ -9,6 +9,7 @@ class Map
 {
 public:
 	Map() = default;
+	~Map() = default;
 
 	void Draw();
 

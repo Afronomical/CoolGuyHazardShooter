@@ -32,6 +32,8 @@ class TileLayer : public Layer
 {
 public:
 	TileLayer(int _tileSize, int _numRows, int _numColumns, const std::vector<std::vector<int>>& _tilemap, const std::vector<Tileset>& _tilesets);
+	~TileLayer() = default;
+
 	virtual void Draw() override;
 
 	inline const std::vector<std::vector<int>>& GetTilemap() const { return tilemap; }

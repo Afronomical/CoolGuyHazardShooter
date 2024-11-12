@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
 	// INFO: Setting seed for random number generation
 	srand(unsigned int(time(NULL)));
 
-	Game game("Cool Guy Hazard Shooter", Vector2(800, 600));
+	Game game("Cool Guy Hazard Shooter", Vector2(800, 640));
 
     return 0;
 }
