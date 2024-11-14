@@ -3,6 +3,7 @@
 void AnimatorController::DrawTexture()
 {
 
+	GameObject* gO = GetGameObject();
 	
 
 }

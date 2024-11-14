@@ -1,10 +1,11 @@
 #pragma once
 #include "Animator.h"
+#include "../Components/Component.h"
 
 
 
 
-class AnimatorController
+class AnimatorController : public Component
 {
 private:
 
@@ -13,8 +14,9 @@ public:
 
 	int stateMachine;
 
-
-	void Update();
+	
+	
+	void Update(float deltaTime);
 
 	void DrawTexture();
 
