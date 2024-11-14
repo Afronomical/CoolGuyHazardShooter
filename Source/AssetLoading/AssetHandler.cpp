@@ -239,16 +239,22 @@ void AssetHandler::DrawAnimation(const Asset& texture, const Vector2& position, 
 	}
 
 	// INFO: Get camera position
-	// Vector2 cameraPosition = ...;
+	Vector2 cameraPosition = { 0,0 };
 
 	// INFO: Create the source rectangle
-	SDL_Rect srcRect = { static_cast<int>(frame * width), static_cast<int>(row * height), static_cast<int>(width), static_cast<int>(height) };
+	SDL_Rect srcRect = {	static_cast<int>(frame * width), 
+							static_cast<int>(row * height), 
+							static_cast<int>(width), 
+							static_cast<int>(height) };
 
 	// INFO: Create the destination rectangle with the camera offset
-	//SDL_Rect destRect = { static_cast<int>(position.X - cameraPosition.X), static_cast<int>(position.Y - cameraPosition.Y), static_cast<int>(width * scale), static_cast<int>(height * scale) };
+	SDL_Rect destRect = {	static_cast<int>(position.X - cameraPosition.X), 
+							static_cast<int>(position.Y - cameraPosition.Y), 
+							static_cast<int>(width * scale), 
+							static_cast<int>(height * scale) };
 
 	// INFO: Draw the texture
-	//SDL_RenderCopyEx(renderer, textureLib[texture], &srcRect, &destRect, 0.0, nullptr, flip);
+	SDL_RenderCopyEx(renderer, textureLib[texture], &srcRect, &destRect, 0.0, nullptr, flip);
 }
 
 void AssetHandler::PlayMusic(const Asset& music, int loops)
