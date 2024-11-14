@@ -13,7 +13,9 @@ public:
 
 	void Draw();
 
+	inline Layer* GetLayer(int index) { return mapLayers[index].get(); }
 	inline const std::vector<std::unique_ptr<Layer>>& GetMapLayers() const { return mapLayers; }
+
 	inline void AddLayer(std::unique_ptr<Layer> layer) { mapLayers.push_back(std::move(layer)); }
 
 private:

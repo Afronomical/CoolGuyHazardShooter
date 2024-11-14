@@ -1,5 +1,6 @@
 #include "FileHandler.h"
 
+#include "../Collision/Collider.h"
 #include "../Debugging/Debug.h"
 #include "../Debugging/MemoryLeakDetector.h"
 
@@ -22,6 +23,24 @@ bool FileHandler::LoadMap(const std::string& name, const std::string& filepath)
 	}
 
 	return true;
+}
+
+std::weak_ptr<Map> FileHandler::GetMap(const std::string& name)
+{
+	if (!IsMapLoaded(name))
+	{
+		Debug::LogWarning("Map with name: " + name + " is not loaded!");
+		return std::weak_ptr<Map>{};
+	}
+
+	// INFO: Get the first layer of the map and dynamically cast it to a TileLayer
+	TileLayer* collisionLayer = dynamic_cast<TileLayer*>(mapLib[name]->GetLayer(0));
+
+	// INFO: Set the map collision data in the Collider handler to the collision layer's tilemap
+	if (collisionLayer != nullptr)
+		Collider::Handler::SetMapCollisionLayer(collisionLayer);
+
+	return IsMapLoaded(name) ? mapLib[name] : nullptr;
 }
 
 bool FileHandler::ParseMap(const std::string& name, const std::string& filepath)

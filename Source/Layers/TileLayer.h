@@ -36,6 +36,9 @@ public:
 
 	virtual void Draw() override;
 
+	inline int GetTileSize() const { return tileSize; }
+	inline int GetNumRows() const { return numRows; }
+	inline int GetNumColumns() const { return numColumns; }
 	inline const std::vector<std::vector<int>>& GetTilemap() const { return tilemap; }
 	inline const std::vector<Tileset>& GetTilesets() const { return tilesets; }
 

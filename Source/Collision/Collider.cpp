@@ -1,12 +1,16 @@
 #include "Collider.h"
 
+#include <SDL_rect.h>
+
 #include "BoxCollider.h"
 #include "CircleCollider.h"
 #include "../Debugging/MemoryLeakDetector.h"
+#include "../Debugging/Debug.h"
 #include "../GameObject/GameObject.h"
 
 #pragma region StaticHandlerMembers
 std::vector<std::weak_ptr<Collider>> Collider::Handler::colliders;
+TileLayer* Collider::Handler::mapCollisionLayer = nullptr;
 #pragma endregion StaticHandlerMembers
 
 #pragma region HandlerMethods
@@ -43,6 +47,56 @@ void Collider::Handler::CheckCollisions()
 			}
 		}
 	}
+}
+
+bool Collider::Handler::CheckMapCollision(const Vector2& position, float width, float height)
+{
+	// INFO: Check if the map collision layer is nullptr
+	if (mapCollisionLayer == nullptr)
+	{
+		Debug::LogError("Map collision layer is nullptr!");
+		return false;
+	}
+
+	// INFO: Change to SDL_Rect object for easier use
+	SDL_Rect entity = { static_cast<int>(position.X), static_cast<int>(position.Y), static_cast<int>(width), static_cast<int>(height) };
+
+	int tileSize = mapCollisionLayer->GetTileSize();
+	int numRows = mapCollisionLayer->GetNumRows();
+	int numColumns = mapCollisionLayer->GetNumColumns();
+
+	std::vector<std::vector<int>> tilemap = mapCollisionLayer->GetTilemap();
+
+
+	// INFO: Calculate the tiles that the entity is currently occupying
+
+	int leftTile = entity.x / tileSize;
+	int rightTile = (entity.x + entity.w) / tileSize;
+
+	int topTile = entity.y / tileSize;
+	int bottomTile = (entity.y + entity.h) / tileSize;
+
+
+	// INFO: Ensure the entity is within the bounds of the map
+
+	if (leftTile < 0) leftTile = 0;
+	if (rightTile >= numColumns) rightTile = numColumns - 1;
+
+	if (topTile < 0) topTile = 0;
+	if (bottomTile >= numRows) bottomTile = numRows - 1;
+
+	// INFO: Go through the tiles that the entity is currently occupying and check for collisions
+	for (size_t i = leftTile; i <= rightTile; i++)
+	{
+		for (size_t j = topTile; j <= bottomTile; j++)
+		{
+			// INFO: Collision has occurred if the tile is not empty, since this is a collision layer
+			if (tilemap[j][i] != 0)
+				return true;
+		}
+	}
+
+	return false;
 }
 
 void Collider::Handler::ClearExpiredColliders()

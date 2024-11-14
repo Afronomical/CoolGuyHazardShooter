@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "../Vector2/Vector2.h"
+#include "../Layers/TileLayer.h"
 
 class BoxCollider;
 class CircleCollider;
@@ -19,9 +20,18 @@ public:
 		/// @brief Utility function used to check for collisions between all colliders
 		static void CheckCollisions();
 
+		/// @brief Utility function used to check for collisions between the given entity and the map
+		/// @param position : The position of the entity
+		/// @param width : The width of the entity
+		/// @param height : The height of the entity
+		/// @return Whether the entity has collided with the map
+		static bool CheckMapCollision(const Vector2& position, float width, float height);
+
+		static inline void SetMapCollisionLayer(TileLayer* collisionLLayer) { mapCollisionLayer = collisionLLayer; }
+
 		/// @brief Used to register a collider with the handler
 		/// @param collider : The collider to register
-		inline static void RegisterCollider(std::shared_ptr<Collider> collider) { colliders.push_back(collider); }
+		static inline void RegisterCollider(std::shared_ptr<Collider> collider) { colliders.push_back(collider); }
 
 		/// @brief Used to clear all expired colliders from the handler at the end of the frame
 		static void ClearExpiredColliders();
@@ -35,6 +45,7 @@ public:
 
 	private:
 		static std::vector<std::weak_ptr<Collider>> colliders;
+		static TileLayer* mapCollisionLayer;
 
 	private:
 		Handler() = delete;
