@@ -62,6 +62,9 @@ public:
 	/// @brief Used to destroy the game object
 	void Destroy();
 
+	inline void SetIsActive(bool _isActive) { isActive = _isActive; }
+	inline bool IsActive() const { return isActive; }
+
 	virtual void Start() {};
 	virtual void Update(float deltaTime) {};
 	virtual void LateUpdate(float deltaTime) {};
@@ -89,6 +92,9 @@ public:
 
 public:
 	std::weak_ptr<Transform> transform;
+
+protected:
+	bool isActive;
 
 private:
 	std::vector<std::shared_ptr<Component>> components;

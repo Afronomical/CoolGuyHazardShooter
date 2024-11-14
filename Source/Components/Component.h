@@ -19,8 +19,12 @@ public:
 	/// during RemoveComponent calls
 	inline const unsigned int GetComponentID() const { return componentID; }
 
+	inline void SetIsActive(bool _isActive) { isActive = _isActive; }
+	inline bool IsActive() const { return isActive; }
+
 protected:
 	bool canHaveMultiple;
+	bool isActive;
 
 private:
 	GameObject* gameObject;

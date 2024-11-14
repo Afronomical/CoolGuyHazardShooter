@@ -19,8 +19,16 @@ void Collider::Handler::CheckCollisions()
 	// INFO: Compares each collider with every other collider in the vector
 	for (size_t i = 0; i < colliders.size(); i++)
 	{
+		// INFO: Skip the collider if it is inactive
+		if (!colliders[i].lock()->IsActive())
+			continue;
+
 		for (size_t j = i + 1; j < colliders.size(); j++)
 		{
+			// INFO: Skip the collider if it is inactive
+			if (!colliders[j].lock()->IsActive())
+				continue;
+
 			// INFO: Create temporary shared pointers to the colliders
 			auto collider1 = colliders[i].lock();
 			auto collider2 = colliders[j].lock();

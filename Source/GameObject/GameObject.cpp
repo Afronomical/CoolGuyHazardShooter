@@ -11,30 +11,42 @@ std::queue<GameObject*> GameObject::Handler::deletionQueue;
 #pragma region HandlerMethods
 void GameObject::Handler::Start()
 {
-	// INFO: Loop through all game objects and call their Start function
+	// INFO: Loop through all game objects and call their Start function if they are active
 	for (auto& gameObject : gameObjects)
-		gameObject->Start();
+	{
+		if (gameObject->IsActive())
+			gameObject->Start();
+	}
 }
 
 void GameObject::Handler::Update(float deltaTime)
 {
-	// INFO: Loop through all game objects and call their Update function
+	// INFO: Loop through all game objects and call their Update function if they are active
 	for (auto& gameObject : gameObjects)
-		gameObject->Update(deltaTime);
+	{
+		if (gameObject->IsActive())
+			gameObject->Update(deltaTime);
+	}
 }
 
 void GameObject::Handler::LateUpdate(float deltaTime)
 {
-	// INFO: Loop through all game objects and call their LateUpdate function
+	// INFO: Loop through all game objects and call their LateUpdate function if they are active
 	for (auto& gameObject : gameObjects)
-		gameObject->LateUpdate(deltaTime);
+	{
+		if (gameObject->IsActive())
+			gameObject->LateUpdate(deltaTime);
+	}
 }
 
 void GameObject::Handler::Draw()
 {
-	// INFO: Loop through all game objects and call their Draw function
+	// INFO: Loop through all game objects and call their Draw function if they are active
 	for (auto& gameObject : gameObjects)
-		gameObject->Draw();
+	{
+		if (gameObject->IsActive())
+			gameObject->Draw();
+	}
 }
 
 void GameObject::Handler::Clean()
@@ -93,7 +105,7 @@ void GameObject::Handler::ProcessDeletionQueue()
 #pragma endregion HandlerMethods
 
 #pragma region GameObjectMethods
-GameObject::GameObject() : components()
+GameObject::GameObject() : isActive(true), components()
 {
 	// INFO: Register the game object with the handler
 	GameObject::Handler::RegisterGameObject(this);

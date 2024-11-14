@@ -21,6 +21,10 @@ Rigidbody::Rigidbody(GameObject* _gameObject) : Component(_gameObject), mass(1.0
 
 void Rigidbody::Update(float deltaTime)
 {
+	// INFO: Don't update the rigidbody if it's inactive
+	if (!IsActive())
+		return;
+
 	// INFO: Calculate gravitational force based on mass as well as the
 	//       force applied to the rigidbody
 	Vector2 gravitationalForce = gravityDirection * gravity * mass;
