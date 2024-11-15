@@ -12,6 +12,9 @@
 #include "../GameObject/GameObject.h"
 #include "../Input/InputHandler.h"
 #include "../Time/Time.h"
+#include "../Enemies/BaseEnemy.h"
+
+BaseEnemy* enemy;
 
 Game::Game(const std::string& _windowName, const Vector2& _windowDimensions) : window(nullptr), renderer(nullptr), isRunning(false), windowName(_windowName), 
 																			   windowDimensions(_windowDimensions)
@@ -148,6 +151,8 @@ bool Game::InitialiseGame()
 
 	// INFO: Set the current map
 	currentMap = FileHandler::GetMap("TestMap");
+
+	enemy = new BaseEnemy();
 
 	// INFO: Set the game to be running
 	isRunning = true;
