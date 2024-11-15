@@ -28,17 +28,28 @@ void Emitter::EmitParticles(int range, float duration, const Asset& texture, con
 			{
 				//Remove the particle when out of range
 				//particles[i]->Destroy();
-				delete particles[i];
+				//delete particles[i];
+
+				//Hide particle - particle pooling
+				particles[i]->SetIsActive(false);
 			}
 		}
 
 		else if (particles[i])//If not empty
 		{
-			if (particles[i]->GetLifetime() > 0)//If out of time
+			if (particles[i]->GetLifetime() <= 0)//If out of time
 			{
 				//particles[i]->Destroy();
-				delete particles[i];
-				particles[i] = nullptr;//Double tap
+				//delete particles[i];
+				//particles[i] = nullptr;//Double tap
+
+				particles[i]->SetIsActive(false);
+			}
+			else if(!particles[i]->IsActive() && duration > 0)
+			{
+				particles[i]->SetPosition(position);
+				particles[i]->SetLifetime(duration);
+				particles[i]->SetIsActive(true);
 			}
 		}
 
