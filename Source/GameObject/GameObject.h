@@ -4,7 +4,8 @@
 #include <queue>
 #include <vector>
 
-class Collider;
+#include "../Collision/Collider.h"
+
 class Component;
 class Transform;
 
@@ -131,6 +132,10 @@ inline std::weak_ptr<T> GameObject::AddComponent(Args && ...args)
 
 	// INFO: Create the component and add it to the components vector
 	components.emplace_back(std::make_shared<T>(std::forward<Args>(args)...));
+
+	// INFO: If the component is a collider, register it with the collider handler
+	if (std::dynamic_pointer_cast<Collider>(components.back()))
+		Collider::Handler::RegisterCollider(std::dynamic_pointer_cast<Collider>(components.back()));
 
 	// INFO: Return the newly created component
 	return std::dynamic_pointer_cast<T>(components.back());

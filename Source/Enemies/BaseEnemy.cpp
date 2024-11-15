@@ -2,7 +2,7 @@
 
 BaseEnemy::BaseEnemy() : GameObject()
 {
-	//collider = AddComponent<BoxCollider>(this);
+	collider = AddComponent<BoxCollider>(this);
 	texture = AssetHandler::LoadTexture("Assets/Animations/sonic.png");
 	transform.lock()->position = Vector2(400, 320);
 

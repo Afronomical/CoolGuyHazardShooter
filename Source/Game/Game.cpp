@@ -168,6 +168,8 @@ void Game::Run()
 	// INFO: Game Loop
 	while (isRunning)
 	{
+		Time::Tick();
+
 		HandleInput();
 		Update(Time::DeltaTime());
 
@@ -178,8 +180,6 @@ void Game::Run()
 
 		// INFO: Process deletion of game objects that have been queued for deletion
 		GameObject::Handler::ProcessDeletionQueue();
-
-		Time::Tick();
 	}
 
 	// NOTE: Clean up the game

@@ -332,9 +332,6 @@ void Collider::Handler::HandleCollisionResponse(std::shared_ptr<Collider> c1, st
 Collider::Collider(GameObject* _gameObject, bool useCustomFunctions) : Component(_gameObject), colliderType(Type::None), position(Vector2()),
 																	   offset(Vector2()), isTrigger(false)
 {
-	// INFO: Register the collider with the handler
-	Collider::Handler::RegisterCollider(shared_from_this());
-
 	// INFO: Allow multiple colliders to be added onto the same game object
 	canHaveMultiple = true;
 	

@@ -11,7 +11,7 @@
 class BoxCollider;
 class CircleCollider;
 
-class Collider : public Component, public std::enable_shared_from_this<Collider>
+class Collider : public Component
 {
 public:
 	class Handler
