@@ -11,6 +11,7 @@ class Game
 {
 public:
 	Game(const std::string& _windowName, const Vector2& _windowDimensions);
+	~Game();
 	
 	/// @brief Utility function that encapsulates SDL and game initialisation
 	/// @retval TRUE : If everything was initialised correctly

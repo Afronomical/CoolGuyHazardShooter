@@ -26,6 +26,12 @@ Game::Game(const std::string& _windowName, const Vector2& _windowDimensions) : w
 	}
 }
 
+Game::~Game()
+{
+	// INFO: Call Clean on destructor if we quit program unexpectedly
+	Clean();
+}
+
 bool Game::Initialise()
 {
 	// INFO: Check to see if everything has been initialised correctly
