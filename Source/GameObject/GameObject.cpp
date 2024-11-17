@@ -7,6 +7,9 @@
 std::vector<GameObject*> GameObject::Handler::gameObjects;
 std::queue<GameObject*> GameObject::Handler::deletionQueue;
 std::weak_ptr<Camera> GameObject::Handler::camera;
+TileLayer* GameObject::Handler::mapGameObjectsLayer;
+
+
 #pragma endregion StaticHandlerMembers
 
 #pragma region HandlerMethods
@@ -100,6 +103,53 @@ void GameObject::Handler::UnregisterGameObject(GameObject* gameObject)
 {
 	// INFO: Add the game object to the deletion queue
 	deletionQueue.push(gameObject);
+}
+
+void GameObject::Handler::SetGameObjectsLayer(TileLayer* GOLayer)
+{
+	for (auto& gameObject : gameObjects)
+	{
+		UnregisterGameObject(gameObject);
+	}
+	
+	mapGameObjectsLayer = GOLayer;
+	// INFO: Instantiate game objects from the map
+	InstantiateObjectsFromMap(); 
+
+}
+
+void GameObject::Handler::InstantiateObjectsFromMap()
+{
+	std::vector<std::vector<int>> tilemap = mapGameObjectsLayer->GetTilemap();
+	int numRows = mapGameObjectsLayer->GetNumRows();
+	int numColumns = mapGameObjectsLayer->GetNumColumns();
+
+	// INFO: Loop through the tilemap and instantiate game objects based on the tile IDs
+	for (size_t i = 0; i < numRows; i++)
+	{
+		for (size_t j = 0; j < numColumns; j++)
+		{
+			if (tilemap[i][j] == 0)
+			{
+				continue;
+			}
+			switch (tilemap[i][j])
+			{
+				///example
+				//case 1:
+				//{
+				//	GameObject* gameObject = new GameObject();
+				//	std::shared_ptr<Transform> transform = gameObject->transform.lock();
+				 //  and so on.... 
+				//	break;
+				//}
+			
+			default:
+				break;
+			}
+				
+		}
+	}
 }
 
 void GameObject::Handler::ProcessDeletionQueue()
