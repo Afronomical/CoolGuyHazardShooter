@@ -38,8 +38,8 @@ void BaseEnemy::Draw()
 	AssetHandler::DrawAnimation(
 		texture,
 		transform.lock()->position,
-		size.X,
-		size.Y,
+		transform.lock()->size.X,
+		transform.lock()->size.Y,
 		1.f,
 		1.f);
 

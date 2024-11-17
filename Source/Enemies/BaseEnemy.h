@@ -19,7 +19,6 @@ public:
 
 protected:
 	float health = 1;
-	Vector2 size = { 50, 50 };
 
 	float animSpeed = 1;
 	Vector2 animFrames = { 1, 1 };

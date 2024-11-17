@@ -7,7 +7,7 @@
 class Transform : public Component
 {
 public:
-	using Component::Component;
+	Transform(GameObject* _gameObject);
 	~Transform() override {};
 
 	void Translate(const float x, const float y);
@@ -15,5 +15,6 @@ public:
 
 public:
 	Vector2 position;
+	Vector2 size;
 };
 
