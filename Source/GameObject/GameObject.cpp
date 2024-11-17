@@ -7,9 +7,7 @@
 std::vector<GameObject*> GameObject::Handler::gameObjects;
 std::queue<GameObject*> GameObject::Handler::deletionQueue;
 std::weak_ptr<Camera> GameObject::Handler::camera;
-TileLayer* GameObject::Handler::mapGameObjectsLayer;
-
-
+TileLayer* GameObject::Handler::mapGameObjectLayer;
 #pragma endregion StaticHandlerMembers
 
 #pragma region HandlerMethods
@@ -105,53 +103,6 @@ void GameObject::Handler::UnregisterGameObject(GameObject* gameObject)
 	deletionQueue.push(gameObject);
 }
 
-void GameObject::Handler::SetGameObjectsLayer(TileLayer* GOLayer)
-{
-	for (auto& gameObject : gameObjects)
-	{
-		UnregisterGameObject(gameObject);
-	}
-	
-	mapGameObjectsLayer = GOLayer;
-	// INFO: Instantiate game objects from the map
-	InstantiateObjectsFromMap(); 
-
-}
-
-void GameObject::Handler::InstantiateObjectsFromMap()
-{
-	std::vector<std::vector<int>> tilemap = mapGameObjectsLayer->GetTilemap();
-	int numRows = mapGameObjectsLayer->GetNumRows();
-	int numColumns = mapGameObjectsLayer->GetNumColumns();
-
-	// INFO: Loop through the tilemap and instantiate game objects based on the tile IDs
-	for (size_t i = 0; i < numRows; i++)
-	{
-		for (size_t j = 0; j < numColumns; j++)
-		{
-			if (tilemap[i][j] == 0)
-			{
-				continue;
-			}
-			switch (tilemap[i][j])
-			{
-				///example
-				//case 1:
-				//{
-				//	GameObject* gameObject = new GameObject();
-				//	std::shared_ptr<Transform> transform = gameObject->transform.lock();
-				 //  and so on.... 
-				//	break;
-				//}
-			
-			default:
-				break;
-			}
-				
-		}
-	}
-}
-
 void GameObject::Handler::ProcessDeletionQueue()
 {
 	// INFO: Loop through all game objects in the deletion queue and delete them
@@ -175,6 +126,48 @@ void GameObject::Handler::ProcessDeletionQueue()
 			continue;
 
 		gameObjects.erase(it);
+	}
+}
+
+void GameObject::Handler::SetMapGameObjectLayer(TileLayer* gameObjectLayer)
+{
+	// INFO: Unregister all game objects from the previous layer
+	for (auto& gameObject : gameObjects)
+		UnregisterGameObject(gameObject);
+
+	// INFO: Set the new game object layer
+	mapGameObjectLayer = gameObjectLayer;
+
+	// INFO: Instantiate game objects from the map
+	InstantiateGameObjectsFromMap();
+}
+
+void GameObject::Handler::InstantiateGameObjectsFromMap()
+{
+	int tileSize = mapGameObjectLayer->GetTileSize();
+	int numRows = mapGameObjectLayer->GetNumRows();
+	int numColumns = mapGameObjectLayer->GetNumColumns();
+
+	std::vector<std::vector<int>> tilemap = mapGameObjectLayer->GetTilemap();
+
+	// INFO: Loop through the tilemap and instantiate game objects based on the tile IDs
+	for (size_t i = 0; i < numRows; i++)
+	{
+		for (size_t j = 0; j < numColumns; j++)
+		{
+			// INFO: If the tile ID is 0 then skip it
+			if (tilemap[i][j] == 0)
+				continue;
+
+			switch (tilemap[i][j])
+			{
+				// INSTANTIATE GAME OBJECTS HERE
+
+			default:
+				break;
+			}
+
+		}
 	}
 }
 #pragma endregion HandlerMethods

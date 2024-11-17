@@ -46,23 +46,23 @@ public:
 		/// @param gameObject : The game object to unregister
 		static void UnregisterGameObject(GameObject* gameObject);
 
-
-		static void SetGameObjectsLayer(TileLayer* GOLayer);
-
-
-		static void InstantiateObjectsFromMap();
-
 		/// @brief Used to process the deletion queue, this will delete all game objects
 		/// that have been queued for deletion
 		static void ProcessDeletionQueue();
+
+		/// @brief Used to set the layer that the game objects are on
+		static void SetMapGameObjectLayer(TileLayer* gameObjectLayer);
+
+		/// @brief Used to instantiate game objects from the game object layer
+		static void InstantiateGameObjectsFromMap();
 
 	private:
 		static std::vector<GameObject*> gameObjects;
 		static std::queue<GameObject*> deletionQueue;
 		
-		static TileLayer* mapGameObjectsLayer;
-
 		static std::weak_ptr<Camera> camera;
+
+		static TileLayer* mapGameObjectLayer;
 
 	private:
 		Handler() = delete;

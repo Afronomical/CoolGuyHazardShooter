@@ -2,8 +2,8 @@
 
 #include "../Collision/Collider.h"
 #include "../Debugging/Debug.h"
-#include "../GameObject/GameObject.h"
 #include "../Debugging/MemoryLeakDetector.h"
+#include "../GameObject/GameObject.h"
 
 std::unordered_map<std::string, std::shared_ptr<Map>> FileHandler::mapLib{};
 
@@ -41,12 +41,12 @@ std::weak_ptr<Map> FileHandler::GetMap(const std::string& name)
 	if (collisionLayer != nullptr)
 		Collider::Handler::SetMapCollisionLayer(collisionLayer);
 
-	//getlayer1 for GO layer 
-	TileLayer* goLayer = dynamic_cast<TileLayer*>(mapLib[name]->GetLayer(1));
+	// INFO: Get the second layer of the map and dynamically cast it to a TileLayer
+	TileLayer* gameObjectLayer = dynamic_cast<TileLayer*>(mapLib[name]->GetLayer(1));
 
-	if (goLayer != nullptr)
-		GameObject::Handler::SetGameObjectsLayer(goLayer);
-
+	// INFO: Set the map game objects data in the GameObject handler to the game object layer's tilemap
+	if (gameObjectLayer != nullptr)
+		GameObject::Handler::SetMapGameObjectLayer(gameObjectLayer);
 
 	return IsMapLoaded(name) ? mapLib[name] : nullptr;
 }
