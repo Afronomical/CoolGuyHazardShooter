@@ -4,6 +4,7 @@
 #include <queue>
 #include <vector>
 
+#include "../Camera/Camera.h"
 #include "../Collision/Collider.h"
 
 class Component;
@@ -32,6 +33,10 @@ public:
 		/// @brief Utility function used to clean up all game objects
 		static void Clean();
 
+		/// @brief Used to set the camera for the handler so it can be used to work out
+		/// whether the game object is in view or not
+		static inline void SetCamera(std::shared_ptr<Camera> _camera) { camera = _camera; }
+
 		/// @brief Used to register a game object with the handler
 		/// @param gameObject : The game object to register
 		static void RegisterGameObject(GameObject* gameObject);
@@ -48,6 +53,8 @@ public:
 	private:
 		static std::vector<GameObject*> gameObjects;
 		static std::queue<GameObject*> deletionQueue;
+		
+		static std::weak_ptr<Camera> camera;
 
 	private:
 		Handler() = delete;
@@ -96,9 +103,11 @@ public:
 
 protected:
 	bool isActive;
+	bool alwaysUpdate; // INFO: If true, the game object will always update regardless of whether it is in view or not
 
 private:
 	std::vector<std::shared_ptr<Component>> components;
+	bool isInView; // INFO: If true, the game object is in view of the camera and should be updated and drawn
 };
 
 template<class T>

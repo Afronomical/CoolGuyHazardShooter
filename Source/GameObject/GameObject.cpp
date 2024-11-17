@@ -6,6 +6,7 @@
 #pragma region StaticHandlerMembers
 std::vector<GameObject*> GameObject::Handler::gameObjects;
 std::queue<GameObject*> GameObject::Handler::deletionQueue;
+std::weak_ptr<Camera> GameObject::Handler::camera;
 #pragma endregion StaticHandlerMembers
 
 #pragma region HandlerMethods
@@ -24,7 +25,21 @@ void GameObject::Handler::Update(float deltaTime)
 	// INFO: Loop through all game objects and call their Update function if they are active
 	for (auto& gameObject : gameObjects)
 	{
-		if (gameObject->IsActive())
+		// INFO: If the object isn't active skip it
+		if (!gameObject->IsActive())
+			continue;
+
+		// INFO: Perform a check to see if the game object is in view of the camera if alwaysUpdate is false
+		if (!gameObject->alwaysUpdate)
+		{
+			std::shared_ptr<Transform> transform = gameObject->transform.lock();
+			SDL_Rect rect = { transform->position.X, transform->position.Y, transform->size.X, transform->size.Y };
+
+			gameObject->isInView = camera.lock()->IsInView(rect);
+		}
+
+		// INFO: If the game object is in view or alwaysUpdate is true then update the game object
+		if (gameObject->isInView || gameObject->alwaysUpdate)
 			gameObject->Update(deltaTime);
 	}
 }
@@ -34,7 +49,12 @@ void GameObject::Handler::LateUpdate(float deltaTime)
 	// INFO: Loop through all game objects and call their LateUpdate function if they are active
 	for (auto& gameObject : gameObjects)
 	{
-		if (gameObject->IsActive())
+		// INFO: If the object isn't active skip it
+		if (!gameObject->IsActive())
+			continue;
+
+		// INFO: If the game object is in view or alwaysUpdate is true then call LateUpdate
+		if (gameObject->isInView || gameObject->alwaysUpdate)
 			gameObject->LateUpdate(deltaTime);
 	}
 }
@@ -44,7 +64,12 @@ void GameObject::Handler::Draw()
 	// INFO: Loop through all game objects and call their Draw function if they are active
 	for (auto& gameObject : gameObjects)
 	{
-		if (gameObject->IsActive())
+		// INFO: If the object isn't active skip it
+		if (!gameObject->IsActive())
+			continue;
+
+		// INFO: If the game object is in view or alwaysUpdate is true then draw the game object
+		if (gameObject->isInView || gameObject->alwaysUpdate)
 			gameObject->Draw();
 	}
 }
@@ -105,7 +130,7 @@ void GameObject::Handler::ProcessDeletionQueue()
 #pragma endregion HandlerMethods
 
 #pragma region GameObjectMethods
-GameObject::GameObject() : isActive(true), components()
+GameObject::GameObject() : isActive(true), alwaysUpdate(false), components(), isInView(false)
 {
 	// INFO: Register the game object with the handler
 	GameObject::Handler::RegisterGameObject(this);

@@ -28,7 +28,7 @@ BaseEnemy::~BaseEnemy()
 void BaseEnemy::Update(float deltaTime)
 {
 	if (walkingLeft)
-		transform.lock()->position.X += -moveSpeed * deltaTime;
+		transform.lock()->position.X += moveSpeed * deltaTime;
 
 	//anim.Update();
 }

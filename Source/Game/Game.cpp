@@ -4,15 +4,18 @@
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 
+
 #include "../AssetLoading/AssetHandler.h"
+#include "../Camera/Camera.h"
 #include "../Collision/Collider.h"
 #include "../Debugging/Debug.h"
 #include "../Debugging/MemoryLeakDetector.h"
+#include "../Enemies/BaseEnemy.h"
 #include "../FileHandling/FileHandler.h"
 #include "../GameObject/GameObject.h"
 #include "../Input/InputHandler.h"
+#include "../Map/Map.h"
 #include "../Time/Time.h"
-#include "../Enemies/BaseEnemy.h"
 
 BaseEnemy* enemy;
 
@@ -136,11 +139,16 @@ bool Game::InitialiseGame()
 
 	// INFO: Initialise the game and various systems here
 
-	// INFO: Set the renderer for the Asset Handler
+	// INFO: Set the renderer for the Asset Handler and Debug
 	AssetHandler::SetRenderer(renderer);
-
-	// INFO: Set the renderer for the Debug
 	Debug::SetRenderer(renderer);
+
+	// INFO: Create the camera
+	camera = std::make_shared<Camera>(static_cast<int>(windowDimensions.X), static_cast<int>(windowDimensions.Y));
+
+	// INFO: Set the camera for the Asset Handler and GameObject Handler
+	AssetHandler::SetCamera(camera);
+	GameObject::Handler::SetCamera(camera);
 
 	// INFO: Initialise the Input System
 	InputHandler::Initialise();

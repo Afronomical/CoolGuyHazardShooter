@@ -9,6 +9,7 @@ std::unordered_map<Asset, Mix_Chunk*> AssetHandler::sfxLib;
 std::unordered_map<Asset, TTF_Font*> AssetHandler::fontLib;
 
 SDL_Renderer* AssetHandler::renderer = nullptr;
+std::weak_ptr<Camera> AssetHandler::camera;
 
 Asset AssetHandler::LoadTexture(const std::string& filepath)
 {
@@ -225,8 +226,9 @@ void AssetHandler::DrawTile(const Asset& texture, const Vector2& position, int t
 	//SDL_Rect destRect = { static_cast<int>(position.X - cameraPosition.X), static_cast<int>(position.Y - cameraPosition.Y), tileSize, tileSize };
 	SDL_Rect destRect = { static_cast<int>(position.X), static_cast<int>(position.Y), tileSize, tileSize };
 
-	// INFO: Draw the texture
-	SDL_RenderCopyEx(renderer, textureLib[texture], &srcRect, &destRect, 0.0, nullptr, SDL_FLIP_NONE);
+	// INFO: Draw the texture if the destination rectangle is within the camera view
+	if (camera.lock()->IsInView(destRect))
+		SDL_RenderCopyEx(renderer, textureLib[texture], &srcRect, &destRect, 0.0, nullptr, SDL_FLIP_NONE);
 }
 
 void AssetHandler::DrawAnimation(const Asset& texture, const Vector2& position, float width, float height, int row, int frame, float scrollSpeed, float scale, SDL_RendererFlip flip)

@@ -27,7 +27,7 @@ protected:
 	std::weak_ptr<BoxCollider> collider;
 	//aAnimator anim;
 
-	float moveSpeed = 10.0f;
+	float moveSpeed = 25.0f;
 
 	bool walkingLeft;
 };

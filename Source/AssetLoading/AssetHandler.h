@@ -1,6 +1,9 @@
 #pragma once
 
+#include <memory>
+
 #include "Asset.h"
+#include "../Camera/Camera.h"
 
 class AssetHandler
 {
@@ -38,6 +41,7 @@ public:
 	static TTF_Font* GetFont(const Asset& font);
 
 	static inline void SetRenderer(SDL_Renderer* _renderer) { renderer = _renderer; }
+	static inline void SetCamera(std::shared_ptr<Camera> _camera) { camera = _camera; }
 
 private:
 	static inline bool IsTextureValid(const Asset& texture) { return textureLib.find(texture) != textureLib.end(); }
@@ -51,6 +55,7 @@ private:
 	static std::unordered_map<Asset, TTF_Font*> fontLib;
 
 	static SDL_Renderer* renderer;
+	static std::weak_ptr<Camera> camera;
 
 private:
 	AssetHandler() = delete;

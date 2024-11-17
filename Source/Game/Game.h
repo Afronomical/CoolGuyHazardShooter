@@ -2,10 +2,13 @@
 
 #include <SDL.h>
 
+#include <memory>
 #include <string>
 
-#include "../Map/Map.h"
 #include "../Vector2/Vector2.h"
+
+class Camera;
+class Map;
 
 class Game
 {
@@ -49,6 +52,8 @@ public:
 private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+
+	std::shared_ptr<Camera> camera;
 
 	bool isRunning;
 	std::string windowName;
