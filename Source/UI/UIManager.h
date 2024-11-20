@@ -19,7 +19,7 @@ public:
     void Init();
     void Update(); // Removed deltaTime parameter
     void Render(SDL_Renderer* renderer);
-    void HandleInput();
+    void HandleInput(InputHandler& inputHandler);
 
     void AddMenuOption(const std::string& text, std::function<void()> action);
 

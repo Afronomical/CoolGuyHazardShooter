@@ -46,25 +46,25 @@ void UIManager::Render(SDL_Renderer* renderer)
     }
 }
 
-void UIManager::HandleInput()
+void UIManager::HandleInput(InputHandler& inputHandler)
 {
-    //if (InputHandler::Instance().IsKeyPressed(SDLK_UP))
-    //{
-    //    selectedOption = (selectedOption - 1 + menuOptions.size()) % menuOptions.size();
-    //}
-    //else if (InputHandler::Instance().IsKeyPressed(SDLK_DOWN))
-    //{
-    //    selectedOption = (selectedOption + 1) % menuOptions.size();
-    //}
+    if (inputHandler.GetKeyDown(SDLK_UP))
+    {
+        selectedOption = (selectedOption - 1 + menuOptions.size()) % menuOptions.size();
+    }
+    else if (inputHandler.GetKeyDown(SDLK_DOWN))
+    {
+        selectedOption = (selectedOption + 1) % menuOptions.size();
+    }
 
-    //// If the selected option is confirmed (e.g., Enter or Space)
-    //if (InputHandler::Instance().IsKeyPressed(SDLK_RETURN))
-    //{
-    //    if (!menuOptions.empty())
-    //    {
-    //        menuOptions[selectedOption].action();
-    //    }
-    //}
+    // If the selected option is confirmed (e.g., Enter)
+    if (inputHandler.GetKeyDown(SDLK_RETURN))
+    {
+        if (!menuOptions.empty())
+        {
+            menuOptions[selectedOption].action();
+        }
+    }
 }
 
 void UIManager::AddMenuOption(const std::string& text, std::function<void()> action)
