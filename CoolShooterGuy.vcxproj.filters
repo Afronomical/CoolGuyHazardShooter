@@ -31,6 +31,7 @@
     <ClCompile Include="Source\Externals\TinyXML\tinyxml.cpp" />
     <ClCompile Include="Source\Externals\TinyXML\tinyxmlerror.cpp" />
     <ClCompile Include="Source\Externals\TinyXML\tinyxmlparser.cpp" />
+    <ClCompile Include="Source\UI\UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Input\InputHandler.h" />
@@ -63,5 +64,6 @@
     <ClInclude Include="Source\FileHandling\FileHandler.h" />
     <ClInclude Include="Source\Externals\TinyXML\tinystr.h" />
     <ClInclude Include="Source\Externals\TinyXML\tinyxml.h" />
+    <ClInclude Include="Source\UI\UIManager.h" />
   </ItemGroup>
 </Project>

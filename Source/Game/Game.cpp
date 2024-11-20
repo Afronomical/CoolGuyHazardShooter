@@ -16,8 +16,13 @@
 #include "../Input/InputHandler.h"
 #include "../Map/Map.h"
 #include "../Time/Time.h"
+#include "../UI/UIManager.h"
 
 BaseEnemy* enemy;
+
+std::shared_ptr<UIManager> uiManager;
+std::shared_ptr<AssetHandler> assetHandler;
+
 
 Game::Game(const std::string& _windowName, const Vector2& _windowDimensions) : window(nullptr), renderer(nullptr), isRunning(false), windowName(_windowName), 
 																			   windowDimensions(_windowDimensions)
@@ -142,13 +147,20 @@ bool Game::InitialiseGame()
 	// INFO: Set the renderer for the Asset Handler and Debug
 	AssetHandler::SetRenderer(renderer);
 	Debug::SetRenderer(renderer);
+	
+
 
 	// INFO: Create the camera
 	camera = std::make_shared<Camera>(static_cast<int>(windowDimensions.X), static_cast<int>(windowDimensions.Y));
 
+	
+
 	// INFO: Set the camera for the Asset Handler and GameObject Handler
 	AssetHandler::SetCamera(camera);
 	GameObject::Handler::SetCamera(camera);
+
+	// INFO: create ui manager 
+	uiManager = std::make_shared<UIManager>(camera, assetHandler);
 
 	// INFO: Initialise the Input System
 	InputHandler::Initialise();
@@ -226,6 +238,11 @@ void Game::Draw()
 	// INFO: Call the Draw function for all game objects
 	GameObject::Handler::Draw();
 
+	//testing UI text 
+	SDL_Rect textRect = { 100, 50, 200, 50 };
+	uiManager->RenderText("Text Test", textRect, renderer);
+	
+	
 	// INFO: Present the renderer
 	SDL_RenderPresent(renderer);
 }

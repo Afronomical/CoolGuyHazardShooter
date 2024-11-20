@@ -48,23 +48,23 @@ void UIManager::Render(SDL_Renderer* renderer)
 
 void UIManager::HandleInput()
 {
-    if (InputHandler::Instance().IsKeyPressed(SDLK_UP))
-    {
-        selectedOption = (selectedOption - 1 + menuOptions.size()) % menuOptions.size();
-    }
-    else if (InputHandler::Instance().IsKeyPressed(SDLK_DOWN))
-    {
-        selectedOption = (selectedOption + 1) % menuOptions.size();
-    }
+    //if (InputHandler::Instance().IsKeyPressed(SDLK_UP))
+    //{
+    //    selectedOption = (selectedOption - 1 + menuOptions.size()) % menuOptions.size();
+    //}
+    //else if (InputHandler::Instance().IsKeyPressed(SDLK_DOWN))
+    //{
+    //    selectedOption = (selectedOption + 1) % menuOptions.size();
+    //}
 
-    // If the selected option is confirmed (e.g., Enter or Space)
-    if (InputHandler::Instance().IsKeyPressed(SDLK_RETURN))
-    {
-        if (!menuOptions.empty())
-        {
-            menuOptions[selectedOption].action();
-        }
-    }
+    //// If the selected option is confirmed (e.g., Enter or Space)
+    //if (InputHandler::Instance().IsKeyPressed(SDLK_RETURN))
+    //{
+    //    if (!menuOptions.empty())
+    //    {
+    //        menuOptions[selectedOption].action();
+    //    }
+    //}
 }
 
 void UIManager::AddMenuOption(const std::string& text, std::function<void()> action)
@@ -76,12 +76,21 @@ void UIManager::AddMenuOption(const std::string& text, std::function<void()> act
 
 void UIManager::RenderText(const std::string& text, const SDL_Rect& rect, SDL_Renderer* renderer)
 {
-    // Use AssetHandler to load font and render text
-    SDL_Texture* texture = assetHandler->GetFontTexture("Arial", 24, text); // Place holder font and size
+    //Use AssetHandler to load font and render text
+    SDL_Color textColor = { 255, 0, 255, 255 }; //purple example
+
+    SDL_Texture* texture = assetHandler->GetFontTexture("assets/Fonts/arial.ttf", 24, text, textColor);
+
     if (texture)
     {
         SDL_RenderCopy(renderer, texture, nullptr, &rect);
+        SDL_DestroyTexture(texture); //Cleanup texture after rendering
     }
+    else
+    {
+        return;
+    }
+        
 }
 
 void UIManager::UpdateMenuSelection()

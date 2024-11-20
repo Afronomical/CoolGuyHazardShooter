@@ -39,6 +39,7 @@ public:
 
 	static void SetFontSize(const Asset& font, int size);
 	static TTF_Font* GetFont(const Asset& font);
+	static SDL_Texture* GetFontTexture(const std::string& filepath, int ptSize, const std::string& text, SDL_Color color);
 
 	static inline void SetRenderer(SDL_Renderer* _renderer) { renderer = _renderer; }
 	static inline void SetCamera(std::shared_ptr<Camera> _camera) { camera = _camera; }

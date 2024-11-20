@@ -1,12 +1,13 @@
 #pragma once
 
-#include "../Asset/AssetHandler.h"
+#include "../AssetLoading/AssetHandler.h"
 #include "../Input/InputHandler.h"
 #include "../Camera/Camera.h"
-#include "Time/Time.h"
+#include "../Time/Time.h"
 #include <memory>
 #include <vector>
 #include <functional>
+#include <string>
 
 
 class UIManager
@@ -22,6 +23,10 @@ public:
 
     void AddMenuOption(const std::string& text, std::function<void()> action);
 
+    
+    // Helper function for rendering text
+    void RenderText(const std::string& text, const SDL_Rect& rect, SDL_Renderer* renderer);
+
 private:
     struct MenuOption
     {
@@ -36,8 +41,6 @@ private:
     std::vector<MenuOption> menuOptions;
     int selectedOption = 0;
 
-    // Helper function for rendering text
-    void RenderText(const std::string& text, const SDL_Rect& rect, SDL_Renderer* renderer);
 
     // Helper function to handle selection highlighting
     void UpdateMenuSelection();

@@ -329,6 +329,39 @@ TTF_Font* AssetHandler::GetFont(const Asset& font)
 	return fontLib[font];
 }
 
+SDL_Texture* AssetHandler::GetFontTexture(const std::string& filepath, int ptSize, const std::string& text, SDL_Color color)
+{
+	//Load the font (if not already loaded) using the already made fnctions
+	Asset fontAsset = LoadFont(filepath, ptSize);
+	TTF_Font* sdlFont = GetFont(fontAsset);
+
+	if (!sdlFont)
+	{
+		Debug::LogError("Failed to load font for text rendering");
+		return nullptr;
+	}
+
+	//Renders the text into an SDL_Surface.
+	SDL_Surface* surface = TTF_RenderText_Blended(sdlFont, text.c_str(), color);
+	if (!surface)
+	{
+		Debug::LogError("Failed to create surface for text.");
+		return nullptr;
+	}
+
+	//Create texture from the surface
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
+
+	if (!texture)
+	{
+		Debug::LogError("Failed to create texture from surface.");
+	}
+
+	return texture;
+}
+
+
 bool AssetHandler::IsAudioValid(const Asset& audio, bool isMusic)
 {
 	if (isMusic)
