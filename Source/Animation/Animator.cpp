@@ -30,7 +30,7 @@ void Animator::Update()
 	}
 }
 
-void Animator::DrawCurrentFrame()
+void Animator::DrawCurrentFrame() const
 {
-	AssetHandler::DrawAnimation(spriteSheet, position, frameWidth, frameHeight, animationRow, currentFrame, 0, scale, flippedOnAxis);
+	AssetHandler::DrawAnimation(spriteSheet, position, static_cast<float>(frameWidth), static_cast<float>(frameHeight), animationRow, currentFrame, 0, scale, flippedOnAxis);
 }

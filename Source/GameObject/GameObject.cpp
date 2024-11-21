@@ -34,7 +34,10 @@ void GameObject::Handler::Update(float deltaTime)
 		if (!gameObject->alwaysUpdate)
 		{
 			std::shared_ptr<Transform> transform = gameObject->transform.lock();
-			SDL_Rect rect = { transform->position.X, transform->position.Y, transform->size.X, transform->size.Y };
+			SDL_Rect rect = { static_cast<int>(transform->position.X), 
+							  static_cast<int>(transform->position.Y),
+							  static_cast<int>(transform->size.X),
+							  static_cast<int>(transform->size.Y) };
 
 			gameObject->isInView = camera.lock()->IsInView(rect);
 		}
@@ -79,12 +82,12 @@ void GameObject::Handler::Clean()
 {
 	// INFO: Loop through all game objects and delete all of their components
 	//       then delete the game object itself
-	for (auto& gameObject : gameObjects)
+	for (size_t i = 0; i < gameObjects.size(); i++)
 	{
 		// INFO: Clear the game objects components vector
-		gameObject->components.clear();
+		gameObjects[i]->components.clear();
 
-		delete gameObject;
+		delete gameObjects[i];
 	}
 
 	// INFO: Clear the game objects vector
@@ -162,7 +165,7 @@ void GameObject::Handler::InstantiateGameObjectsFromMap()
 			switch (tilemap[i][j])
 			{
 				// INSTANTIATE GAME OBJECTS HERE
-
+			case 0:
 			default:
 				break;
 			}

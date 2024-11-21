@@ -48,7 +48,7 @@ public:
 	// Info: Update the SourceRect (srcRect) to display the next frame of the animation
 	void Update();
 	//Info: Call the draw function
-	void DrawCurrentFrame();
+	void DrawCurrentFrame() const;
 
 	
 };

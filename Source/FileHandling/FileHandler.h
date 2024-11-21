@@ -18,7 +18,7 @@ public:
 
 	/// @brief Returns the specified map from the map library
 	/// @param name : The name of the map to be retrieved from the map library
-	static std::weak_ptr<Map> GetMap(const std::string& name);
+	static std::weak_ptr<Map> InitialiseMap(const std::string& name);
 
 private:
 	static bool ParseMap(const std::string& name, const std::string& filepath);

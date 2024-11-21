@@ -30,7 +30,8 @@ Game::Game(const std::string& _windowName, const Vector2& _windowDimensions) : w
 	// INFO: Initialise and Validate everything
 	if (Initialise())
 	{
-		Run();
+		// INFO: Set the game to be running
+		isRunning = true;
 	}
 }
 
@@ -148,12 +149,8 @@ bool Game::InitialiseGame()
 	AssetHandler::SetRenderer(renderer);
 	Debug::SetRenderer(renderer);
 	
-
-
 	// INFO: Create the camera
 	camera = std::make_shared<Camera>(static_cast<int>(windowDimensions.X), static_cast<int>(windowDimensions.Y));
-
-	
 
 	// INFO: Set the camera for the Asset Handler and GameObject Handler
 	AssetHandler::SetCamera(camera);
@@ -176,12 +173,9 @@ bool Game::InitialiseGame()
 	}
 
 	// INFO: Set the current map
-	currentMap = FileHandler::GetMap("TestMap");
+	currentMap = FileHandler::InitialiseMap("TestMap");
 
 	enemy = new BaseEnemy();
-
-	// INFO: Set the game to be running
-	isRunning = true;
 
 	return success;
 }
@@ -207,9 +201,6 @@ void Game::Run()
 		// INFO: Process deletion of game objects that have been queued for deletion
 		GameObject::Handler::ProcessDeletionQueue();
 	}
-
-	// NOTE: Clean up the game
-	Clean();
 }
 
 void Game::HandleInput()

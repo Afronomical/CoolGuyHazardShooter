@@ -12,7 +12,7 @@ class Particle : public GameObject
 private:
 
 	float pLifeTime = 0;
-	int pSpeed = 0;
+	float pSpeed = 0;
 	//Vector2 pos;
 
 public:
@@ -23,13 +23,13 @@ public:
 	Particle(float lifeTime, float size, const Asset& texture, const Vector2& position);
 
 	//Getters
-	float GetLifetime() { return pLifeTime; };
-	float GetSpeed() { return pSpeed; };
+	float GetLifetime() const { return pLifeTime; };
+	float GetSpeed() const { return pSpeed; };
 	Vector2 GetPosition() { return this->GetComponent<Transform>().lock()->position; };
 
 	// Setters
 	void SetLifetime(float duration) { pLifeTime = duration; };
-	void SetSpeed(int speed) { pSpeed = speed; };
+	void SetSpeed(float speed) { pSpeed = speed; };
 	void SetPosition(Vector2 pos) { this->GetComponent<Transform>().lock()->position = pos; };
 
 	/// <summary>

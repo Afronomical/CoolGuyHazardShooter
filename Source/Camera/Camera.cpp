@@ -9,11 +9,11 @@ bool Camera::IsInView(const SDL_Rect& rect) const
 	// INFO: Check using AABB between the camera viewport and the rectangle
 
 	// INFO: Get the min and max values for the viewport (with its extension) and the rectangle
-	int vpMinX = viewport.x - viewportExtension.X;
-	int vpMaxX = viewport.x + viewport.w + viewportExtension.X;
+	int vpMinX = viewport.x - static_cast<int>(viewportExtension.X);
+	int vpMaxX = viewport.x + viewport.w + static_cast<int>(viewportExtension.X);
 
-	int vpMinY = viewport.y - viewportExtension.Y;
-	int vpMaxY = viewport.y + viewport.h + viewportExtension.Y;
+	int vpMinY = viewport.y - static_cast<int>(viewportExtension.Y);
+	int vpMaxY = viewport.y + viewport.h + static_cast<int>(viewportExtension.Y);
 
 	int rectMinX = rect.x;
 	int rectMaxX = rect.x + rect.w;
