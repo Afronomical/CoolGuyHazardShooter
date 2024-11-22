@@ -166,6 +166,7 @@
     <ClCompile Include="Source\Vector2\Vector2.cpp" />
     <ClCompile Include="Source\Time\Time.cpp" />
     <ClCompile Include="Source\Layers\TileLayer.cpp" />
+    <ClCompile Include="Source\WallEnemy\WallEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Externals\TinyXML\tinystr.h" />
@@ -201,6 +202,7 @@
     <ClInclude Include="Source\Vector2\Vector2.h" />
     <ClInclude Include="Source\Time\Time.h" />
     <ClInclude Include="Source\Layers\TileLayer.h" />
+    <ClInclude Include="Source\WallEnemy\WallEnemy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
