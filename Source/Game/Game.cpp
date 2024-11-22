@@ -11,6 +11,7 @@
 #include "../Debugging/Debug.h"
 #include "../Debugging/MemoryLeakDetector.h"
 #include "../Enemies/BaseEnemy.h"
+#include "../Players/Player1.h"
 #include "../FileHandling/FileHandler.h"
 #include "../GameObject/GameObject.h"
 #include "../Input/InputHandler.h"
@@ -19,6 +20,7 @@
 #include "../UI/UIManager.h"
 
 BaseEnemy* enemy;
+Player1* player1;
 
 std::shared_ptr<UIManager> uiManager;
 std::shared_ptr<AssetHandler> assetHandler;
@@ -174,8 +176,9 @@ bool Game::InitialiseGame()
 
 	// INFO: Set the current map
 	currentMap = FileHandler::InitialiseMap("TestMap");
-
+	
 	enemy = new BaseEnemy();
+	player1 = new Player1();
 
 	return success;
 }
@@ -189,7 +192,6 @@ void Game::Run()
 	while (isRunning)
 	{
 		Time::Tick();
-
 		HandleInput();
 		Update(Time::DeltaTime());
 
