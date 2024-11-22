@@ -192,6 +192,7 @@ void Game::Run()
 	while (isRunning)
 	{
 		Time::Tick();
+
 		HandleInput();
 		Update(Time::DeltaTime());
 
