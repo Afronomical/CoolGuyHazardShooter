@@ -7,6 +7,7 @@
 #include "../Debugging/MemoryLeakDetector.h"
 #include "../Debugging/Debug.h"
 #include "../GameObject/GameObject.h"
+#include "MapCollisionResult.h"
 
 #pragma region StaticHandlerMembers
 std::vector<std::weak_ptr<Collider>> Collider::Handler::colliders;
@@ -57,8 +58,10 @@ void Collider::Handler::CheckCollisions()
 	}
 }
 
-bool Collider::Handler::CheckMapCollision(const Vector2& position, float width, float height)
+bool Collider::Handler::CheckMapCollision(const Vector2& position, float width, float height, MapCollisionResult* collisionResult)
 {
+	bool isColliding = false;
+
 	// INFO: Check if the map collision layer is nullptr
 	if (mapCollisionLayer == nullptr)
 	{
@@ -78,11 +81,11 @@ bool Collider::Handler::CheckMapCollision(const Vector2& position, float width, 
 
 	// INFO: Calculate the tiles that the entity is currently occupying
 
-	int leftTile = entity.x / tileSize;
-	int rightTile = (entity.x + entity.w) / tileSize;
+	int leftTile = (entity.x / tileSize);
+	int rightTile = ((entity.x + entity.w) / tileSize);
 
-	int topTile = entity.y / tileSize;
-	int bottomTile = (entity.y + entity.h) / tileSize;
+	int topTile = (entity.y / tileSize);
+	int bottomTile = ((entity.y + entity.h) / tileSize);
 
 
 	// INFO: Ensure the entity is within the bounds of the map
@@ -100,11 +103,28 @@ bool Collider::Handler::CheckMapCollision(const Vector2& position, float width, 
 		{
 			// INFO: Collision has occurred if the tile is not empty, since this is a collision layer
 			if (tilemap[j][i] != 0)
-				return true;
+			{
+				isColliding = true;
+
+				// INFO: Fill collision result with detailed information about what tiles the entity is colliding with
+				if (collisionResult)
+				{
+					// INFO: Given that a collision has occurred whilst traversing the left tile
+					if (i == leftTile)
+					{
+						collisionResult->isCollidingLeftTile = true;
+					}
+					// INFO: Given that a collision has occurred whilst traversing the right tile
+					else if (i == rightTile)
+					{
+						collisionResult->isCollidingRightTile = true;
+					}
+				}
+			}
 		}
 	}
 
-	return false;
+	return isColliding;
 }
 
 void Collider::Handler::ClearExpiredColliders()

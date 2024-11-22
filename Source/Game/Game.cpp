@@ -11,7 +11,7 @@
 #include "../Debugging/Debug.h"
 #include "../Debugging/MemoryLeakDetector.h"
 #include "../Enemies/BaseEnemy.h"
-#include "../Players/Player.h"
+#include "../Player/Player.h"
 #include "../FileHandling/FileHandler.h"
 #include "../GameObject/GameObject.h"
 #include "../Input/InputHandler.h"

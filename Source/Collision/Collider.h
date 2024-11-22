@@ -10,6 +10,7 @@
 
 class BoxCollider;
 class CircleCollider;
+struct MapCollisionResult;
 
 class Collider : public Component
 {
@@ -24,8 +25,9 @@ public:
 		/// @param position : The position of the entity
 		/// @param width : The width of the entity
 		/// @param height : The height of the entity
+		/// @param collisionResult : More detailed information about the collision, if you want to use it pass your MapCollisionResult by reference (&MapCollisionResult)
 		/// @return Whether the entity has collided with the map
-		static bool CheckMapCollision(const Vector2& position, float width, float height);
+		static bool CheckMapCollision(const Vector2& position, float width, float height, MapCollisionResult* collisionResult = nullptr);
 
 		static inline void SetMapCollisionLayer(TileLayer* collisionLLayer) { mapCollisionLayer = collisionLLayer; }
 

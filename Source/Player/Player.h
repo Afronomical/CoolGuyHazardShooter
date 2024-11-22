@@ -1,5 +1,7 @@
 #pragma once
-#include "../Players/Players.h"
+
+#include "../GameObject/GameObject.h"
+
 class Player : public GameObject
 {
 public:
@@ -15,10 +17,13 @@ public:
     void Jump();
     void Kill();
 
+    // INFO: Temporary variable delete whenever
+    bool isPlayer1 = false;
+
     Asset texture;
     float health = 3;
     float playerMoveSpeed = 25.0f;
-    float deltaTimeRef;
+    float deltaTimeRef = 0.0f;
     bool isPlayerDead = false;
 };
 
