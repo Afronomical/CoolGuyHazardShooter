@@ -8,7 +8,9 @@
 class Animator
 {
 private:
+	Vector2 DefaultPos = { 0 };
 	float timeElapsed = Time::ElapsedTime()/500;
+protected:
 
 	int frameWidth = 16;  
 	int frameHeight = 16;  
@@ -26,24 +28,27 @@ private:
 	SDL_RendererFlip flippedOnAxis;
 	//Info: the row that line of the spritesheet the animator will play from
 	int animationRow = 0;
-	// {Number of frames on a row}			{the currently visual frame}
-		int totalFrames,						currentFrame = 0;
+	//{Number of frames on a row}			{the currently visual frame}
+	int totalFrames,						currentFrame = 0;
 
 	//Info: time spent on a frame before moving to the next
 	float frameDuration;
-protected:
 
 public:
+	Animator();
+	Animator(std::string filePath, 
+				const Vector2& _position, 
+				int numberOfRows, int numberOfColumns, 
+				int totalNumberOfFrames, int frameWidth, 
+				int frameHeight, float timeSpentPerFrame);
 
-
-	void SetAnimatorValues(	std::string filePath, 
+	/*void SetAnimatorValues(	std::string filePath, 
 							const Vector2& position, 
 							int numberOfRows, int numberOfColumns, 
 							int totalNumberOfFrames, 
 							int frameWidth, int frameHeight, 
-							float timeSpentPerFrame);
-	
-	Vector2& position;
+							float timeSpentPerFrame);*/
+	Vector2& position = DefaultPos;
 	
 	// Info: Update the SourceRect (srcRect) to display the next frame of the animation
 	void Update();
