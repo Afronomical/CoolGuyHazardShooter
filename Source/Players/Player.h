@@ -1,10 +1,10 @@
 #pragma once
 #include "../Players/Players.h"
-class Player1 : public GameObject
+class Player : public GameObject
 {
 public:
-    Player1();      
-    ~Player1();     
+    Player(bool isPlayer1);      
+    ~Player() override;     
 
     void Update(float deltaTime) override;
     void Draw() override;
@@ -13,6 +13,7 @@ public:
     void MoveLeft();
     void MoveRight();
     void Jump();
+    void Kill();
 
     Asset texture;
     float health = 3;

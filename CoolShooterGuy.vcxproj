@@ -160,12 +160,13 @@
     <ClCompile Include="Source\Game\Game.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Components\Transform.cpp" />
-    <ClCompile Include="Source\Players\Player1.cpp" />
+    <ClCompile Include="Source\Players\Player.cpp" />
     <ClCompile Include="Source\Players\Players.cpp" />
     <ClCompile Include="Source\UI\UIManager.cpp" />
     <ClCompile Include="Source\Vector2\Vector2.cpp" />
     <ClCompile Include="Source\Time\Time.cpp" />
     <ClCompile Include="Source\Layers\TileLayer.cpp" />
+    <ClCompile Include="Source\WallEnemy\WallEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Externals\TinyXML\tinystr.h" />
@@ -195,12 +196,13 @@
     <ClInclude Include="Source\Components\Transform.h" />
     <ClInclude Include="Source\Input\Mouse.h" />
     <ClInclude Include="Source\Debugging\MemoryLeakDetector.h" />
-    <ClInclude Include="Source\Players\Player1.h" />
+    <ClInclude Include="Source\Players\Player.h" />
     <ClInclude Include="Source\Players\Players.h" />
     <ClInclude Include="Source\UI\UIManager.h" />
     <ClInclude Include="Source\Vector2\Vector2.h" />
     <ClInclude Include="Source\Time\Time.h" />
     <ClInclude Include="Source\Layers\TileLayer.h" />
+    <ClInclude Include="Source\WallEnemy\WallEnemy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
