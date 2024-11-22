@@ -2,9 +2,9 @@
 
 Player1::Player1()
 {
-	GameObject::Handler::RegisterGameObject(this);
+	//GameObject::Handler::RegisterGameObject(this);
 	texture = AssetHandler::LoadTexture("Assets/Animations/sonic.png");
-	transform.lock()->position = Vector2(300, 320);
+	transform.lock()->position = Vector2(300, 360);
 }
 
 Player1::~Player1()
