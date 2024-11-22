@@ -1,10 +1,11 @@
 #pragma once
 #include "../Players/Players.h"
-class Player1 : public GameObject
+class Player : public GameObject
 {
 public:
-    Player1();      
-    ~Player1();     
+    Player(bool isPlayer1);      
+    Player();
+    ~Player();     
 
     void Update(float deltaTime) override;
     void Draw() override;

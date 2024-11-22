@@ -11,7 +11,7 @@
 #include "../Debugging/Debug.h"
 #include "../Debugging/MemoryLeakDetector.h"
 #include "../Enemies/BaseEnemy.h"
-#include "../Players/Player1.h"
+#include "../Players/Player.h"
 #include "../FileHandling/FileHandler.h"
 #include "../GameObject/GameObject.h"
 #include "../Input/InputHandler.h"
@@ -20,7 +20,8 @@
 #include "../UI/UIManager.h"
 
 BaseEnemy* enemy;
-Player1* player1;
+Player* player1;
+Player* player2;
 
 std::shared_ptr<UIManager> uiManager;
 std::shared_ptr<AssetHandler> assetHandler;
@@ -178,7 +179,8 @@ bool Game::InitialiseGame()
 	currentMap = FileHandler::InitialiseMap("TestMap");
 	
 	enemy = new BaseEnemy();
-	player1 = new Player1();
+	player1 = new Player(true);
+	player2 = new Player(false);
 
 	return success;
 }

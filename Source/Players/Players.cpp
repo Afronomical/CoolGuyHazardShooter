@@ -59,3 +59,4 @@ void Players::Draw()
 		Player2->transform.lock()->size.Y,
 		1, 1);
 }*/
+
