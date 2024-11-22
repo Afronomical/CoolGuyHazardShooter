@@ -60,5 +60,6 @@ private:
 	Vector2 windowDimensions;
 
 	std::weak_ptr<Map> currentMap;
+	std::weak_ptr<Map> nextMap;
 };
 

@@ -17,6 +17,7 @@
 #include "../Map/Map.h"
 #include "../Time/Time.h"
 #include "../UI/UIManager.h"
+#include "../MapGeneration/MapGenerator.h"
 
 BaseEnemy* enemy;
 
@@ -169,14 +170,17 @@ bool Game::InitialiseGame()
 	InputHandler::SetOnQuit([&]() { isRunning = false; });
 
 	// INFO: Load the map that will be used as the current map
-	if (!FileHandler::LoadMap("TestMap", "Assets/Maps/TestMap.tmx"))
+	if (!FileHandler::LoadMap("LevelOne", "Assets/Maps/LevelOne.tmx"))
 	{
 		Debug::LogError("Game::InitialiseGame: Failed to load map!");
 		return !success;
 	}
 
 	// INFO: Set the current map
-	currentMap = FileHandler::GetMap("TestMap");
+	currentMap = FileHandler::GetMap("LevelOne");
+
+	//Load next map using the current map name, the name of the next map that should be loaded and it's file path
+	nextMap = MapGenerator::LoadNextMap(currentMap, "LevelTwo", "Assets/Maps/LevelTwo.tmx");
 
 	enemy = new BaseEnemy();
 
@@ -234,6 +238,10 @@ void Game::Draw()
 	// INFO: Draw the current map if it exists
 	if (!currentMap.expired())
 		currentMap.lock()->Draw();
+
+	//Draw next map
+	if (!nextMap.expired())
+		nextMap.lock()->Draw();
 
 	// INFO: Call the Draw function for all game objects
 	GameObject::Handler::Draw();

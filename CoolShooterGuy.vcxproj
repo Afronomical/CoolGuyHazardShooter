@@ -142,6 +142,7 @@
     <ClCompile Include="Source\Animation\Animator.cpp" />
     <ClCompile Include="Source\Enemies\BaseEnemy.cpp" />
     <ClCompile Include="Source\Camera\Camera.cpp" />
+    <ClCompile Include="Source\MapGeneration\MapGenerator.cpp" />
     <ClCompile Include="Source\Particles\Emitter.cpp" />
     <ClCompile Include="Source\Map\Map.cpp" />
     <ClCompile Include="Source\Particles\Particle.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Source\Animation\Animator.h" />
     <ClInclude Include="Source\Enemies\BaseEnemy.h" />
     <ClInclude Include="Source\Camera\Camera.h" />
+    <ClInclude Include="Source\MapGeneration\MapGenerator.h" />
     <ClInclude Include="Source\Particles\Emitter.h" />
     <ClInclude Include="Source\Map\Map.h" />
     <ClInclude Include="Source\Layers\Layer.h" />

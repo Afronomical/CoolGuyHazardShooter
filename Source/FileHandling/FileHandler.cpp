@@ -101,6 +101,7 @@ bool FileHandler::ParseMap(const std::string& name, const std::string& filepath)
 			map->AddLayer(ParseTileLayer(i, tilesets, tileSize, numRows, numColumns));
 		}
 	}
+	map->SetDimensions(numRows, numColumns, tileSize);
 
 	// INFO: Add the map to the map library
 	mapLib[name] = std::move(map);
