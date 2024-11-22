@@ -54,3 +54,8 @@ void Player::Jump()
 {
 	Debug::Log("Player 1 has Jumped");
 }
+
+void Player::Kill()
+{
+	Debug::Log("Player has died");
+}

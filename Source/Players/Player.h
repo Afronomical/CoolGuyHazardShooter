@@ -4,8 +4,7 @@ class Player : public GameObject
 {
 public:
     Player(bool isPlayer1);      
-    Player();
-    ~Player();     
+    ~Player() override;     
 
     void Update(float deltaTime) override;
     void Draw() override;
@@ -14,6 +13,7 @@ public:
     void MoveLeft();
     void MoveRight();
     void Jump();
+    void Kill();
 
     Asset texture;
     float health = 3;
