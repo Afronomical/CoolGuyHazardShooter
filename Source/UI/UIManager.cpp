@@ -48,13 +48,15 @@ void UIManager::Render(SDL_Renderer* renderer)
 
 void UIManager::HandleInput(InputHandler& inputHandler)
 {
+	int menuOptionCount = static_cast<int>(menuOptions.size());
+
     if (inputHandler.GetKeyDown(SDLK_UP))
     {
-        selectedOption = (selectedOption - 1 + menuOptions.size()) % menuOptions.size();
+        selectedOption = (selectedOption - 1 + menuOptionCount) % menuOptionCount;
     }
     else if (inputHandler.GetKeyDown(SDLK_DOWN))
     {
-        selectedOption = (selectedOption + 1) % menuOptions.size();
+        selectedOption = (selectedOption + 1) % menuOptionCount;
     }
 
     // If the selected option is confirmed (e.g., Enter)

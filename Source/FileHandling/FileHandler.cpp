@@ -26,7 +26,7 @@ bool FileHandler::LoadMap(const std::string& name, const std::string& filepath)
 	return true;
 }
 
-std::weak_ptr<Map> FileHandler::GetMap(const std::string& name)
+std::weak_ptr<Map> FileHandler::InitialiseMap(const std::string& name)
 {
 	if (!IsMapLoaded(name))
 	{
@@ -48,7 +48,7 @@ std::weak_ptr<Map> FileHandler::GetMap(const std::string& name)
 	if (gameObjectLayer != nullptr)
 		GameObject::Handler::SetMapGameObjectLayer(gameObjectLayer);
 
-	return IsMapLoaded(name) ? mapLib[name] : nullptr;
+	return mapLib[name];
 }
 
 bool FileHandler::ParseMap(const std::string& name, const std::string& filepath)

@@ -6,21 +6,18 @@
 #include "../Components/Transform.h"
 #include "../Collision/BoxCollider.h"
 #include "../Input/InputHandler.h"
+#include "../Debugging/Debug.h"
 
-
-class Players
+class WallEnemy :  public GameObject
 {
+
 public:
-	Players();
-	~Players();
+	WallEnemy();
+	~WallEnemy();
 
+	virtual void Update(float deltaTime) override;
+	virtual void Draw() override;
 
-	void MoveLeft();
-	void MoveRight();
-	void Jump();
-	void Interact();
-
-	bool playerIsDead;
-	float playersSpeed;
+	Asset wallTexture;
 };
 

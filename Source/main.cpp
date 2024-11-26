@@ -13,6 +13,7 @@ int main(int argc, char* argv[])
 	srand(unsigned int(time(NULL)));
 
 	Game game("Cool Guy Hazard Shooter", Vector2(800, 640));
+	game.Run();
 
     return 0;
 }
