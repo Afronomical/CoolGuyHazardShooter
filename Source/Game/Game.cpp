@@ -177,7 +177,7 @@ bool Game::InitialiseGame()
 	}
 
 	// INFO: Set the current map
-	currentMap = FileHandler::GetMap("LevelOne");
+	currentMap = FileHandler::InitialiseMap("LevelOne");
 
 	//Load next map using the current map name, the name of the next map that should be loaded and it's file path
 	nextMap = MapGenerator::LoadNextMap(currentMap, "LevelTwo", "Assets/Maps/LevelTwo.tmx");

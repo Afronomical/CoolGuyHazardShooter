@@ -16,7 +16,7 @@ TileLayer::TileLayer(int _tileSize, int _numRows, int _numColumns, const std::ve
 	}
 }
 
-void TileLayer::Draw()
+void TileLayer::Draw(const Vector2& position)
 {
 	for (size_t mapRow = 0; mapRow < numRows; mapRow++)
 	{
@@ -59,7 +59,8 @@ void TileLayer::Draw()
 			}
 
 			// INFO: Draw the tile
-			Vector2 tilePos = Vector2((float)(mapColumn * selectedTileset.tileSize), (float)(mapRow * selectedTileset.tileSize));
+			//add position so that it wont be drawn at 0,0
+			Vector2 tilePos = position + Vector2((float)(mapColumn * selectedTileset.tileSize), (float)(mapRow * selectedTileset.tileSize));
 
 			AssetHandler::DrawTile(selectedTileset.texture, tilePos, selectedTileset.tileSize, tileRow, tileColumn);
 		}

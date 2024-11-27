@@ -34,7 +34,7 @@ public:
 	TileLayer(int _tileSize, int _numRows, int _numColumns, const std::vector<std::vector<int>>& _tilemap, const std::vector<Tileset>& _tilesets);
 	~TileLayer() override {};
 
-	virtual void Draw() override;
+	virtual void Draw(const Vector2& position) override;
 
 	inline int GetTileSize() const { return tileSize; }
 	inline int GetNumRows() const { return numRows; }

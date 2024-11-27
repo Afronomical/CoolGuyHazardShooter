@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "../Layers/Layer.h"
+#include "../Vector2/Vector2.h"
 
 class Map
 {
@@ -28,9 +29,14 @@ public:
 	int GetColumns() const { return numColumns; }
 	int GetTileSize() const { return tileSize; }
 
+	Vector2 GetPosition() const { return position; }
+	void SetPosition(const Vector2& newPosition) { position = newPosition; }
+
+
 private:
 	std::vector<std::unique_ptr<Layer>> mapLayers;
 
+	Vector2 position;
 	int numRows;
 	int numColumns;
 	int tileSize;

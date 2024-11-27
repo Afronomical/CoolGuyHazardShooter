@@ -34,6 +34,9 @@ std::weak_ptr<Map> FileHandler::InitialiseMap(const std::string& name)
 		return std::weak_ptr<Map>{};
 	}
 
+	//Set default position
+	mapLib[name]->SetPosition({ 0, 0 });
+
 	// INFO: Get the first layer of the map and dynamically cast it to a TileLayer
 	TileLayer* collisionLayer = dynamic_cast<TileLayer*>(mapLib[name]->GetLayer(0));
 	

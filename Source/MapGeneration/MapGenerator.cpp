@@ -12,15 +12,26 @@ std::weak_ptr<Map> MapGenerator::LoadNextMap(const std::weak_ptr<Map> currentMap
         return {};
     }
 
-    std::weak_ptr<Map> newMap = FileHandler::GetMap(newMapName);
+    std::weak_ptr<Map> newMap = FileHandler::InitialiseMap(newMapName);
+    auto newMapShared = newMap.lock();
 
-    auto currentMapShared = currentMap.lock();
+    // Default position
+    Vector2 newMapPosition{ 0, 0 };
 
-    int currentMapWidth = currentMapShared->GetColumns() * currentMapShared->GetTileSize();
-    int currentMapHeight = currentMapShared->GetRows() * currentMapShared->GetTileSize();
+    if (auto currentMapShared = currentMap.lock()) {
+        // Calculate new map position based on current map
+        int currentMapWidth = currentMapShared->GetColumns() * currentMapShared->GetTileSize();
+        int currentMapHeight = currentMapShared->GetRows() * currentMapShared->GetTileSize();
 
-    int newMapX = currentMapWidth;
-    int newMapY = 0;
+        // Position the new map to the right of the current map
+        Vector2 currentMapPosition = currentMapShared->GetPosition();
+        newMapPosition = { currentMapPosition.X + currentMapWidth, currentMapPosition.Y};
+    }
+
+
+    newMapShared->SetPosition(newMapPosition);
 
     return newMap;
-};
+}
+
+
