@@ -6,6 +6,7 @@
 #include "../GameObject/GameObject.h"
 #include "../Components/Transform.h"
 #include "../Collision/BoxCollider.h"
+#include "../Collision/MapCollisionResult.h"
 #include "../Animation/Animator.h"
 
 class BaseEnemy : public GameObject
@@ -30,6 +31,8 @@ protected:
 	float moveSpeed = 25.0f;
 
 	bool walkingLeft;
+
+	void CheckMapCollisions();
 };
 
 /*
