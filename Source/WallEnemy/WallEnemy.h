@@ -19,5 +19,7 @@ public:
 	virtual void Draw() override;
 
 	Asset wallTexture;
+
+	float wallMoveSpeed = 25;
 };
 
