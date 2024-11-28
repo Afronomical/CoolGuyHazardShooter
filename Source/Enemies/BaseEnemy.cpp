@@ -2,10 +2,12 @@
 
 BaseEnemy::BaseEnemy() : GameObject()
 {
-	collider = AddComponent<BoxCollider>(this);
+	collider = AddComponent<BoxCollider>(this, true);
+	collider.lock()->SetOnCollisionEnter(std::bind(&BaseEnemy::PlayerColliderOnCollisionEnter, this, std::placeholders::_1));
 	texture = AssetHandler::LoadTexture("Assets/Animations/sonic.png");
 	transform.lock()->position = Vector2(400, 370);
 	walkingLeft = false;
+	alwaysUpdate = true;
 
 	/*anim;
 	anim.SetAnimatorValues
@@ -28,6 +30,8 @@ BaseEnemy::~BaseEnemy()
 
 void BaseEnemy::Update(float deltaTime)
 {
+	CheckMapCollisions();
+
 	int moveDir = walkingLeft ? -1 : 1;
 
 	transform.lock()->position.X += moveSpeed * moveDir * deltaTime;
@@ -45,12 +49,36 @@ void BaseEnemy::Draw()
 		1,  // Row
 		1,  // Frame
 		1,  // Scroll Speed
-		1,  // Scale,
+		health,  // Scale,
 		walkingLeft ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE  // Flip
 		);
 
 	//anim.DrawCurrentFrame();
 }
+
+
+void BaseEnemy::TakeDamage(int damage)
+{
+	if (health > 0)
+		health -= damage;  // Hurt the enemy
+
+	if (health <= 0)  // Death
+	{
+		//emitter.lock()->EmitParticles(  // Death particles
+		//	3,
+		//	3,
+		//	texture,
+		//	transform.lock()->position
+		//);
+	}
+}
+
+
+void BaseEnemy::PlayerColliderOnCollisionEnter(std::shared_ptr<Collider> other)
+{
+
+}
+
 
 void BaseEnemy::CheckMapCollisions()
 {

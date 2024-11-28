@@ -8,6 +8,7 @@
 #include "../Collision/BoxCollider.h"
 #include "../Collision/MapCollisionResult.h"
 #include "../Animation/Animator.h"
+#include "../Particles/Emitter.h"
 
 class BaseEnemy : public GameObject
 {
@@ -18,6 +19,9 @@ public:
 	virtual void Update(float deltaTime) override;
 	virtual void Draw() override;
 
+	void TakeDamage(int damage = 1);
+	void PlayerColliderOnCollisionEnter(std::shared_ptr<Collider> other);
+
 protected:
 	float health = 1;
 
@@ -26,9 +30,8 @@ protected:
 
 	Asset texture;
 	std::weak_ptr<BoxCollider> collider;
-	//aAnimator anim;
 
-	float moveSpeed = 25.0f;
+	float moveSpeed = 10.0f;
 
 	bool walkingLeft;
 
