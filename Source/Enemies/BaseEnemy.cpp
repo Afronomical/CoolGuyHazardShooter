@@ -3,9 +3,12 @@
 BaseEnemy::BaseEnemy() : GameObject()
 {
 	collider = AddComponent<BoxCollider>(this);
+	emitter = AddComponent<Emitter>();
 	texture = AssetHandler::LoadTexture("Assets/Animations/sonic.png");
 	transform.lock()->position = Vector2(400, 370);
 	walkingLeft = false;
+
+	//InputHandler::BindKeyToAction(SDL_SCANCODE_B, BindData(std::bind(&BaseEnemy::TakeDamage, this), ButtonState::Pressed));
 
 	/*anim;
 	anim.SetAnimatorValues
@@ -28,6 +31,8 @@ BaseEnemy::~BaseEnemy()
 
 void BaseEnemy::Update(float deltaTime)
 {
+	CheckMapCollisions();
+
 	int moveDir = walkingLeft ? -1 : 1;
 
 	transform.lock()->position.X += moveSpeed * moveDir * deltaTime;
@@ -51,6 +56,23 @@ void BaseEnemy::Draw()
 
 	//anim.DrawCurrentFrame();
 }
+
+
+void BaseEnemy::TakeDamage(int damage = 1)
+{
+	health -= damage;  // Hurt the enemy
+
+	if (health <= 0)  // Death
+	{
+		//emitter.lock()->EmitParticles(  // Death particles
+		//	3,
+		//	3,
+		//	texture,
+		//	transform.lock()->position
+		//);
+	}
+}
+
 
 void BaseEnemy::CheckMapCollisions()
 {
