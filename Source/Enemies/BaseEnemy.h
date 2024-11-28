@@ -9,7 +9,6 @@
 #include "../Collision/MapCollisionResult.h"
 #include "../Animation/Animator.h"
 #include "../Particles/Emitter.h"
-#include "../Input/InputHandler.h"
 
 class BaseEnemy : public GameObject
 {
@@ -21,6 +20,7 @@ public:
 	virtual void Draw() override;
 
 	void TakeDamage(int damage = 1);
+	void PlayerColliderOnCollisionEnter(std::shared_ptr<Collider> other);
 
 protected:
 	float health = 1;
@@ -30,9 +30,8 @@ protected:
 
 	Asset texture;
 	std::weak_ptr<BoxCollider> collider;
-	std::weak_ptr<Emitter> emitter;
 
-	float moveSpeed = 25.0f;
+	float moveSpeed = 10.0f;
 
 	bool walkingLeft;
 

@@ -2,13 +2,12 @@
 
 BaseEnemy::BaseEnemy() : GameObject()
 {
-	collider = AddComponent<BoxCollider>(this);
-	emitter = AddComponent<Emitter>();
+	collider = AddComponent<BoxCollider>(this, true);
+	collider.lock()->SetOnCollisionEnter(std::bind(&BaseEnemy::PlayerColliderOnCollisionEnter, this, std::placeholders::_1));
 	texture = AssetHandler::LoadTexture("Assets/Animations/sonic.png");
 	transform.lock()->position = Vector2(400, 370);
 	walkingLeft = false;
-
-	//InputHandler::BindKeyToAction(SDL_SCANCODE_B, BindData(std::bind(&BaseEnemy::TakeDamage, this), ButtonState::Pressed));
+	alwaysUpdate = true;
 
 	/*anim;
 	anim.SetAnimatorValues
@@ -50,7 +49,7 @@ void BaseEnemy::Draw()
 		1,  // Row
 		1,  // Frame
 		1,  // Scroll Speed
-		1,  // Scale,
+		health,  // Scale,
 		walkingLeft ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE  // Flip
 		);
 
@@ -58,9 +57,10 @@ void BaseEnemy::Draw()
 }
 
 
-void BaseEnemy::TakeDamage(int damage = 1)
+void BaseEnemy::TakeDamage(int damage)
 {
-	health -= damage;  // Hurt the enemy
+	if (health > 0)
+		health -= damage;  // Hurt the enemy
 
 	if (health <= 0)  // Death
 	{
@@ -71,6 +71,12 @@ void BaseEnemy::TakeDamage(int damage = 1)
 		//	transform.lock()->position
 		//);
 	}
+}
+
+
+void BaseEnemy::PlayerColliderOnCollisionEnter(std::shared_ptr<Collider> other)
+{
+
 }
 
 
