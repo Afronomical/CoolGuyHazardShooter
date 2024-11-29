@@ -20,6 +20,7 @@
 #include "../Time/Time.h"
 #include "../UI/UIManager.h"
 #include "../MapGeneration/MapGenerator.h"
+#include "../WallEnemy/WallEnemy.h"
 
 
 BaseEnemy* walkingEnemy;
@@ -27,6 +28,8 @@ BaseEnemy* jumpingEnemy;
 
 Player* player1;
 Player* player2;
+
+WallEnemy* wallEnemy;
 
 std::shared_ptr<UIManager> uiManager;
 std::shared_ptr<AssetHandler> assetHandler;
@@ -194,9 +197,11 @@ bool Game::InitialiseGame()
 	jumpingEnemy = new JumpingEnemy();
 
 
-	enemy = new BaseEnemy();
+	//enemy = new BaseEnemy();
 	player1 = new Player(true);
 	player2 = new Player(false);
+
+	wallEnemy = new WallEnemy();
 
 	// INFO: Set the game to be running
 	isRunning = true;
