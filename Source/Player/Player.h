@@ -1,6 +1,9 @@
 #pragma once
 
 #include "../GameObject/GameObject.h"
+#include "../Physics/Rigidbody.h"
+#include "../Collision/Collider.h"
+#include "../Enemies/BaseEnemy.h"
 
 class Player : public GameObject
 {
@@ -16,14 +19,28 @@ public:
     void MoveRight();
     void Jump();
     void Kill();
-
+    void SlowDown();
+    //void OnCollisionEnter(Collider* other);
     // INFO: Temporary variable delete whenever
     bool isPlayer1 = false;
 
     Asset texture;
+    std::weak_ptr<Rigidbody> playerRigidBody;
+    std::weak_ptr<BoxCollider> playerCollider;
+
     float health = 3;
-    float playerMoveSpeed = 25.0f;
-    float deltaTimeRef = 0.0f;
+    float playerMoveSpeed = 50.0f;
+    float playerJumpForce = 100.0f;
+    float playerJumpHeightLimit = playerJumpForce * 100.0f;
     bool isPlayerDead = false;
+
+private:
+    float deltaTimeRef = 0.0f;
+    float slowedAmount = 25.0f;
+    float fallSpeed = 100.0f;
+    bool isJumping = false;
+    bool isGrounded = true;
+    BaseEnemy* enemy;
+    std::weak_ptr<BoxCollider> enemyColliderRef;
 };
 

@@ -16,12 +16,17 @@
 #include "../GameObject/GameObject.h"
 #include "../Input/InputHandler.h"
 #include "../Map/Map.h"
+#include "../Player/Player.h"
 #include "../Time/Time.h"
 #include "../UI/UIManager.h"
 #include "../MapGeneration/MapGenerator.h"
 
+
 BaseEnemy* walkingEnemy;
 BaseEnemy* jumpingEnemy;
+
+Player* player1;
+Player* player2;
 
 std::shared_ptr<UIManager> uiManager;
 std::shared_ptr<AssetHandler> assetHandler;
@@ -184,8 +189,14 @@ bool Game::InitialiseGame()
 	//Load next map using the current map name, the name of the next map that should be loaded and it's file path
 	nextMap = MapGenerator::LoadNextMap(currentMap, "LevelTwo", "Assets/Maps/LevelTwo.tmx");
 
+
 	walkingEnemy = new WalkingEnemy();
 	jumpingEnemy = new JumpingEnemy();
+
+
+	enemy = new BaseEnemy();
+	player1 = new Player(true);
+	player2 = new Player(false);
 
 	// INFO: Set the game to be running
 	isRunning = true;

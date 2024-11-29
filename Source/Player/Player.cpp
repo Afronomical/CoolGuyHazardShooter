@@ -4,15 +4,18 @@
 #include "../Components/Transform.h"
 #include "../Input/InputHandler.h"
 #include "../Debugging/Debug.h"
-#include "../Collision/Collider.h"
+
 #include "../Collision/MapCollisionResult.h"
+
 
 Player::Player(bool isPlayer1)
 {
 	//GameObject::Handler::RegisterGameObject(this);
 	texture = AssetHandler::LoadTexture("Assets/Animations/sonic.png");
-	transform.lock()->position = Vector2(300, 360);
+	playerRigidBody = AddComponent<Rigidbody>(this);
+	playerCollider = AddComponent<BoxCollider>(this);
 
+	transform.lock()->position = Vector2(300, 200);
 	// INFO: Temporary bool to ensure only player 1 moves with the W and S keys in the update function
 	this->isPlayer1 = isPlayer1;
 
@@ -35,8 +38,17 @@ Player::~Player()
 
 }
 
+/*void Player::Start()
+{
+	enemyColliderRef = enemy->GetComponent<BoxCollider>();
+}*/
+
 void Player::Update(float deltaTime)
 {
+	playerRigidBody.lock()->Update(deltaTime);
+	
+	if(!isGrounded) transform.lock()->position.Y += playerRigidBody.lock()->GetGravity() * deltaTime * fallSpeed;
+	
 	deltaTimeRef = deltaTime;
 
 	// INFO: Check if the player has collided with the map and log extra detailed results
@@ -55,20 +67,11 @@ void Player::Update(float deltaTime)
 			Debug::Log("There is ledge on left");
 		}
 	}
+	
+	if (transform.lock()->position.Y >= 360) isGrounded = true;
+	else isGrounded = false;
 
-	// INFO: Temporary logic to move player down to floor tiles to test ledge detection
-	if (isPlayer1)
-	{
-		if (InputHandler::GetKey(SDL_SCANCODE_W))
-		{
-			transform.lock()->position.Y -= playerMoveSpeed * deltaTime;
-		}
-
-		if (InputHandler::GetKey(SDL_SCANCODE_S))
-		{
-			transform.lock()->position.Y += playerMoveSpeed * deltaTime;
-		}
-	}
+	if(isGrounded && !isJumping) transform.lock()->position.Y = 360;
 }
 
 void Player::Draw()
@@ -93,10 +96,36 @@ void Player::MoveRight()
 
 void Player::Jump()
 {
-	Debug::Log("Player 1 has Jumped");
+	if (isGrounded) 
+	{
+		//isGrounded = false;
+		//isJumping = true;
+		//playerRigidBody.lock()->AddForce(0, playerJumpForce, ForceMode::Impulse);
+		//transform.lock()->position.Y -= playerJumpForce * deltaTimeRef;
+	}
 }
 
 void Player::Kill()
 {
 	Debug::Log("Player has died");
+	Destroy();
 }
+
+void Player::SlowDown()
+{
+	playerMoveSpeed -= slowedAmount;
+	playerJumpForce -= slowedAmount;
+}
+
+/*void Player::OnCollisionEnter(Collider* other)
+{
+	if (other == enemyColliderRef) 
+	{
+
+	}
+}*/
+
+
+
+
+
