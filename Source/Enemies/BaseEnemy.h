@@ -9,6 +9,7 @@
 #include "../Collision/MapCollisionResult.h"
 #include "../Animation/Animator.h"
 #include "../Particles/Emitter.h"
+#include "../Player/Player.h"
 
 class BaseEnemy : public GameObject
 {

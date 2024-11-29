@@ -29,6 +29,7 @@ void JumpingEnemy::Update(float deltaTime)
 
 	rb.lock()->Update(deltaTime);
 	transform.lock()->Translate(0.0f, rb.lock()->GetDisplacement().Y);
+	collider.lock()->UpdateCollider(transform.lock()->position);
 }
 
 void JumpingEnemy::CheckMapCollisions()

@@ -21,6 +21,8 @@ void WalkingEnemy::Update(float deltaTime)
 	transform.lock()->position.X += moveSpeed * moveDir * deltaTime;
 
 	flipSprite = walkingLeft;
+
+	collider.lock()->UpdateCollider(transform.lock()->position);
 }
 
 void WalkingEnemy::CheckMapCollisions()
