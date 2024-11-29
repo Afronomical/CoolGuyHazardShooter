@@ -193,8 +193,6 @@ bool Game::InitialiseGame()
 	walkingEnemy = new WalkingEnemy();
 	jumpingEnemy = new JumpingEnemy();
 
-
-	enemy = new BaseEnemy();
 	player1 = new Player(true);
 	player2 = new Player(false);
 

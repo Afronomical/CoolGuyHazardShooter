@@ -30,8 +30,8 @@ public:
 
     float health = 3;
     float playerMoveSpeed = 50.0f;
-    float playerJumpForce = 100.0f;
-    float playerJumpHeightLimit = playerJumpForce * 100.0f;
+    float playerJumpForce = 500.0f;
+    float playerJumpHeightLimit = 250;
     bool isPlayerDead = false;
 
 private:
@@ -40,7 +40,5 @@ private:
     float fallSpeed = 100.0f;
     bool isJumping = false;
     bool isGrounded = true;
-    BaseEnemy* enemy;
-    std::weak_ptr<BoxCollider> enemyColliderRef;
 };
 

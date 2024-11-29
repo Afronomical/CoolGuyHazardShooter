@@ -15,7 +15,8 @@ Player::Player(bool isPlayer1)
 	playerRigidBody = AddComponent<Rigidbody>(this);
 	playerCollider = AddComponent<BoxCollider>(this);
 
-	transform.lock()->position = Vector2(300, 200);
+	transform.lock()->position = Vector2(300, 360);
+	
 	// INFO: Temporary bool to ensure only player 1 moves with the W and S keys in the update function
 	this->isPlayer1 = isPlayer1;
 
@@ -46,8 +47,9 @@ Player::~Player()
 void Player::Update(float deltaTime)
 {
 	playerRigidBody.lock()->Update(deltaTime);
-	
-	if(!isGrounded) transform.lock()->position.Y += playerRigidBody.lock()->GetGravity() * deltaTime * fallSpeed;
+	//transform.lock()->Translate(0.0f, -playerRigidBody.lock()->GetDisplacement().Y);
+
+	//if(!isGrounded) transform.lock()->position.Y += playerRigidBody.lock()->GetGravity() * deltaTime * fallSpeed;
 	
 	deltaTimeRef = deltaTime;
 
@@ -68,10 +70,18 @@ void Player::Update(float deltaTime)
 		}
 	}
 	
-	if (transform.lock()->position.Y >= 360) isGrounded = true;
-	else isGrounded = false;
+	/*if (transform.lock()->position.Y >= 360)
+	{
+		transform.lock()->position.Y = 360;
+		playerRigidBody.lock()->SetVelocity(0);
+	}
 
-	if(isGrounded && !isJumping) transform.lock()->position.Y = 360;
+	if (transform.lock()->position.Y <= playerJumpHeightLimit)
+	{
+		playerRigidBody.lock()->SetVelocity(0);
+		playerRigidBody.lock()->AddForce(0, 0, ForceMode::None);
+	}*/
+
 }
 
 void Player::Draw()
