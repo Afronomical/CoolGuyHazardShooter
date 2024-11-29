@@ -14,6 +14,8 @@ Player::Player(bool isPlayer1)
 	texture = AssetHandler::LoadTexture("Assets/Animations/sonic.png");
 	playerRigidBody = AddComponent<Rigidbody>(this);
 	playerCollider = AddComponent<BoxCollider>(this);
+	playerCollider.lock()->SetWidth(5);
+	playerCollider.lock()->SetHeight(5);
 
 	transform.lock()->position = Vector2(300, 360);
 	
@@ -82,6 +84,7 @@ void Player::Update(float deltaTime)
 		playerRigidBody.lock()->AddForce(0, 0, ForceMode::None);
 	}*/
 
+	playerCollider.lock()->UpdateCollider(transform.lock()->position);
 }
 
 void Player::Draw()
@@ -91,7 +94,7 @@ void Player::Draw()
 		transform.lock()->position,
 		transform.lock()->size.X,
 		transform.lock()->size.Y,
-		1, 1);
+		1, 0);
 }
 
 void Player::MoveLeft()
