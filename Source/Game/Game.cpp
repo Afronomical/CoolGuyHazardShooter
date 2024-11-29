@@ -21,6 +21,7 @@
 #include "../UI/UIManager.h"
 #include "../MapGeneration/MapGenerator.h"
 #include "../WallEnemy/WallEnemy.h"
+#include "../EnvironmentHazard/EnvironmentHazards.h"
 
 
 BaseEnemy* walkingEnemy;
@@ -30,6 +31,8 @@ Player* player1;
 Player* player2;
 
 WallEnemy* wallEnemy;
+EnvironemtHazard* AcidPool;
+
 
 std::shared_ptr<UIManager> uiManager;
 std::shared_ptr<AssetHandler> assetHandler;
@@ -200,6 +203,8 @@ bool Game::InitialiseGame()
 	player2 = new Player(false);
 
 	wallEnemy = new WallEnemy();
+	AcidPool = new EnvironemtHazard();
+
 
 	// INFO: Set the game to be running
 	isRunning = true;
