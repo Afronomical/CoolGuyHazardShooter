@@ -12,9 +12,12 @@ private:
 
 	int radius;
 	int particleCount;
-	Particle* particles[MAX_PARTICLES];
+	std::vector<Particle*> particles;//[MAX_PARTICLES];
 
 public:
+
+	//Emitter() 
+	using Component::Component;
 
 	/// <summary>
 	/// Spawns, moves and removes a single particle
@@ -25,6 +28,6 @@ public:
 	/// <param name="particleCount"> Max amount of particles </param>
 	/// <param name="texture"> What each particle looks like </param>
 	/// <param name="position"> Origin point of particles </param>
-	void EmitParticles(int range, float duration, const Asset& texture, const Vector2& position);
+	void EmitParticles(int range, float duration, int particleCount, const Asset& texture, const Vector2& position);
 };
 

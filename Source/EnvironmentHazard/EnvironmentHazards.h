@@ -26,4 +26,5 @@ protected:
 	Asset AcidPoolTexture;
 	std::weak_ptr<Rigidbody> AcidPoolRigidBody;
 	std::weak_ptr<BoxCollider> AcidPoolCollider;
+	std::weak_ptr<Emitter> acidParticles;
 };
