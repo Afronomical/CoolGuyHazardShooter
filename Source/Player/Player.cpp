@@ -17,7 +17,7 @@ Player::Player(bool isPlayer1)
 	playerCollider.lock()->SetWidth(5);
 	playerCollider.lock()->SetHeight(5);
 
-	transform.lock()->position = Vector2(300, 360);
+	
 	
 	// INFO: Temporary bool to ensure only player 1 moves with the W and S keys in the update function
 	this->isPlayer1 = isPlayer1;
@@ -27,12 +27,16 @@ Player::Player(bool isPlayer1)
 		InputHandler::BindKeyToAction(SDL_SCANCODE_A, BindData(std::bind(&Player::MoveLeft, this), ButtonState::Held));
 		InputHandler::BindKeyToAction(SDL_SCANCODE_D, BindData(std::bind(&Player::MoveRight, this), ButtonState::Held));
 		InputHandler::BindKeyToAction(SDL_SCANCODE_W, BindData(std::bind(&Player::Jump, this), ButtonState::Pressed));
+
+		transform.lock()->position = Vector2(300, 360);
 	}
 	else
 	{
 		InputHandler::BindKeyToAction(SDL_SCANCODE_LEFT, BindData(std::bind(&Player::MoveLeft, this), ButtonState::Held));
 		InputHandler::BindKeyToAction(SDL_SCANCODE_RIGHT, BindData(std::bind(&Player::MoveRight, this), ButtonState::Held));
 		InputHandler::BindKeyToAction(SDL_SCANCODE_UP, BindData(std::bind(&Player::Jump, this), ButtonState::Pressed));
+
+		transform.lock()->position = Vector2(200, 360);
 	}
 }
 
@@ -83,7 +87,7 @@ void Player::Update(float deltaTime)
 		playerRigidBody.lock()->SetVelocity(0);
 		playerRigidBody.lock()->AddForce(0, 0, ForceMode::None);
 	}*/
-
+	Debug::DrawColliderOutline(playerCollider.lock());
 	playerCollider.lock()->UpdateCollider(transform.lock()->position);
 }
 

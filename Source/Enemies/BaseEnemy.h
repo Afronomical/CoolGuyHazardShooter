@@ -10,6 +10,7 @@
 #include "../Animation/Animator.h"
 #include "../Particles/Emitter.h"
 #include "../Player/Player.h"
+#include "../Debugging/Debug.h"
 
 class BaseEnemy : public GameObject
 {
@@ -20,7 +21,7 @@ public:
 	virtual void Draw() override;
 
 	void TakeDamage(int damage = 1);
-	void PlayerColliderOnCollisionEnter(std::shared_ptr<Collider> other);
+	virtual void OnCollisionStay(std::shared_ptr<Collider> other) override;
 
 protected:
 	float health = 1;

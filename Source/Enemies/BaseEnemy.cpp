@@ -2,10 +2,9 @@
 
 BaseEnemy::BaseEnemy() : GameObject()
 {
-	collider = AddComponent<BoxCollider>(this, true);
-	collider.lock()->SetOnCollisionEnter(std::bind(&BaseEnemy::PlayerColliderOnCollisionEnter, this, std::placeholders::_1));
-	collider.lock()->SetWidth(5);
-	collider.lock()->SetHeight(5);
+	collider = AddComponent<BoxCollider>(this);
+	collider.lock()->SetWidth(50);
+	collider.lock()->SetHeight(50);
 
 	/*anim;
 	anim.SetAnimatorValues
@@ -29,6 +28,7 @@ BaseEnemy::~BaseEnemy()
 
 void BaseEnemy::Draw()
 {
+	Debug::DrawColliderOutline(collider.lock(), Color::Orange);
 	AssetHandler::DrawAnimation(
 		texture,  // Texture
 		transform.lock()->position,  // Position
@@ -61,8 +61,7 @@ void BaseEnemy::TakeDamage(int damage)
 	}
 }
 
-
-void BaseEnemy::PlayerColliderOnCollisionEnter(std::shared_ptr<Collider> other)
+void BaseEnemy::OnCollisionStay(std::shared_ptr<Collider> other)
 {
 	Player* p = static_cast<Player*>(other->GetGameObject());
 	if (p != nullptr)
