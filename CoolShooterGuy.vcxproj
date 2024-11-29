@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Enemies\JumpingEnemy.cpp" />
     <ClCompile Include="Source\Externals\TinyXML\tinystr.cpp" />
     <ClCompile Include="Source\Externals\TinyXML\tinyxml.cpp" />
     <ClCompile Include="Source\Externals\TinyXML\tinyxmlerror.cpp" />
@@ -167,8 +168,10 @@
     <ClCompile Include="Source\Time\Time.cpp" />
     <ClCompile Include="Source\Layers\TileLayer.cpp" />
     <ClCompile Include="Source\WallEnemy\WallEnemy.cpp" />
+    <ClCompile Include="Source\Enemies\WalkingEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Enemies\JumpingEnemy.h" />
     <ClInclude Include="Source\Collision\MapCollisionResult.h" />
     <ClInclude Include="Source\Externals\TinyXML\tinystr.h" />
     <ClInclude Include="Source\Externals\TinyXML\tinyxml.h" />
@@ -204,6 +207,7 @@
     <ClInclude Include="Source\Time\Time.h" />
     <ClInclude Include="Source\Layers\TileLayer.h" />
     <ClInclude Include="Source\WallEnemy\WallEnemy.h" />
+    <ClInclude Include="Source\Enemies\WalkingEnemy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

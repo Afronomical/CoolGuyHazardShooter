@@ -10,7 +10,7 @@
 #include "../Collision/Collider.h"
 #include "../Debugging/Debug.h"
 #include "../Debugging/MemoryLeakDetector.h"
-#include "../Enemies/BaseEnemy.h"
+#include "../Enemies/WalkingEnemy.h"
 #include "../FileHandling/FileHandler.h"
 #include "../GameObject/GameObject.h"
 #include "../Input/InputHandler.h"
@@ -19,7 +19,7 @@
 #include "../UI/UIManager.h"
 #include "../MapGeneration/MapGenerator.h"
 
-BaseEnemy* enemy;
+BaseEnemy* walkingEnemy;
 
 std::shared_ptr<UIManager> uiManager;
 std::shared_ptr<AssetHandler> assetHandler;
@@ -182,7 +182,7 @@ bool Game::InitialiseGame()
 	//Load next map using the current map name, the name of the next map that should be loaded and it's file path
 	nextMap = MapGenerator::LoadNextMap(currentMap, "LevelTwo", "Assets/Maps/LevelTwo.tmx");
 
-	enemy = new BaseEnemy();
+	walkingEnemy = new WalkingEnemy();
 
 	// INFO: Set the game to be running
 	isRunning = true;

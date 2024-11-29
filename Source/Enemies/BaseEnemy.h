@@ -16,7 +16,6 @@ public:
 	BaseEnemy();
 	~BaseEnemy() override;
 
-	virtual void Update(float deltaTime) override;
 	virtual void Draw() override;
 
 	void TakeDamage(int damage = 1);
@@ -27,23 +26,8 @@ protected:
 
 	float animSpeed = 1;
 	Vector2 animFrames = { 1, 1 };
+	bool flipSprite;
 
 	Asset texture;
 	std::weak_ptr<BoxCollider> collider;
-
-	float moveSpeed = 10.0f;
-
-	bool walkingLeft;
-
-	void CheckMapCollisions();
 };
-
-/*
-Move x
-check x col
-if true then revert x
-
-move y
-check y col
-if true then revert y
-*/
