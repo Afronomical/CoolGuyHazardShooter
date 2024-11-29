@@ -35,7 +35,7 @@ void BaseEnemy::Draw()
 		1,  // Row
 		1,  // Frame
 		1,  // Scroll Speed
-		health,  // Scale,
+		health,  // Scale  <---- TEMPORARY, CHANGE THIS
 		flipSprite ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE  // Flip
 		);
 

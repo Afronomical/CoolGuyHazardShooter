@@ -11,6 +11,7 @@
 #include "../Debugging/Debug.h"
 #include "../Debugging/MemoryLeakDetector.h"
 #include "../Enemies/WalkingEnemy.h"
+#include "../Enemies/JumpingEnemy.h"
 #include "../FileHandling/FileHandler.h"
 #include "../GameObject/GameObject.h"
 #include "../Input/InputHandler.h"
@@ -20,6 +21,7 @@
 #include "../MapGeneration/MapGenerator.h"
 
 BaseEnemy* walkingEnemy;
+BaseEnemy* jumpingEnemy;
 
 std::shared_ptr<UIManager> uiManager;
 std::shared_ptr<AssetHandler> assetHandler;
@@ -183,6 +185,7 @@ bool Game::InitialiseGame()
 	nextMap = MapGenerator::LoadNextMap(currentMap, "LevelTwo", "Assets/Maps/LevelTwo.tmx");
 
 	walkingEnemy = new WalkingEnemy();
+	jumpingEnemy = new JumpingEnemy();
 
 	// INFO: Set the game to be running
 	isRunning = true;

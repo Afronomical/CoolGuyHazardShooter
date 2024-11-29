@@ -1,6 +1,7 @@
 #pragma once
 
 #include "..\Enemies\BaseEnemy.h"
+#include "..\Physics\Rigidbody.h"
 
 class JumpingEnemy : public BaseEnemy
 {
@@ -11,7 +12,12 @@ public:
 	virtual void Update(float deltaTime) override;
 
 protected:
-	float jumpHeight = 10.0f;
-
+	std::weak_ptr<Rigidbody> rb;
 	void CheckMapCollisions();
+
+private:
+	float mass = 50.0f;
+	float jumpHeight = 50000.0f;
+	float timeBetweenJumps = 1.0f;
+	float jumpTimer;
 };
