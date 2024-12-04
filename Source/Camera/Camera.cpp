@@ -4,6 +4,12 @@ Camera::Camera(int width, int height) : viewport({ 0, 0, width, height }), viewp
 {
 }
 
+Camera::Camera(int width, int height, ECameraMode CamMode) : viewport({ 0, 0, width, height }), viewportExtension({ 50, 50 })
+{
+
+	camMode = CamMode;
+}
+
 bool Camera::IsInView(const SDL_Rect& rect) const
 {
 	// INFO: Check using AABB between the camera viewport and the rectangle
@@ -30,4 +36,11 @@ bool Camera::IsInView(const SDL_Rect& rect) const
 
 	// INFO: The rectangle is not within the viewport
 	return false;
+}
+
+void Camera::SetTarget(std::weak_ptr<Transform>)
+{
+
+
+
 }
