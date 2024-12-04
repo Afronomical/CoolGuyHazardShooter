@@ -29,9 +29,25 @@
 //	}
 //}
 
-Particle::Particle(float lifeTime, float size, const Asset& texture, const Vector2& position)
-{
-	AssetHandler::DrawDynamic(texture, position, size, size);
-	SetLifetime(lifeTime);
+//Particle::Particle(float lifeTime, float size, const Asset& texture, const Vector2& position)
+//{
+//	//AssetHandler::DrawDynamic(texture, position, size, size);
+//	SetLifetime(lifeTime);
+//}
 
+Particle::Particle(float lifeTime) : GameObject()
+{
+	SetLifetime(lifeTime);
+}
+
+void Particle::Draw(const Asset& texture, const Vector2& position, float size)
+{
+	AssetHandler::DrawAnimation(
+		texture,  // Texture
+		position,  // Position
+		size,  // Width
+		size,  // Height
+		1,  // Row
+		1  // Frame
+	);
 }

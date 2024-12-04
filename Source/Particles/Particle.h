@@ -20,7 +20,10 @@ public:
 	using GameObject::GameObject;
 	~Particle() override {};
 
-	Particle(float lifeTime, float size, const Asset& texture, const Vector2& position);
+	//Particle(float lifeTime, float size, const Asset& texture, const Vector2& position);
+	Particle(float lifeTime);
+
+	void Draw(const Asset& texture, const Vector2& position, float size);
 
 	//Getters
 	float GetLifetime() const { return pLifeTime; };
