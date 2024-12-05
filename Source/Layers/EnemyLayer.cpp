@@ -38,6 +38,11 @@ void EnemyLayer::Init(int _tileSize, int _numRows, int _numColumns, const std::v
 	}
 }
 
+std::vector<GameObject>* EnemyLayer::GetEnemies()
+{
+	return &enemies;
+}
+
 //void EnemyLayer::Draw(const Vector2& position)
 //{
 //	for (size_t mapRow = 0; mapRow < numRows; mapRow++)

@@ -23,3 +23,15 @@ Layer* Map::GetLayer(int index)
 
 	return mapLayers[index].get();
 }
+
+std::vector<GameObject>* Map::GetEnemies()
+{
+	return mapEnemies->GetEnemies();
+}
+
+void Map::AddEnemyLayer()
+{
+	//std::unique_ptr<Layer> layer = mapLayers.back();
+	//RemoveLayer();
+	//mapEnemies = layer;
+}

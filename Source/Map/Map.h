@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "../Layers/Layer.h"
+#include "../Layers/EnemyLayer.h"
 #include "../Vector2/Vector2.h"
 
 class Map
@@ -15,9 +16,12 @@ public:
 	void Draw();
 
 	Layer* GetLayer(int index);
+	std::vector<GameObject>* GetEnemies();
 	inline const std::vector<std::unique_ptr<Layer>>& GetMapLayers() const { return mapLayers; }
 
 	inline void AddLayer(std::unique_ptr<Layer> layer) { mapLayers.push_back(std::move(layer)); }
+	inline void RemoveLayer() { mapLayers.pop_back(); }
+	void AddEnemyLayer();
 
 	void SetDimensions(int rows, int cols, int tileSize) {
 		this->numRows = rows;
@@ -35,7 +39,7 @@ public:
 
 private:
 	std::vector<std::unique_ptr<Layer>> mapLayers;
-	std::unique_ptr <Layer> mapEnemies;
+	std::unique_ptr <EnemyLayer> mapEnemies;
 
 	Vector2 position;
 	int numRows;
