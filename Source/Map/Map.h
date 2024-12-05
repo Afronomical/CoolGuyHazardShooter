@@ -35,6 +35,7 @@ public:
 
 private:
 	std::vector<std::unique_ptr<Layer>> mapLayers;
+	std::unique_ptr <Layer> mapEnemies;
 
 	Vector2 position;
 	int numRows;

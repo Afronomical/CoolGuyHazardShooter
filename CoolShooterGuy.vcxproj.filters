@@ -38,6 +38,7 @@
     <ClCompile Include="Source\MapGeneration\MapGenerator.cpp" />
     <ClCompile Include="Source\Enemies\WalkingEnemy.cpp" />
     <ClCompile Include="Source\EnvironmentHazard\EnvironmentHazards.cpp" />
+    <ClCompile Include="Source\Layers\EnemyLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Input\InputHandler.h" />
@@ -78,5 +79,6 @@
     <ClInclude Include="Source\MapGeneration\MapGenerator.h" />
     <ClInclude Include="Source\Enemies\WalkingEnemy.h" />
     <ClInclude Include="Source\EnvironmentHazard\EnvironmentHazards.h" />
+    <ClInclude Include="Source\Layers\EnemyLayer.h" />
   </ItemGroup>
 </Project>

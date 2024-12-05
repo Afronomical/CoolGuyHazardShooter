@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Layers\EnemyLayer.cpp" />
     <ClCompile Include="Source\EnvironmentHazard\EnvironmentHazards.cpp" />
     <ClCompile Include="Source\Enemies\JumpingEnemy.cpp" />
     <ClCompile Include="Source\Externals\TinyXML\tinystr.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="Source\Enemies\WalkingEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Layers\EnemyLayer.h" />
     <ClInclude Include="Source\EnvironmentHazard\EnvironmentHazards.h" />
     <ClInclude Include="Source\Enemies\JumpingEnemy.h" />
     <ClInclude Include="Source\Collision\MapCollisionResult.h" />
