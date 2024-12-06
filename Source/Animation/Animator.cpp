@@ -46,7 +46,7 @@ Animator::Animator(std::string filePath, const Vector2& _position, int numberOfR
 
 void Animator::Update()
 {
-	if (Time::DeltaTime() - Time::ElapsedTime() < frameDuration) 
+	if (Time::DeltaTime() - Time::ElapsedTime() <= frameDuration) 
 	{
 		currentFrame = (currentFrame + 1) % totalFrames;
 	}

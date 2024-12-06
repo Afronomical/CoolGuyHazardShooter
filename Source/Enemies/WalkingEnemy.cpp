@@ -8,7 +8,7 @@ WalkingEnemy::WalkingEnemy() : BaseEnemy()
 	alwaysUpdate = true;
 	
 	
-	animController.lock()->AddAnimation("Walk", "Assets/Animations/adventurer-Sheet.png", transform.lock()->position, 11, 7, 4, 10, 10, 1.0f);
+	animController.lock()->AddAnimation("Walk", "Assets/Animations/AcidPool.png", transform.lock()->position, 10, 7, 4, 400, 400, 1.0f);
 	animController.lock()->SetCurrentAnimation("Walk");
 }
 
@@ -25,6 +25,7 @@ void WalkingEnemy::Update(float deltaTime)
 	int moveDir = walkingLeft ? -1 : 1;
 
 	transform.lock()->position.X += moveSpeed * moveDir * deltaTime;
+	
 
 	flipSprite = walkingLeft;
 
