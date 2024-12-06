@@ -29,15 +29,17 @@ public:
     std::weak_ptr<BoxCollider> playerCollider;
 
     float health = 3;
-    float playerMoveSpeed = 50.0f;
-    float playerJumpForce = 500.0f;
-    float playerJumpHeightLimit = 250;
+    float playerMoveSpeed = 100.0f;
+    //float playerJumpForce = 5000.0f;
+    float playerJumpTimer = 0.5f;
+    float playerMass = 50.0f;
     bool isPlayerDead = false;
 
 private:
     float deltaTimeRef = 0.0f;
     float slowedAmount = 25.0f;
     float fallSpeed = 100.0f;
+    float playerJumpTimerSaved;
     bool isJumping = false;
     bool isGrounded = true;
 };

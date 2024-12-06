@@ -16,8 +16,8 @@ Player::Player(bool isPlayer1)
 	playerCollider = AddComponent<BoxCollider>(this);
 	playerCollider.lock()->SetWidth(5);
 	playerCollider.lock()->SetHeight(5);
-
-	
+	playerRigidBody.lock()->SetMass(playerMass);
+	playerJumpTimerSaved = playerJumpTimer;
 	
 	// INFO: Temporary bool to ensure only player 1 moves with the W and S keys in the update function
 	this->isPlayer1 = isPlayer1;
@@ -52,11 +52,10 @@ Player::~Player()
 
 void Player::Update(float deltaTime)
 {
+	//Update Players position
 	playerRigidBody.lock()->Update(deltaTime);
-	//transform.lock()->Translate(0.0f, -playerRigidBody.lock()->GetDisplacement().Y);
+	transform.lock()->Translate(0.0f, -playerRigidBody.lock()->GetDisplacement().Y);
 
-	//if(!isGrounded) transform.lock()->position.Y += playerRigidBody.lock()->GetGravity() * deltaTime * fallSpeed;
-	
 	deltaTimeRef = deltaTime;
 
 	// INFO: Check if the player has collided with the map and log extra detailed results
@@ -76,21 +75,33 @@ void Player::Update(float deltaTime)
 		}
 	}
 	
-	/*if (transform.lock()->position.Y >= 360)
+	//Jumping/Gravity
+	if (!isGrounded) 
 	{
+		playerJumpTimer -= deltaTime;
+		transform.lock()->position.Y += playerRigidBody.lock()->GetGravity() * deltaTime * fallSpeed;
+	}
+	
+	//TEMPORARY!!! If player is on the floor, lock them to the ground level
+	if (transform.lock()->position.Y >= 360)
+	{
+		isGrounded = true;
 		transform.lock()->position.Y = 360;
 		playerRigidBody.lock()->SetVelocity(0);
 	}
-
-	if (transform.lock()->position.Y <= playerJumpHeightLimit)
+	
+	//When player jump timer runs out, set the gravity back to normal which will make the player fall
+	if (playerJumpTimer <= 0)
 	{
+		playerJumpTimer = playerJumpTimerSaved;
+		playerRigidBody.lock()->SetGravity(9.81f);
 		playerRigidBody.lock()->SetVelocity(0);
-		playerRigidBody.lock()->AddForce(0, 0, ForceMode::None);
-	}*/
+	}
+
 	Debug::DrawColliderOutline(playerCollider.lock());
 	playerCollider.lock()->UpdateCollider(transform.lock()->position);
 }
-
+//Displays the players on the screen
 void Player::Draw()
 {
 	AssetHandler::DrawAnimation(
@@ -115,10 +126,10 @@ void Player::Jump()
 {
 	if (isGrounded) 
 	{
-		//isGrounded = false;
-		//isJumping = true;
-		//playerRigidBody.lock()->AddForce(0, playerJumpForce, ForceMode::Impulse);
-		//transform.lock()->position.Y -= playerJumpForce * deltaTimeRef;
+		isGrounded = false;
+		isJumping = true;
+		playerRigidBody.lock()->SetVelocity(0);
+		playerRigidBody.lock()->SetGravity(-4);
 	}
 }
 
@@ -131,7 +142,7 @@ void Player::Kill()
 void Player::SlowDown()
 {
 	playerMoveSpeed -= slowedAmount;
-	playerJumpForce -= slowedAmount;
+	//playerJumpForce -= slowedAmount;
 }
 
 /*void Player::OnCollisionEnter(Collider* other)
