@@ -22,6 +22,7 @@
 #include "../MapGeneration/MapGenerator.h"
 #include "../WallEnemy/WallEnemy.h"
 #include "../EnvironmentHazard/EnvironmentHazards.h"
+#include "../Missile/Missile.h"
 
 
 BaseEnemy* walkingEnemy;
@@ -33,6 +34,7 @@ Player* player2;
 WallEnemy* wallEnemy;
 EnvironemtHazard* AcidPool;
 
+Missile* missile;
 
 std::shared_ptr<UIManager> uiManager;
 std::shared_ptr<AssetHandler> assetHandler;
@@ -204,6 +206,10 @@ bool Game::InitialiseGame()
 
 	wallEnemy = new WallEnemy();
 	AcidPool = new EnvironemtHazard();
+
+	missile = new Missile();
+	missile = new Missile();
+	missile = new Missile();
 
 
 	// INFO: Set the game to be running

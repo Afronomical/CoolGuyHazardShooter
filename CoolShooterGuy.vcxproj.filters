@@ -39,6 +39,7 @@
     <ClCompile Include="Source\Enemies\WalkingEnemy.cpp" />
     <ClCompile Include="Source\EnvironmentHazard\EnvironmentHazards.cpp" />
     <ClCompile Include="Source\Layers\EnemyLayer.cpp" />
+    <ClCompile Include="Source\Missile\Missile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Input\InputHandler.h" />
@@ -80,5 +81,6 @@
     <ClInclude Include="Source\Enemies\WalkingEnemy.h" />
     <ClInclude Include="Source\EnvironmentHazard\EnvironmentHazards.h" />
     <ClInclude Include="Source\Layers\EnemyLayer.h" />
+    <ClInclude Include="Source\Missile\Missile.h" />
   </ItemGroup>
 </Project>
