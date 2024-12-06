@@ -36,6 +36,9 @@ public:
 
 	/// @brief Calls the HandleInputs function of the InputHandler
 	void HandleInput();
+
+	void DrawMaps(std::weak_ptr<Map> map);
+	void UpdateMaps();
 	
 	/// @brief Updates all game objects
 	/// @param deltaTime : The time between frames
@@ -61,5 +64,6 @@ private:
 
 	std::weak_ptr<Map> currentMap;
 	std::weak_ptr<Map> nextMap;
+	std::weak_ptr<Map> previousMap;
 };
 

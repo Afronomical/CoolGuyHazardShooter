@@ -35,3 +35,8 @@ void Map::AddEnemyLayer()
 	//RemoveLayer();
 	//mapEnemies = layer;
 }
+
+void Map::CreateMapCollider(const Vector2& position, const int width, const int height) 
+{
+	//mapEnterTrigger = AddComponent<Collider>();
+}

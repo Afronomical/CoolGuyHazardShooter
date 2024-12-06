@@ -257,13 +257,9 @@ void Game::Draw()
 	// INFO: Clear the renderer
 	SDL_RenderClear(renderer);
 
-	// INFO: Draw the current map if it exists
-	if (!currentMap.expired())
-		currentMap.lock()->Draw();
-
-	//Draw next map
-	if (!nextMap.expired())
-		nextMap.lock()->Draw();
+	DrawMaps(currentMap);
+	DrawMaps(nextMap);
+	DrawMaps(previousMap);
 
 	// INFO: Call the Draw function for all game objects
 	GameObject::Handler::Draw();
@@ -275,6 +271,21 @@ void Game::Draw()
 	
 	// INFO: Present the renderer
 	SDL_RenderPresent(renderer);
+}
+
+void Game::DrawMaps(std::weak_ptr<Map> map) 
+{
+	// INFO: Draw the current map if it exists
+	if (!map.expired())
+		map.lock()->Draw();
+}
+
+void Game::UpdateMaps()
+{
+	previousMap = currentMap;
+	currentMap = nextMap;
+
+	nextMap = MapGenerator::LoadNextMap(currentMap, "LevelThree", "Assets/Maps/LevelThree.tmx");
 }
 
 void Game::Clean()

@@ -35,8 +35,12 @@ public:
 
 	Vector2 GetPosition() const { return position; }
 	void SetPosition(const Vector2& newPosition) { position = newPosition; }
+	void CreateMapCollider(const Vector2& position, const int width, const int height);
 
-
+	bool isActive = false;
+	std::weak_ptr<Collider> mapEnterTrigger;
+	std::weak_ptr<GameObject> mapGO;
+	
 private:
 	std::vector<std::unique_ptr<Layer>> mapLayers;
 	std::unique_ptr <EnemyLayer> mapEnemies;
