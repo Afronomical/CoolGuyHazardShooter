@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Components/Component.h"
+#include "../Animation/AnimatorController.h"
 #include "../AssetLoading/AssetHandler.h"
 #include "../Time/Time.h"
 #include "../GameObject/GameObject.h"
@@ -21,8 +22,8 @@ public:
 
 	void TakeDamage(int damage = 1);
 	void PlayerColliderOnCollisionEnter(std::shared_ptr<Collider> other);
-
 protected:
+	std::weak_ptr<AnimatorController> animController;
 	float health = 1;
 
 	float animSpeed = 1;

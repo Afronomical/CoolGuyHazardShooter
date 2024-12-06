@@ -2,11 +2,12 @@
 
 BaseEnemy::BaseEnemy() : GameObject()
 {
+
 	collider = AddComponent<BoxCollider>(this, true);
 	collider.lock()->SetOnCollisionEnter(std::bind(&BaseEnemy::PlayerColliderOnCollisionEnter, this, std::placeholders::_1));
 	collider.lock()->SetWidth(5);
 	collider.lock()->SetHeight(5);
-
+	animController = AddComponent<AnimatorController>(this);
 	/*anim;
 	anim.SetAnimatorValues
 	(
@@ -29,19 +30,21 @@ BaseEnemy::~BaseEnemy()
 
 void BaseEnemy::Draw()
 {
-	AssetHandler::DrawAnimation(
-		texture,  // Texture
-		transform.lock()->position,  // Position
-		transform.lock()->size.X,  // Width
-		transform.lock()->size.Y,  // Height
-		1,  // Row
-		1,  // Frame
-		1,  // Scroll Speed
-		health,  // Scale  <---- TEMPORARY, CHANGE THIS
-		flipSprite ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE  // Flip
-		);
+	//AssetHandler::DrawAnimation(
+	//	texture,  // Texture
+	//	transform.lock()->position,  // Position
+	//	transform.lock()->size.X,  // Width
+	//	transform.lock()->size.Y,  // Height
+	//	1,  // Row
+	//	1,  // Frame
+	//	1,  // Scroll Speed
+	//	health,  // Scale  <---- TEMPORARY, CHANGE THIS
+	//	flipSprite ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE  // Flip
+	//	);
 
 	//anim.DrawCurrentFrame();
+
+	//animController.lock()->Draw();
 }
 
 
