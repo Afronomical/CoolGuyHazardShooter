@@ -151,8 +151,9 @@ inline std::weak_ptr<T> GameObject::AddComponent(Args && ...args)
 	components.emplace_back(std::make_shared<T>(std::forward<Args>(args)...));
 
 	// INFO: If the component is a collider, register it with the collider handler
-	if (std::dynamic_pointer_cast<Collider>(components.back()))
-		Collider::Handler::RegisterCollider(std::dynamic_pointer_cast<Collider>(components.back()));
+	auto colliderComponent = std::dynamic_pointer_cast<Collider>(components.back());
+	if (colliderComponent)
+		Collider::Handler::RegisterCollider(colliderComponent);
 
 	// INFO: Return the newly created component
 	return std::dynamic_pointer_cast<T>(components.back());

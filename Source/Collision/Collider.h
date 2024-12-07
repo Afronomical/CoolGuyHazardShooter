@@ -33,7 +33,7 @@ public:
 
 		/// @brief Used to register a collider with the handler
 		/// @param collider : The collider to register
-		static inline void RegisterCollider(std::shared_ptr<Collider> collider) { colliders.push_back(collider); }
+		static inline void RegisterCollider(std::weak_ptr<Collider> collider) { colliders.push_back(collider); }
 
 		/// @brief Used to clear all expired colliders from the handler at the end of the frame
 		static void ClearExpiredColliders();

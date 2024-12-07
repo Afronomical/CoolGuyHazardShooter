@@ -16,7 +16,7 @@ enum class ForceMode
 	VelocityChange
 };
 
-class Rigidbody : public Component, public std::enable_shared_from_this<Rigidbody>
+class Rigidbody : public Component
 {
 public:
 	class Handler
@@ -49,6 +49,10 @@ public:
 	void AddForce(const Vector2& _force, ForceMode mode = ForceMode::Force);
 	inline void AddForce(float forceX, float forceY, ForceMode mode = ForceMode::Force) { AddForce(Vector2(forceX, forceY), mode); }
 
+	inline void CancelForce() { force = Vector2::Zero; }
+	inline void CancelForceX() { force.X = 0.0f; }
+	inline void CancelForceY() { force.Y = 0.0f; }
+
 	inline void SetMass(float _mass) { mass = _mass; }
 	inline float GetMass() const { return mass; }
 
@@ -68,7 +72,6 @@ private:
 	float mass;
 	float gravity;
 
-	Vector2 gravityDirection;
 	Vector2 force;
 	Vector2 acceleration;
 	Vector2 velocity;

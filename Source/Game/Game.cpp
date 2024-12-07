@@ -26,6 +26,7 @@
 
 
 BaseEnemy* walkingEnemy;
+BaseEnemy* walkingEnemy2;
 BaseEnemy* jumpingEnemy;
 
 Player* player1;
@@ -46,7 +47,8 @@ Game::Game(const std::string& _windowName, const Vector2& _windowDimensions) : w
 	// INFO: Initialise and Validate everything
 	if (Initialise())
 	{
-		Run();
+		// INFO: Set the game to be running
+		isRunning = true;
 	}
 }
 
@@ -199,7 +201,10 @@ bool Game::InitialiseGame()
 
 
 	walkingEnemy = new WalkingEnemy();
-	jumpingEnemy = new JumpingEnemy();
+	walkingEnemy2 = new WalkingEnemy();
+	walkingEnemy2->GetComponent<Transform>().lock()->position = Vector2(600, 370);
+	dynamic_cast<WalkingEnemy*>(walkingEnemy2)->SetWalkingLeft(true);
+	//jumpingEnemy = new JumpingEnemy();
 
 	player1 = new Player(true);
 	player2 = new Player(false);
@@ -210,10 +215,6 @@ bool Game::InitialiseGame()
 	missile = new Missile();
 	missile = new Missile();
 	missile = new Missile();
-
-
-	// INFO: Set the game to be running
-	isRunning = true;
 
 	return success;
 }

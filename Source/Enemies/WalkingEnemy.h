@@ -10,8 +10,10 @@ public:
 
 	virtual void Update(float deltaTime) override;
 
+	inline void SetWalkingLeft(bool left) { walkingLeft = left; }
+
 protected:
-	float moveSpeed = 10.0f;
+	float moveSpeed = 20.0f;
 
 	bool walkingLeft;
 

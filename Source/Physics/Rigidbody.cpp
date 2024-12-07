@@ -2,17 +2,23 @@
 
 #include "../Debugging/MemoryLeakDetector.h"
 #include "../Time/Time.h"
+#include "../Debugging/Debug.h"
 
 #pragma region StaticHandlerMembers
-float Rigidbody::Handler::globalGravity = 9.81f;
+float Rigidbody::Handler::globalGravity = -9.81f;
 #pragma endregion StaticHandlerMembers
 
 #pragma region StaticRigidbodyMembers
 float Rigidbody::dragCoefficient = 0.5f;
 #pragma endregion StaticRigidbodyMembers
 
+namespace Physics
+{
+	static const float MAX_VELOCITY = 3.5f;
+}
+
 #pragma region RigidbodyMethods
-Rigidbody::Rigidbody(GameObject* _gameObject) : Component(_gameObject), mass(1.0f), gravityDirection(Vector2::Down), acceleration(Vector2::Zero), 
+Rigidbody::Rigidbody(GameObject* _gameObject) : Component(_gameObject), mass(1.0f), acceleration(Vector2::Zero), 
 												velocity(Vector2::Zero), displacement(Vector2::Zero)
 {
 	// INFO: Set gravity to global gravity value
@@ -25,6 +31,20 @@ void Rigidbody::Update(float deltaTime)
 	if (!IsActive())
 		return;
 
+	acceleration.X = (force.X / mass);
+	acceleration.Y = (force.Y / mass) + gravity;
+
+	velocity += acceleration * deltaTime;
+
+	if (velocity.Magnitude() > Physics::MAX_VELOCITY)
+	{
+		Vector2::Normalize(velocity);
+		velocity *= Physics::MAX_VELOCITY;
+	}
+
+	displacement = velocity * deltaTime;
+
+	/*
 	// INFO: Calculate gravitational force based on mass as well as the
 	//       force applied to the rigidbody
 	Vector2 gravitationalForce = gravityDirection * gravity * mass;
@@ -57,6 +77,7 @@ void Rigidbody::Update(float deltaTime)
 
 	// INFO: Calculate displacement based on the velocity of the rigidbody
 	displacement = velocity * deltaTime;
+	*/
 }
 
 void Rigidbody::AddForce(const Vector2& _force, ForceMode mode)
@@ -66,16 +87,16 @@ void Rigidbody::AddForce(const Vector2& _force, ForceMode mode)
 	switch (mode)
 	{
 	case ForceMode::Force:
-		force += _force * deltaTime / mass;
+		force = _force * deltaTime / mass;
 		break;
 	case ForceMode::Acceleration:
-		force += _force * deltaTime;
+		force = _force * deltaTime;
 		break;
 	case ForceMode::Impulse:
-		force += _force / mass;
+		force = _force / mass;
 		break;
 	case ForceMode::VelocityChange:
-		force += _force;
+		force = _force;
 		break;
 	case ForceMode::None:
 	default:

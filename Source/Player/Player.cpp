@@ -94,7 +94,7 @@ void Player::Update(float deltaTime)
 	if (playerJumpTimer <= 0)
 	{
 		playerJumpTimer = playerJumpTimerSaved;
-		playerRigidBody.lock()->SetGravity(9.81f);
+		playerRigidBody.lock()->SetGravity(1.5f);
 		playerRigidBody.lock()->SetVelocity(0);
 	}
 
@@ -129,14 +129,14 @@ void Player::Jump()
 		isGrounded = false;
 		isJumping = true;
 		playerRigidBody.lock()->SetVelocity(0);
-		playerRigidBody.lock()->SetGravity(-4);
+		playerRigidBody.lock()->SetGravity(-1);
 	}
 }
 
 void Player::Kill()
 {
 	Debug::Log("Player has died");
-	Destroy();
+	//Destroy();
 }
 
 void Player::SlowDown()

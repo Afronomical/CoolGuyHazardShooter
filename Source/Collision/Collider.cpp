@@ -87,14 +87,19 @@ bool Collider::Handler::CheckMapCollision(const Vector2& position, float width, 
 	int topTile = (entity.y / tileSize);
 	int bottomTile = ((entity.y + entity.h) / tileSize);
 
-
 	// INFO: Ensure the entity is within the bounds of the map
 
 	if (leftTile < 0) leftTile = 0;
+	if (rightTile < 0) rightTile = 0;
+
 	if (rightTile >= numColumns) rightTile = numColumns - 1;
+	if (leftTile >= numColumns) leftTile = numColumns - 1;
 
 	if (topTile < 0) topTile = 0;
+	if (bottomTile < 0) bottomTile = 0;
+
 	if (bottomTile >= numRows) bottomTile = numRows - 1;
+	if (topTile >= numRows) topTile = numRows - 1;
 
 	// INFO: Go through the tiles that the entity is currently occupying and check for collisions
 	for (size_t i = leftTile; i <= rightTile; i++)
