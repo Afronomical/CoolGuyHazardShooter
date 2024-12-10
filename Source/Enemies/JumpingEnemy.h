@@ -17,7 +17,9 @@ protected:
 
 private:
 	float mass = 50.0f;
-	float jumpHeight = 50000.0f;
+	float gravity = -7.5f;
+	float jumpHeight = 2.0f;
 	float timeBetweenJumps = 1.0f;
 	float jumpTimer;
+	float jumpCooldown;
 };

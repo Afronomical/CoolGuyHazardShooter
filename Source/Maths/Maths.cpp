@@ -23,6 +23,30 @@ float Maths::Lerp(float a, float b, float t)
 	return a + (b - a) * t;
 }
 
+float Maths::Lerp(float a, float b, float t, LerpEasing l)
+{
+    switch (l)
+    {
+        case LerpEasing::EaseIn:
+        {
+            t *= t;
+            break;
+        }
+        case LerpEasing::EaseOut:
+        {
+            t = 1 - t;
+            t = t * t;
+            t = 1 - t;
+            break;
+        }
+        default:
+            break;
+    };
+
+    t = Clamp(t, 0.0f, 1.0f);
+    return a + (b - a) * t;
+}
+
 float Maths::Clamp(float value, float min, float max)
 {
 	const float t = value < min ? min : value;

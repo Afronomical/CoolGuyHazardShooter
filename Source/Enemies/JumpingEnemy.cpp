@@ -4,7 +4,7 @@ JumpingEnemy::JumpingEnemy() : BaseEnemy()
 {
 	rb = AddComponent<Rigidbody>(this);
 	rb.lock()->SetMass(mass);
-	rb.lock()->SetGravity(-1);
+	rb.lock()->SetGravity(gravity);
 	transform.lock()->position = Vector2(600, 370);
 	texture = AssetHandler::LoadTexture("Assets/Animations/sonic.png");
 	jumpTimer = timeBetweenJumps;
@@ -22,8 +22,9 @@ void JumpingEnemy::Update(float deltaTime)
 	jumpTimer -= deltaTime;
 	if (jumpTimer <= 0)
 	{
-		jumpTimer = timeBetweenJumps;
-		rb.lock()->AddForce(0, jumpHeight, ForceMode::Impulse);
+		//jumpTimer = timeBetweenJumps;
+		//rb.lock()->AddForce(0, jumpHeight, ForceMode::Impulse);
+		//rb.lock()->SetGravity(Maths::Lerp(0, 100, deltaTime / jumpHeight, LerpEasing::EaseIn));
 	}
 
 

@@ -2,6 +2,14 @@
 
 #include <string>
 
+enum class LerpEasing
+{
+	None = 0,
+
+	EaseIn,
+	EaseOut
+};
+
 class Maths
 {
 public:
@@ -9,6 +17,7 @@ public:
 	static float RadToDeg(float rad);
 
 	static float Lerp(float a, float b, float t);
+	static float Lerp(float a, float b, float t, LerpEasing);
 	static float Clamp(float value, float min, float max);
 	static int Clamp(int value, int min, int max);
 
