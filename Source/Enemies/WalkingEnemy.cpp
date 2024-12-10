@@ -25,6 +25,11 @@ void WalkingEnemy::Update(float deltaTime)
 	collider.lock()->UpdateCollider(transform.lock()->position);
 }
 
+void WalkingEnemy::TurnAround()
+{
+	SetWalkingLeft(!walkingLeft);
+}
+
 void WalkingEnemy::CheckMapCollisions()
 {
 	MapCollisionResult collisionResult;

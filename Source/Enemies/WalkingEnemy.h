@@ -11,6 +11,7 @@ public:
 	virtual void Update(float deltaTime) override;
 
 	inline void SetWalkingLeft(bool left) { walkingLeft = left; }
+	void TurnAround();
 
 protected:
 	float moveSpeed = 20.0f;

@@ -204,7 +204,7 @@ bool Game::InitialiseGame()
 	walkingEnemy2 = new WalkingEnemy();
 	walkingEnemy2->GetComponent<Transform>().lock()->position = Vector2(600, 370);
 	dynamic_cast<WalkingEnemy*>(walkingEnemy2)->SetWalkingLeft(true);
-	//jumpingEnemy = new JumpingEnemy();
+	jumpingEnemy = new JumpingEnemy();
 
 	player1 = new Player(true);
 	player2 = new Player(false);

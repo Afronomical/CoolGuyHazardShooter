@@ -8,7 +8,7 @@ JumpingEnemy::JumpingEnemy() : BaseEnemy()
 	transform.lock()->position = Vector2(600, 370);
 	texture = AssetHandler::LoadTexture("Assets/Animations/sonic.png");
 	jumpTimer = timeBetweenJumps;
-	TakeDamage();  // KILL THE ENEMY AT THE START
+	//TakeDamage();  // KILL THE ENEMY AT THE START
 }
 
 JumpingEnemy::~JumpingEnemy()
