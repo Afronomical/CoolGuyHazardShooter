@@ -19,13 +19,27 @@ void JumpingEnemy::Update(float deltaTime)
 {
 	CheckMapCollisions();
 
-	jumpTimer -= deltaTime;
-	if (jumpTimer <= 0)
+	jumpCooldown -= deltaTime;
+	if (jumpCooldown <= 0)
 	{
-		//jumpTimer = timeBetweenJumps;
+		jumpTimer = 0;
+		jumpCooldown = timeBetweenJumps;
 		//rb.lock()->AddForce(0, jumpHeight, ForceMode::Impulse);
 		//rb.lock()->SetGravity(Maths::Lerp(0, 100, deltaTime / jumpHeight, LerpEasing::EaseIn));
 	}
+
+	if (jumpTimer >= 0 && jumpTimer < jumpTime)
+	{
+		jumpTimer += deltaTime;
+
+		if (jumpTimer < jumpTime / 2)
+			rb.lock()->SetGravity(Maths::Lerp(0, 100, jumpTime / 2 / jumpTimer, LerpEasing::EaseIn));
+		else
+			rb.lock()->SetGravity(Maths::Lerp(100, 0, jumpTime / 2 / jumpTimer, LerpEasing::EaseOut));
+	}
+	else
+		rb.lock()->SetGravity(0);
+
 
 
 	rb.lock()->Update(deltaTime);
