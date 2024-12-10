@@ -172,7 +172,7 @@ void AssetHandler::Clean()
 	fontLib.clear();
 }
 
-void AssetHandler::DrawStatic(const Asset& texture, const Vector2& position, float width, float height, float scale, SDL_RendererFlip flip)
+void AssetHandler::DrawStatic(const Asset& texture, const Vector2& position, float width, float height, float scale, SDL_RendererFlip flip, double rotationAngle)
 {
 	// INFO: Check if the texture is valid
 	if (!IsTextureValid(texture))
@@ -185,7 +185,7 @@ void AssetHandler::DrawStatic(const Asset& texture, const Vector2& position, flo
 	SDL_Rect destRect = { static_cast<int>(position.X), static_cast<int>(position.Y), static_cast<int>(width * scale), static_cast<int>(height * scale) };
 
 	// INFO: Draw the texture
-	SDL_RenderCopyEx(renderer, textureLib[texture], nullptr, &destRect, 0.0, nullptr, flip);
+	SDL_RenderCopyEx(renderer, textureLib[texture], nullptr, &destRect, rotationAngle, nullptr, flip);
 }
 
 void AssetHandler::DrawDynamic(const Asset& texture, const Vector2& position, float width, float height, float scrollSpeed, float scale, SDL_RendererFlip flip)

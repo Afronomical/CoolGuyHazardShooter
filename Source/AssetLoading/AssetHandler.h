@@ -16,7 +16,7 @@ public:
 	static void Clean();
 
 	/// @brief Used to draw static textures that do not change based on camera e.g. (UI)
-	static void DrawStatic(const Asset& texture, const Vector2& position, float width, float height, float scale = 1.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	static void DrawStatic(const Asset& texture, const Vector2& position, float width, float height, float scale = 1.0f, SDL_RendererFlip flip = SDL_FLIP_NONE, double rotationAngle = 0.0);
 
 	/// @brief Used to draw dynamic textures that change based on camera e.g. (Whole backgrounds)
 	static void DrawDynamic(const Asset& texture, const Vector2& position, float width, float height, float scrollSpeed = 1.0f, float scale = 1.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
