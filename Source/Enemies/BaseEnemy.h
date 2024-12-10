@@ -11,6 +11,7 @@
 #include "../Particles/Emitter.h"
 #include "../Player/Player.h"
 #include "../Debugging/Debug.h"
+//#include "../Enemies/WalkingEnemy.h"
 
 class BaseEnemy : public GameObject
 {

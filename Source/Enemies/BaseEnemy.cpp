@@ -63,9 +63,12 @@ void BaseEnemy::TakeDamage(int damage)
 
 void BaseEnemy::OnCollisionStay(std::shared_ptr<Collider> other)
 {
-	Player* p = static_cast<Player*>(other->GetGameObject());
-	if (p != nullptr)
+	if (Player* p = dynamic_cast<Player*>(other->GetGameObject()))
 	{
 		p->SlowDown();
 	}
+	//if (WalkingEnemy* e = dynamic_cast<WalkingEnemy*>(other->GetGameObject()))
+	//{
+	//	e->TurnAround();
+	//}
 }
