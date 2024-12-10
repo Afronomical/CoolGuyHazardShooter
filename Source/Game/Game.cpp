@@ -212,9 +212,12 @@ bool Game::InitialiseGame()
 	wallEnemy = new WallEnemy();
 	AcidPool = new EnvironemtHazard();
 
-	missile = new Missile();
-	missile = new Missile();
-	missile = new Missile();
+
+	missile = new Missile(player1, player2);
+	missile = new Missile(player1, player2);
+	missile = new Missile(player1, player2);
+	missile = new Missile(player1, player2);
+
 
 	return success;
 }
