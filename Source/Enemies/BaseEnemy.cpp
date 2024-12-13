@@ -20,6 +20,7 @@ BaseEnemy::BaseEnemy() : GameObject()
 	);*/
 }
 
+
 BaseEnemy::~BaseEnemy()
 {
 
@@ -61,6 +62,7 @@ void BaseEnemy::TakeDamage(int damage)
 		//);
 	}
 }
+
 
 void BaseEnemy::OnCollisionStay(std::shared_ptr<Collider> other)
 {

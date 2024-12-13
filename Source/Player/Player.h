@@ -37,10 +37,13 @@ public:
 
 private:
     float deltaTimeRef = 0.0f;
-    float slowedAmount = 25.0f;
+    float slowedSpeed = 15.0f;
+    float baseSpeed;
     float fallSpeed = 100.0f;
     float playerJumpTimerSaved;
     bool isJumping = false;
     bool isGrounded = true;
+    float slowedTimer;
+    float slowedTime = 3.0f;
 };
 
