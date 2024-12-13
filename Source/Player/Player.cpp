@@ -14,10 +14,11 @@ Player::Player(bool isPlayer1)
 	texture = AssetHandler::LoadTexture("Assets/Animations/sonic.png");
 	playerRigidBody = AddComponent<Rigidbody>(this);
 	playerCollider = AddComponent<BoxCollider>(this);
-	playerCollider.lock()->SetWidth(5);
-	playerCollider.lock()->SetHeight(5);
+	playerCollider.lock()->SetWidth(50);
+	playerCollider.lock()->SetHeight(50);
 	playerRigidBody.lock()->SetMass(playerMass);
 	playerJumpTimerSaved = playerJumpTimer;
+	baseSpeed = playerMoveSpeed;
 	
 	// INFO: Temporary bool to ensure only player 1 moves with the W and S keys in the update function
 	this->isPlayer1 = isPlayer1;
@@ -98,7 +99,17 @@ void Player::Update(float deltaTime)
 		playerRigidBody.lock()->SetVelocity(0);
 	}
 
-	Debug::DrawColliderOutline(playerCollider.lock());
+	if (slowedTimer > 0)
+	{
+		slowedTimer -= deltaTime;
+
+		if (slowedTimer <= 0)
+		{
+			playerMoveSpeed = baseSpeed;
+		}
+	}
+
+	Debug::DrawColliderOutline(playerCollider.lock(), Color::Orange);
 	playerCollider.lock()->UpdateCollider(transform.lock()->position);
 }
 //Displays the players on the screen
@@ -139,10 +150,10 @@ void Player::Kill()
 	//Destroy();
 }
 
-void Player::SlowDown()
+void Player::SlowDown(float time)
 {
-	playerMoveSpeed -= slowedAmount;
-	//playerJumpForce -= slowedAmount;
+	playerMoveSpeed = slowedSpeed;
+	slowedTimer = time;
 }
 
 /*void Player::OnCollisionEnter(Collider* other)

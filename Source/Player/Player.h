@@ -19,7 +19,7 @@ public:
     void MoveRight();
     void Jump();
     void Kill();
-    void SlowDown();
+    void SlowDown(float time);
     //void OnCollisionEnter(Collider* other);
     // INFO: Temporary variable delete whenever
     bool isPlayer1 = false;
@@ -37,10 +37,13 @@ public:
 
 private:
     float deltaTimeRef = 0.0f;
-    float slowedAmount = 25.0f;
+    float slowedSpeed = 15.0f;
+    float baseSpeed;
     float fallSpeed = 100.0f;
     float playerJumpTimerSaved;
     bool isJumping = false;
     bool isGrounded = true;
+    float slowedTimer;
+    float slowedTime = 3.0f;
 };
 
