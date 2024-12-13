@@ -30,6 +30,7 @@ protected:
 	float animSpeed = 1;
 	Vector2 animFrames = { 1, 1 };
 	bool flipSprite;
+	bool debugCollision = false;
 
 	Asset texture;
 	std::weak_ptr<BoxCollider> collider;

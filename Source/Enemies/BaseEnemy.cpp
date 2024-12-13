@@ -28,7 +28,8 @@ BaseEnemy::~BaseEnemy()
 
 void BaseEnemy::Draw()
 {
-	Debug::DrawColliderOutline(collider.lock(), Color::Orange);
+	if (debugCollision) Debug::DrawColliderOutline(collider.lock(), Color::Orange);
+
 	AssetHandler::DrawAnimation(
 		texture,  // Texture
 		transform.lock()->position,  // Position
