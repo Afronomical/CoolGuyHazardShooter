@@ -9,7 +9,7 @@ EnvironemtHazard::EnvironemtHazard() : GameObject()
 	transform.lock()->position = Vector2(500, 410);
 	acidParticles = AddComponent<Emitter>(this, 100.0f);
 	AcidPoolCollider.lock()->SetWidth(200);
-	AcidPoolCollider.lock()->SetHeight(100);
+	AcidPoolCollider.lock()->SetHeight(150);
 }
 
 EnvironemtHazard::~EnvironemtHazard()
@@ -26,7 +26,7 @@ void EnvironemtHazard::Draw()
 	AcidPoolCollider.lock()->UpdateCollider(transform.lock()->position);
 }
 
-void EnvironemtHazard::OnCollisionEnter(std::shared_ptr<Collider> other)
+void EnvironemtHazard::OnCollisionStay(std::shared_ptr<Collider> other)
 {
 	if (Player* p = dynamic_cast<Player*>(other->GetGameObject()))
 	{

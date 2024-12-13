@@ -17,7 +17,7 @@ public:
 	EnvironemtHazard();
 	~EnvironemtHazard() override;
 	virtual void Draw() override;
-	void OnCollisionEnter(std::shared_ptr<Collider> other) override;
+	virtual void OnCollisionStay(std::shared_ptr<Collider> other) override;
 	
 	
 

@@ -40,6 +40,8 @@ void JumpingEnemy::Update(float deltaTime)
 	else
 		rb.lock()->SetGravity(0);
 
+	if (transform.lock()->position.Y >= 370)
+		transform.lock()->position.Y = 370;
 
 
 	rb.lock()->Update(deltaTime);
