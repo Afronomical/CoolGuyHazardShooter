@@ -51,7 +51,7 @@ bool AnimatorController::SetCurrentAnimation(const char* AnimationToPlay)
 bool AnimatorController::AddAnimation(const char* AnimationName, Animator* AnimationToPlay)
 {
 
-	if (ListOfAnimators[AnimationName] = nullptr)
+	if (ListOfAnimators[AnimationName] == nullptr)
 	{
 		ListOfAnimators[AnimationName] = AnimationToPlay;
 		return true;
