@@ -34,13 +34,16 @@ public:
 	float accel = 0.3f;
 	float distanceToPlayer1 = 0;
 	float distanceToPlayer2 = 0;
-	float didtanceToDestroy = 20;
+	float distanceToDestroy = 20;
 	float randDirDuration = 1;
 	float randDirTime = 0;
 	float randDirRange = 0.6f;
 	Vector2 DirectionToPlayer(Player* playerObj);
+	Vector2 moveAngle = 0;
 	void RandDir();
 	void MissileHit();
+
+	float GetRotationInDegrees(const Vector2& normalizedVector);
 
 private:
 	Player* player1;

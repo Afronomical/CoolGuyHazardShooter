@@ -5,7 +5,7 @@ Missile::Missile(Player* player1Ref, Player* player2Ref) : player1(player1Ref), 
 {
 	missileTexture = AssetHandler::LoadTexture("Assets/Animations/catgun.png");
 	transform.lock()->position = Vector2(200, 0);
-	transform.lock()->size = Vector2(30, 30);
+	transform.lock()->size = Vector2(60, 30);
 
 	startPos = transform.lock()->position;
 }
@@ -23,21 +23,24 @@ void Missile::Update(float deltaTime)
 	distanceToPlayer2 = Vector2::Distance(transform.lock()->position, player2->transform.lock()->position);
 	if (distanceToPlayer1 < distanceToPlayer2)
 	{
-		transform.lock()->position += DirectionToPlayer(player1) * missileSpeed;
+		moveAngle = DirectionToPlayer(player1);
+		transform.lock()->position += moveAngle * missileSpeed;
 	}
 	else
 	{
-		transform.lock()->position += DirectionToPlayer(player2) * missileSpeed;
+		moveAngle = DirectionToPlayer(player2);
+		transform.lock()->position += moveAngle * missileSpeed;
 	}
-	if (distanceToPlayer1 <= didtanceToDestroy || distanceToPlayer2 <= didtanceToDestroy)
+	if (distanceToPlayer1 <= distanceToDestroy || distanceToPlayer2 <= distanceToDestroy)
 	{
 		MissileHit();
 	}
+
 }
 
 void Missile::Draw()
 {
-	AssetHandler::DrawStatic(missileTexture, transform.lock()->position, transform.lock()->size.X, transform.lock()->size.Y, 1);
+	AssetHandler::DrawStatic(missileTexture, transform.lock()->position, transform.lock()->size.X, transform.lock()->size.Y, 1, SDL_FLIP_NONE, GetRotationInDegrees(moveAngle));
 }
 
 void Missile::MissileMove()
@@ -63,6 +66,17 @@ void Missile::RandDir()
 
 		randRot = Vector2(Maths::RandomRange(-randDirRange, randDirRange), Maths::RandomRange(-randDirRange, randDirRange));
 	}
+}
+
+float Missile::GetRotationInDegrees(const Vector2& normalizedVector)
+{
+	float angleInRadians = std::atan2(normalizedVector.Y, normalizedVector.X);
+	float angleInDegrees = angleInRadians * (180.0f / M_PI);
+
+	if (angleInDegrees < 0) {
+		angleInDegrees += 360.0f;
+	}
+	return angleInDegrees;
 }
 
 void Missile::MissileHit()
