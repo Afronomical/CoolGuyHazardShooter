@@ -19,7 +19,7 @@ public:
     void MoveRight();
     void Jump();
     void Kill();
-    void SlowDown();
+    void SlowDown(float time);
     //void OnCollisionEnter(Collider* other);
     // INFO: Temporary variable delete whenever
     bool isPlayer1 = false;

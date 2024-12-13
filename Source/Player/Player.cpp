@@ -150,10 +150,10 @@ void Player::Kill()
 	//Destroy();
 }
 
-void Player::SlowDown()
+void Player::SlowDown(float time)
 {
 	playerMoveSpeed = slowedSpeed;
-	slowedTimer = slowedTime;
+	slowedTimer = time;
 }
 
 /*void Player::OnCollisionEnter(Collider* other)

@@ -68,7 +68,7 @@ void BaseEnemy::OnCollisionStay(std::shared_ptr<Collider> other)
 {
 	if (Player* p = dynamic_cast<Player*>(other->GetGameObject()))
 	{
-		p->SlowDown();
+		p->SlowDown(3.0f);
 	}
 	//if (WalkingEnemy* e = dynamic_cast<WalkingEnemy*>(other->GetGameObject()))
 	//{

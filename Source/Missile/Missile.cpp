@@ -67,7 +67,15 @@ void Missile::RandDir()
 
 void Missile::MissileHit()
 {
+
 	transform.lock()->position = startPos;
+
+	if (distanceToPlayer1 < distanceToPlayer2)
+	{
+		player1->SlowDown(1.0f);
+	}
+	else
+	{
+		player2->SlowDown(1.0f);
+	}
 }
-
-
