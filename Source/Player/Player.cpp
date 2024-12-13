@@ -15,7 +15,7 @@ Player::Player(bool isPlayer1)
 	playerRigidBody = AddComponent<Rigidbody>(this);
 	playerCollider = AddComponent<BoxCollider>(this);
 	playerCollider.lock()->SetWidth(50);
-	playerCollider.lock()->SetHeight(50);
+	playerCollider.lock()->SetHeight(40);
 	playerRigidBody.lock()->SetMass(playerMass);
 	playerJumpTimerSaved = playerJumpTimer;
 	baseSpeed = playerMoveSpeed;
@@ -29,7 +29,7 @@ Player::Player(bool isPlayer1)
 		InputHandler::BindKeyToAction(SDL_SCANCODE_D, BindData(std::bind(&Player::MoveRight, this), ButtonState::Held));
 		InputHandler::BindKeyToAction(SDL_SCANCODE_W, BindData(std::bind(&Player::Jump, this), ButtonState::Pressed));
 
-		transform.lock()->position = Vector2(300, 360);
+		transform.lock()->position = Vector2(300, 370);
 	}
 	else
 	{
@@ -37,7 +37,7 @@ Player::Player(bool isPlayer1)
 		InputHandler::BindKeyToAction(SDL_SCANCODE_RIGHT, BindData(std::bind(&Player::MoveRight, this), ButtonState::Held));
 		InputHandler::BindKeyToAction(SDL_SCANCODE_UP, BindData(std::bind(&Player::Jump, this), ButtonState::Pressed));
 
-		transform.lock()->position = Vector2(200, 360);
+		transform.lock()->position = Vector2(200, 370);
 	}
 }
 
@@ -84,11 +84,12 @@ void Player::Update(float deltaTime)
 	}
 	
 	//TEMPORARY!!! If player is on the floor, lock them to the ground level
-	if (transform.lock()->position.Y >= 360)
+	if (transform.lock()->position.Y >= 370)
 	{
 		isGrounded = true;
-		transform.lock()->position.Y = 360;
+		transform.lock()->position.Y = 370;
 		playerRigidBody.lock()->SetVelocity(0);
+		playerRigidBody.lock()->SetGravity(-1.5f);
 	}
 	
 	//When player jump timer runs out, set the gravity back to normal which will make the player fall
